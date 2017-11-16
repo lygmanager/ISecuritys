@@ -3,7 +3,7 @@ package net.bhtech.lygmanager.ui.camera;
 import android.net.Uri;
 
 import net.bhtech.lygmanager.delegates.PermissionCheckerDelegate;
-import net.bhtech.lygmanager.util.file.FileUtil;
+import net.bhtech.lygmanager.utils.file.FileUtil;
 
 /**
  * Created by 傅令杰

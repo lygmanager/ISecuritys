@@ -5,16 +5,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.flj.latte.delegates.LatteDelegate;
-import com.flj.latte.util.callback.CallbackManager;
-import com.flj.latte.util.callback.CallbackType;
-import com.flj.latte.util.callback.IGlobalCallback;
+import net.bhtech.lygmanager.delegates.LatteDelegate;
+import net.bhtech.lygmanager.utils.callback.CallbackManager;
+import net.bhtech.lygmanager.utils.callback.CallbackType;
+import net.bhtech.lygmanager.utils.callback.IGlobalCallback;
 
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 /**
- * Created by 傅令杰
+ * Created by zhangxinbiao
  */
 
 public class ScannerDelegate extends LatteDelegate implements ZBarScannerView.ResultHandler {

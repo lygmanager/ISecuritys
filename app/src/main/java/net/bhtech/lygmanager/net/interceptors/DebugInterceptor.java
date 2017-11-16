@@ -3,7 +3,7 @@ package net.bhtech.lygmanager.net.interceptors;
 import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 
-import com.flj.latte.util.file.FileUtil;
+import net.bhtech.lygmanager.utils.file.FileUtil;
 
 import java.io.IOException;
 

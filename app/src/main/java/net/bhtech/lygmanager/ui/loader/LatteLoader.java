@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.utils.dimen.DimenUtil;
 
 import java.util.ArrayList;
 

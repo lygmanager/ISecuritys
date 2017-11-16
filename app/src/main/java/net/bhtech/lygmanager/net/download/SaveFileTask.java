@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.net.callback.IRequest;
 import net.bhtech.lygmanager.net.callback.ISuccess;
-import net.bhtech.lygmanager.util.file.FileUtil;
+import net.bhtech.lygmanager.utils.file.FileUtil;
 
 import java.io.File;
 import java.io.InputStream;
