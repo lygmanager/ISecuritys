@@ -6,8 +6,9 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.flj.latte.util.dimen.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import net.bhtech.lygmanager.isecuritys.R;
 
 import java.util.ArrayList;
 
