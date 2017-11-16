@@ -9,6 +9,7 @@ import android.view.View;
 
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,8 +20,8 @@ import butterknife.OnClick;
 
 public class SignInDelegate extends LatteDelegate {
 
-    @BindView(R.id.edit_sign_in_email)
-    TextInputEditText mEmail = null;
+    @BindView(R.id.edit_sign_in_usrId)
+    TextInputEditText mUsrId = null;
     @BindView(R.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
@@ -50,28 +51,29 @@ public class SignInDelegate extends LatteDelegate {
 //                    })
 //                    .build()
 //                    .post();
+            getSupportDelegate().start(new EcBottomDelegate(),SINGLETASK);
         }
     }
 
     private boolean checkForm() {
-        final String email = mEmail.getText().toString();
+        final String usrid = mUsrId.getText().toString();
         final String password = mPassword.getText().toString();
 
         boolean isPass = true;
 
-//        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            mEmail.setError("错误的邮箱格式");
-//            isPass = false;
-//        } else {
-//            mEmail.setError(null);
-//        }
-//
-//        if (password.isEmpty() || password.length() < 6) {
-//            mPassword.setError("请填写至少6位数密码");
-//            isPass = false;
-//        } else {
-//            mPassword.setError(null);
-//        }
+        if (usrid.isEmpty() ) {
+            mUsrId.setError("用户名不能为空");
+            isPass = false;
+        } else {
+            mUsrId.setError(null);
+        }
+
+        if (password.isEmpty() ) {
+            mPassword.setError("请填写至少6位数密码");
+            isPass = false;
+        } else {
+            mPassword.setError(null);
+        }
 
         return isPass;
     }

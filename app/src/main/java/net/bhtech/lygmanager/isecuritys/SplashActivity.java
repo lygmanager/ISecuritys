@@ -9,6 +9,7 @@ import net.bhtech.lygmanager.activities.ProxyActivity;
 import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.launcher.ILauncherListener;
+import net.bhtech.lygmanager.isecuritys.launcher.LauncherDelegate;
 import net.bhtech.lygmanager.isecuritys.launcher.OnLauncherFinishTag;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
 import net.bhtech.lygmanager.isecuritys.sign.ISignListener;
@@ -40,7 +41,7 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new SignInDelegate();
+        return new LauncherDelegate();
     }
 
     @Override
@@ -52,11 +53,11 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-//                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
                 getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
-//                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
                 getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:
