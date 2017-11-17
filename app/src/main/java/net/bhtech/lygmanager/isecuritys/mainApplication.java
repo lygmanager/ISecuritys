@@ -5,7 +5,9 @@ import android.support.multidex.MultiDexApplication;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import net.bhtech.lygmanager.app.Latte;
+import net.bhtech.lygmanager.database.DatabaseManager;
 import net.bhtech.lygmanager.icons.FontEcModule;
+import net.bhtech.lygmanager.net.interceptors.DebugInterceptor;
 
 /**
  * Created by zhangxinbiao on 2017/11/10.
@@ -19,11 +21,11 @@ public class mainApplication extends MultiDexApplication {
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withLoaderDelayed(1000)
-                .withApiHost("你的本地服务器地址")
-//                .withInterceptor(new DebugInterceptor("test", R.raw.test))
+                .withApiHost("http://192.168.1.103:7001/")
+                .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .withJavascriptInterface("latte")
                 .configure();
-//            DatabaseManager.getInstance().init(this);
+            DatabaseManager.getInstance().init(this);
 
     }
 }

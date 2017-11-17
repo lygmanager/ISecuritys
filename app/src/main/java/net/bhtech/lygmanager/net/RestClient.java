@@ -22,7 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
- * Created by 傅令杰 on 2017/4/2
+ * Created by zhangxinbiao on 2017/11/16
+ * 网络访问
  */
 
 public final class RestClient {

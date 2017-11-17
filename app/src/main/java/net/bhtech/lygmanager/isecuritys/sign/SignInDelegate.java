@@ -7,12 +7,17 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
+
+import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
+import net.bhtech.lygmanager.net.cxfweservice.CxfRestClient;
+import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /**
  * Created by zhangxinbiao on 2017/11/9.
@@ -38,20 +43,22 @@ public class SignInDelegate extends LatteDelegate {
     @OnClick(R.id.btn_sign_in)
     void onClickSignIn() {
         if (checkForm()) {
-//            RestClient.builder()
-//                    .url("http://192.168.56.1:8080/RestDataServer/api/user_profile.php")
-//                    .params("email", mEmail.getText().toString())
-//                    .params("password", mPassword.getText().toString())
-//                    .success(new ISuccess() {
-//                        @Override
-//                        public void onSuccess(String response) {
-//                            LatteLogger.json("USER_PROFILE", response);
-//                            SignHandler.onSignIn(response, mISignListener);
-//                        }
-//                    })
-//                    .build()
-//                    .post();
-            getSupportDelegate().start(new EcBottomDelegate(),SINGLETASK);
+           Observable<String> obj=CxfRestClient.builder()
+                    .url("login")
+                    .params("arg0", mUsrId.getText().toString())
+                    .params("arg1", mPassword.getText().toString())
+                    .build()
+                    .post();
+           obj.subscribe(new LatteObserver<String>(_mActivity) {
+               @Override
+               public void onNext(String o) {
+                   UtusrEntity entity=JSON.parseObject(o, UtusrEntity.class);
+                   if(entity!=null&&entity.getUSR_ID()!=null&&!"".equals(entity.getUSR_ID())) {
+                       SignHandler.onSignIn(entity, mISignListener);
+                   }
+               }
+           });
+            //getSupportDelegate().start(new EcBottomDelegate(),SINGLETASK);
         }
     }
 

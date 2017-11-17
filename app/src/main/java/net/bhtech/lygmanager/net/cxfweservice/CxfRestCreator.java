@@ -1,31 +1,32 @@
-package net.bhtech.lygmanager.net;
+package net.bhtech.lygmanager.net.cxfweservice;
 
 import net.bhtech.lygmanager.app.ConfigKeys;
 import net.bhtech.lygmanager.app.Latte;
+import net.bhtech.lygmanager.net.cxfweservice.convert.StringConverterFactory;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
- * Created by 傅令杰 on 2017/4/2
+ * Created by zhangxinbiao on 2017/11/16.
  */
 
-public final class RestCreator {
-
+public final class CxfRestCreator {
     /**
      * 参数容器
      */
     private static final class ParamsHolder {
-        private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
+        private static final HashMap<String, Object> PARAMS = new HashMap<>();
     }
 
-    public static WeakHashMap<String, Object> getParams() {
-        return ParamsHolder.PARAMS;
+    public static HashMap<String, Object> getParams() {
+        return CxfRestCreator.ParamsHolder.PARAMS;
     }
 
     /**
@@ -53,23 +54,25 @@ public final class RestCreator {
     /**
      * 构建全局Retrofit客户端
      */
-    private static final class RetrofitHolder {
+    private static final class CxfRetrofitHolder {
         private static final String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(OKHttpHolder.OK_HTTP_CLIENT)
+                .addConverterFactory(StringConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
     /**
      * Service接口
      */
-    private static final class RestServiceHolder {
-        private static final RestService REST_SERVICE =
-                RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
+    private static final class CxfRestServiceHolder {
+        private static final CxfRestService REST_SERVICE =
+                CxfRetrofitHolder.RETROFIT_CLIENT.create(CxfRestService.class);
     }
 
-    public static RestService getRestService() {
-        return RestServiceHolder.REST_SERVICE;
+    public static CxfRestService getRestService() {
+        return CxfRestServiceHolder.REST_SERVICE;
     }
 }

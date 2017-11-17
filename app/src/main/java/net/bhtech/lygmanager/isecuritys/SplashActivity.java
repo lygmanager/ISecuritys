@@ -47,17 +47,18 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
     @Override
     public void onSignInSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_LONG).show();
+        getSupportDelegate().startWithPop(new EcBottomDelegate());
     }
 
     @Override
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:
-                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_SHORT).show();
                 getSupportDelegate().startWithPop(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_SHORT).show();
                 getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             default:
