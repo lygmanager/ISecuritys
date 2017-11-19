@@ -1,0 +1,13 @@
+[{
+  "imageUrl":"{fa-cogs}","itemText":"设备参数","itemId":"1","itemType":"3"
+},{
+  "imageUrl":"{fa-camera-retro}","itemText":"曝光板","itemId":"2","itemType":"3"
+},{
+  "imageUrl":"{fa-file-archive-o}","itemText":"工作票","itemId":"3","itemType":"3"
+},{
+  "imageUrl":"{fa-location-arrow}","itemText":"上岗到位","itemId":"4","itemType":"3"
+},{
+  "imageUrl":"{fa-file-image-o}","itemText":"电一工作票","itemId":"5","itemType":"3"
+},{
+  "imageUrl":"{fa-file-text-o}","itemText":"操作票","itemId":"6","itemType":"3"
+}]

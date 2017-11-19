@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorMain">#80bebebe</color>
+    <color name="app_background">#1111</color>
+
+    <color name="border_clo">#ccc</color>
+    <color name="text_clo">#333</color>
+    <color name="white">#fff</color>
+    <color name="blue">#419DE4</color>
+    <color name="colorBar">#0099FF</color>
 </resources>

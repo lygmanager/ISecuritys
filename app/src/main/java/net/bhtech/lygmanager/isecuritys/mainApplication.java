@@ -21,7 +21,7 @@ public class mainApplication extends MultiDexApplication {
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withLoaderDelayed(1000)
-                .withApiHost("http://192.168.1.103:7001/")
+                .withApiHost("http://192.168.0.103:7001/")
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .withJavascriptInterface("latte")
                 .configure();

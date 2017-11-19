@@ -21,7 +21,6 @@ public abstract class LatteObserver<T> implements Observer<T> {
     }
     @Override
     public void onSubscribe(Disposable d) {
-        LatteLogger.d(d);
     }
 
     @Override

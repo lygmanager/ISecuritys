@@ -13,6 +13,6 @@ import retrofit2.http.POST;
 
 public interface CxfRestService {
 
-    @POST("/Liems/ws/SSInterface")
+    @POST("/Liems/ws/SSInterface?wsdl")
     Observable<String> post(@HeaderMap Map<String,String> headerMap, @Body String body);
 }

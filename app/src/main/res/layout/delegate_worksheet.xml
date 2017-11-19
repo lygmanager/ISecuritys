@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include layout="@layout/bar_titlebar"/>
+    <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+        android:id="@+id/ELC_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:left_text="设备编号"
+        app:right_text=""/>
+    <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+        android:id="@+id/ELC_NAM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:left_text="设备名称"
+        app:right_text=""/>
+    <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+        android:id="@+id/ETP_NO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:left_text="设备类别"
+        app:right_text=""/>
+    <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+        android:id="@+id/GGXH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:left_text="部门"
+        app:right_text=""/>
+    <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+        android:id="@+id/SCCJ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:left_text="班组"
+        app:right_text=""/>
+</LinearLayout>

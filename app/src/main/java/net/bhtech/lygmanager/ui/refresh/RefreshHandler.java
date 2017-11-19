@@ -1,16 +1,18 @@
 package net.bhtech.lygmanager.ui.refresh;
 
+import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import net.bhtech.lygmanager.app.Latte;
-import net.bhtech.lygmanager.net.RestClient;
-import net.bhtech.lygmanager.net.callback.ISuccess;
+import net.bhtech.lygmanager.net.cxfweservice.CxfRestClient;
+import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.ui.recycler.DataConverter;
+import net.bhtech.lygmanager.ui.recycler.MultipleRecyclerAdapter;
+
+import io.reactivex.Observable;
 
 /**
  * Created by zhangxinbiao on 2017/11/16.
@@ -24,6 +26,7 @@ public class RefreshHandler implements
     private final PagingBean BEAN;
     private final RecyclerView RECYCLERVIEW;
     private final DataConverter CONVERTER;
+    private MultipleRecyclerAdapter mAdapter = null;
 
     private RefreshHandler(SwipeRefreshLayout swipeRefreshLayout,
                            RecyclerView recyclerView,
@@ -51,22 +54,42 @@ public class RefreshHandler implements
         }, 1000);
     }
 
-    public void firstPage(String url) {
-        BEAN.setDelayed(1000);
-        RestClient.builder()
-                .url(url)
-                .success(new ISuccess() {
-                    @Override
-                    public void onSuccess(String response) {
-                        final JSONObject object = JSON.parseObject(response);
-                        BEAN.setTotal(object.getInteger("total"))
-                                .setPageSize(object.getInteger("page_size"));
-                        //设置Adapter
-                        BEAN.addIndex();
-                    }
-                })
+    public void firstPage() {
+
+        mAdapter = MultipleRecyclerAdapter.create(CONVERTER);
+        RECYCLERVIEW.setAdapter(mAdapter);
+    }
+
+    public void getDefectList(String elcId, Context _mActivity) {
+        Observable<String> obj= CxfRestClient.builder()
+                .url("getLimlistByElcId")
+                .params("arg0", "3")
+                .params("arg1", elcId)
                 .build()
-                .get();
+                .post();
+        obj.subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    public void getWorksheetList(String elcId, Context _mActivity) {
+        Observable<String> obj= CxfRestClient.builder()
+                .url("getTtklistByElcId")
+                .params("arg0", "3")
+                .params("arg1", elcId)
+                .build()
+                .post();
+        obj.subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
     }
 
     private void paging(final String url) {
