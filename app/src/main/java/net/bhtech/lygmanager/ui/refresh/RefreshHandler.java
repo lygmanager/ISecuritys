@@ -4,15 +4,29 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import net.bhtech.lygmanager.app.AccountManager;
+import net.bhtech.lygmanager.app.ConfigKeys;
 import net.bhtech.lygmanager.app.Latte;
+import net.bhtech.lygmanager.database.MountEntity;
+import net.bhtech.lygmanager.database.UtusrEntity;
+import net.bhtech.lygmanager.net.RestClient;
 import net.bhtech.lygmanager.net.cxfweservice.CxfRestClient;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
+import net.bhtech.lygmanager.net.rx.LiemsResult;
+import net.bhtech.lygmanager.net.rx.RxRestClient;
 import net.bhtech.lygmanager.ui.recycler.DataConverter;
 import net.bhtech.lygmanager.ui.recycler.MultipleRecyclerAdapter;
+import net.bhtech.lygmanager.utils.log.LatteLogger;
+
+
+import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zhangxinbiao on 2017/11/16.
@@ -27,6 +41,8 @@ public class RefreshHandler implements
     private final RecyclerView RECYCLERVIEW;
     private final DataConverter CONVERTER;
     private MultipleRecyclerAdapter mAdapter = null;
+
+    private UtusrEntity mUser=AccountManager.getSignInfo();
 
     private RefreshHandler(SwipeRefreshLayout swipeRefreshLayout,
                            RecyclerView recyclerView,
@@ -61,8 +77,60 @@ public class RefreshHandler implements
     }
 
     public void getDefectList(String elcId, Context _mActivity) {
+//        Observable<String> obj= CxfRestClient.builder()
+//                .url("getLimlistByElcId")
+//                .params("arg0", "3")
+//                .params("arg1", elcId)
+//                .build()
+//                .post();
+//        obj.subscribe(new LatteObserver<String>(_mActivity) {
+//            @Override
+//            public void onNext(String o) {
+//                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+//                RECYCLERVIEW.setAdapter(mAdapter);
+//            }
+//        });
+
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getLimlistByElcId")
+                        .params("arg0", "3")
+                        .params("arg1", elcId)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                System.out.print(o);
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    public void getAqgcktList( Context _mActivity) {
+           Observable<String> obj=
+                   RxRestClient.builder()
+                    .url("getAQGCKList")
+                    .params("orgno", mUser.getOrgNo())
+                    .params("page", "1")
+                    .params("limit", "10")
+                    .loader(_mActivity)
+                    .build()
+                    .post();
+           obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+               @Override
+               public void onNext(String o) {
+                   LatteLogger.d(o);
+                   mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                   RECYCLERVIEW.setAdapter(mAdapter);
+               }
+           });
+    }
+
+    public void getWorksheetList(String elcId, Context _mActivity) {
         Observable<String> obj= CxfRestClient.builder()
-                .url("getLimlistByElcId")
+                .url("getTtklistByElcId")
                 .params("arg0", "3")
                 .params("arg1", elcId)
                 .build()
@@ -76,9 +144,16 @@ public class RefreshHandler implements
         });
     }
 
-    public void getWorksheetList(String elcId, Context _mActivity) {
+    public void getMountList(List<MountEntity> ls) {
+        String o="[]";
+        o= JSONArray.toJSONString(ls,true);
+        mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+        RECYCLERVIEW.setAdapter(mAdapter);
+    }
+
+    public void getMountList(String elcId, Context _mActivity) {
         Observable<String> obj= CxfRestClient.builder()
-                .url("getTtklistByElcId")
+                .url("getLimlistByElcId")
                 .params("arg0", "3")
                 .params("arg1", elcId)
                 .build()

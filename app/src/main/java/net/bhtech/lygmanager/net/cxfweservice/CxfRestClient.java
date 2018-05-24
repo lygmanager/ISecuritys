@@ -81,7 +81,7 @@ public final class CxfRestClient<T> {
             mBody = new String((byte[]) getParamters.get(1));
         }
 
-        call=service.post(soapHeaderMap, mBody).subscribeOn(Schedulers.io())
+        call=service.post(soapHeaderMap,mBody).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return call;
     }

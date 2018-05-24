@@ -4,7 +4,7 @@ package net.bhtech.lygmanager.net;
  * Created by 傅令杰 on 2017/4/2
  */
 
-enum HttpMethod {
+public enum HttpMethod {
     GET,
     POST,
     POST_RAW,

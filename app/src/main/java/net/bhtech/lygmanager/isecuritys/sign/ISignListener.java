@@ -7,4 +7,5 @@ package net.bhtech.lygmanager.isecuritys.sign;
 public interface ISignListener {
 
     void onSignInSuccess();
+    void onSignInFail(String msg);
 }

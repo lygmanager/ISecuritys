@@ -27,9 +27,9 @@
     <application
         android:name=".mainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/managerlogo"
+        android:icon="@mipmap/applogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/managerlogo"
+        android:roundIcon="@mipmap/applogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

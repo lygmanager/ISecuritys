@@ -6,13 +6,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 
 import net.bhtech.lygmanager.delegates.LatteDelegate;
+import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckDelegate;
 import net.bhtech.lygmanager.isecuritys.main.equip.EquipDelegate;
+import net.bhtech.lygmanager.isecuritys.main.mount.MountDelegate;
 import net.bhtech.lygmanager.isecuritys.main.task.TaskDelegate;
 import net.bhtech.lygmanager.ui.recycler.MultipleFields;
 import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 
 /**
- * Created by 傅令杰
+ * Created by zhangxinbiao
  */
 
 public class IndexItemClickListener extends SimpleClickListener {
@@ -33,10 +36,10 @@ public class IndexItemClickListener extends SimpleClickListener {
         final String id = entity.getField(MultipleFields.ID);
         switch (id){
             case "1":
-                DELEGATE.getSupportDelegate().start(new EquipDelegate());
+                DELEGATE.getSupportDelegate().start(new AqgckDelegate());
                 break;
             case "2":
-                DELEGATE.getSupportDelegate().start(new EquipDelegate());
+                DELEGATE.getSupportDelegate().start(new AqgckBeanDelegate());
                 break;
             case "3":
                 DELEGATE.getSupportDelegate().start(new TaskDelegate());

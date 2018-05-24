@@ -20,6 +20,8 @@ import me.yokeyword.fragmentation.SupportFragmentDelegate;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 import net.bhtech.lygmanager.activities.ProxyActivity;
+import net.bhtech.lygmanager.app.ConfigKeys;
+import net.bhtech.lygmanager.app.Latte;
 
 /**
  * Created by zhangxinbiao on 2017/11/9.
@@ -31,6 +33,8 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
     protected FragmentActivity _mActivity = null;
     @SuppressWarnings("SpellCheckingInspection")
     private Unbinder mUnbinder = null;
+
+//    public static final String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
 
     public abstract Object setLayout();
 
@@ -74,7 +78,6 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         }
         mUnbinder = ButterKnife.bind(this, rootView);
         onBindView(savedInstanceState, rootView);
-
         return rootView;
     }
 

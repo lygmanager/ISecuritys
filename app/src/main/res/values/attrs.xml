@@ -8,4 +8,14 @@
         <attr name="right_color" format="color"/>
         <attr name="right_size" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="RightAndLeftEditText">
+        <!-- 标题的大小 -->
+        <attr name="nameSize" format="dimension" />
+        <!-- 标题的内容 -->
+        <attr name="nameText" format = "reference|string" />
+        <!-- 编辑框选中的颜色 -->
+        <attr name="normalColor" format="color" />
+        <!-- 编辑框没选中的颜色 -->
+        <attr name="selcetColor" format="color" />
+    </declare-styleable>
 </resources>

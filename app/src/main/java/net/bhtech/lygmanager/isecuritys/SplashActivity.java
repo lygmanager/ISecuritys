@@ -51,6 +51,11 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
     }
 
     @Override
+    public void onSignInFail(String meg) {
+        Toast.makeText(this, meg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void onLauncherFinish(OnLauncherFinishTag tag) {
         switch (tag) {
             case SIGNED:

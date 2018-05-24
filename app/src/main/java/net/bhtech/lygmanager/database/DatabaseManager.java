@@ -36,7 +36,7 @@ public class DatabaseManager {
         mDao = mDaoSession.getUtusrEntityDao();
     }
 
-    public final UtusrEntityDao getDao() {
-        return mDao;
+    public final DaoSession getDaoSession() {
+        return mDaoSession;
     }
 }

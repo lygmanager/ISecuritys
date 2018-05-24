@@ -16,13 +16,19 @@ import java.util.List;
 
 public class IndexDataConverter extends DataConverter {
     private Context mContext=null;
+    private String mFileName="Index";
     public IndexDataConverter(Context context){
         mContext=context;
     }
 
+    public IndexDataConverter(Context context,String fileName){
+        mContext=context;
+        mFileName=fileName;
+    }
+
     @Override
     public ArrayList<MultipleItemEntity> convert() {
-        String foodJson = LocalJsonResolutionUtils.getJson(mContext, "IndexData.json");
+        String foodJson = LocalJsonResolutionUtils.getJson(mContext, mFileName+"Data.json");
         final List<IndexDataEntity> dataArray = LocalJsonResolutionUtils.JsonToArray(foodJson,IndexDataEntity.class);
 
         for (IndexDataEntity data:dataArray) {

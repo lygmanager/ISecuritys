@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:paddingTop="-50dp"
+    android:gravity="top"
+    android:layout_height="60dp">
+
+        <TextView android:id="@+id/ELC_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" android:layout_margin="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@+id/ELC_ID">
+        <TextView android:id="@+id/USR_NAM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#606060"
+            android:textSize="13sp" />
+        <TextView android:id="@+id/MOUNT_IP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#606060"
+            android:textSize="13sp" android:layout_marginLeft="5dp" />
+        <TextView android:id="@+id/MOUNT_DTM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#606060"
+            android:textSize="13sp" android:layout_marginLeft="5dp" />
+        </LinearLayout>
+        <TextView android:id="@+id/MOUNT_NO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" android:layout_margin="5dp" android:visibility="gone"/>
+        <TextView android:id="@+id/ORG_NO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" android:layout_margin="5dp" android:visibility="gone"/>
+</RelativeLayout>

@@ -16,20 +16,19 @@
         android:textColor="#ffffffff"
         android:textSize="18dp" />
 
-    <Button
+    <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/button_backward"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="match_parent"
-        android:drawablePadding="10dp"
         android:background="#0099FF"
         android:ellipsize="end"
         android:gravity="center"
-        android:onClick="onClick"
+        android:text="{fa-angle-left}"
         android:paddingLeft="10dp"
         android:singleLine="true"
-        android:textColor="#ffffffff"
-        android:textSize="12dp"
-        android:visibility="visible" />
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:visibility="invisible" />
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/button_forward"
         android:layout_width="40dp"
@@ -43,7 +42,7 @@
         android:textSize="18dp"
         android:visibility="invisible" />
 
-    <Button
+    <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/button_commit"
         android:layout_width="40dp"
         android:layout_height="match_parent"
@@ -52,7 +51,7 @@
         android:gravity="center"
         android:singleLine="true"
         android:textColor="#ffffffff"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:visibility="invisible" />
     <Button
         android:id="@+id/button_delete"

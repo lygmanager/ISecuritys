@@ -48,6 +48,7 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.TEXT_IMAGE, R.layout.item_multiple_image_text);
         addItemType(ItemType.DEFECT, R.layout.item_defectvlist);
         addItemType(ItemType.WORKSHEET, R.layout.item_worksheet);
+        addItemType(ItemType.AQGCK, R.layout.item_aqgckvlist);
         //设置宽度监听
         setSpanSizeLookup(this);
         openLoadAnimation();
@@ -84,6 +85,13 @@ public class MultipleRecyclerAdapter extends
                 holder.setText(R.id.TTK_ADR, (String)entity.getField("TTK_ADR"));
                 holder.setText(R.id.TTKPER_ID, (String)entity.getField("TTKPER_ID"));
                 holder.setText(R.id.TTK_NO, (String)entity.getField("TTK_NO"));
+                break;
+            case ItemType.AQGCK:
+                holder.setText(R.id.GC_ORG, (String)entity.getField("GC_ORG"));
+                holder.setText(R.id.GC_NAM, (String)entity.getField("GC_NAM"));
+                holder.setText(R.id.GC_DTM, (String)entity.getField("GC_DTM"));
+                holder.setText(R.id.GC_RW, (String)entity.getField("GC_RW"));
+                holder.setText(R.id.AQ_NO, (String)entity.getField("AQ_NO"));
                 break;
             default:
                 break;
