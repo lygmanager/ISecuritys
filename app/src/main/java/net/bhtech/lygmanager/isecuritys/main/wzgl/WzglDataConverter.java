@@ -1,10 +1,8 @@
-package net.bhtech.lygmanager.isecuritys.main.lxzbk;
+package net.bhtech.lygmanager.isecuritys.main.wzgl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import net.bhtech.lygmanager.database.AqgckEntity;
-import net.bhtech.lygmanager.database.LxzbklinEntity;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.ui.recycler.DataConverter;
 import net.bhtech.lygmanager.ui.recycler.ItemType;
@@ -13,31 +11,33 @@ import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by zhangxinbiao on 2018/5/22.
  */
 
-public class LxzbklinDataConverter extends DataConverter {
+public class WzglDataConverter extends DataConverter {
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         ENTITIES.clear();
         String jsonArray=getJsonData();
+        LatteLogger.d(jsonArray);
         if(jsonArray!=null&&!"".equals(jsonArray)) {
             JSONObject lr2= (JSONObject) JSONObject.parse(jsonArray);
             LiemsResult lr=JSONObject.toJavaObject(lr2,LiemsResult.class);
-            List<LxzbklinEntity>  ls=JSONArray.parseArray(lr.getRows().toString(),LxzbklinEntity.class);
-            for (LxzbklinEntity data : ls) {
+            JSONArray  ls=JSONArray.parseArray(lr.getRows().toString());
+            for (int i=0;i< ls.size();i++) {
+                JSONObject data=ls.getJSONObject(i);
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
-                        .setField(MultipleFields.ITEM_TYPE, ItemType.LXZBKLIN)
+                        .setField(MultipleFields.ITEM_TYPE, ItemType.BGB)
                         .setField(MultipleFields.SPAN_SIZE, 1)
-                        .setField("JCLIN_NO", data.getJCLIN_NO())
-                        .setField("JCLIN_DSC", data.getJCLIN_DSC())
-                        .setField("JCLIN_SFNUM", data.getJCLIN_SFNUM())
-                        .setField("JCLIN_FXNUM", data.getJCLIN_FXNUM())
-                        .setField("JCLIN_ZDNUM", data.getJCLIN_ZDNUM())
-                        .setField("JCLIN_NANUM", getTextTagInfo(data.getJCLIN_NANUM(),"SDZBJCKLIN@@JCLIN_NANUM"))
+                        .setField("BGB_NO", data.getString("BGB_NO"))
+                        .setField("JC_DTM", data.getString("JC_DTM"))
+                        .setField("BG_NOT", data.getString("BG_NOT"))
+                        .setField("BG_ADR", getTextTagInfo(data.getString("BG_ADR"),"RMBGBMST@@BG_ADR"))
+                        .setField("BF_TYP", getTextTagInfo(data.getString("BF_TYP"),"RMBGBMST@@BF_TYP"))
+                        .setField("JCUSR_ID", data.getString("JCUSR_ID"))
+                        .setField("CST_NO", getTextTagInfo(data.getString("CST_NO"),"BgbcstOption"))
                         .build();
                 ENTITIES.add(entity);
             }

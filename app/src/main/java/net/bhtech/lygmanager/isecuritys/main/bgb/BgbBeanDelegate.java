@@ -128,6 +128,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbsklOption","BgbsklOption");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstsklOption","BgbcstsklOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbjcnrOption","BgbjcnrOption");
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -139,6 +140,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         BG_ADR.setPopulWindow(mContext,"RMBGBMST@@BG_ADR");
         CST_NO.setPopulWindow(mContext,"BgbcstOption");
         SKL_NO.setPopulWindow(mContext,"BgbsklOption");
+        GLCST_NO.setPopulWindow(mContext,"BgbcstsklOption");
 
 //
 
@@ -155,7 +157,8 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 entity.put("JC_TYP",JC_TYP.getEditTextTagInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
                 entity.put("PLAN_DTM",PLAN_DTM.getEditTextInfo());
-                entity.put("GLCST_NO",GLCST_NO.getEditTextInfo());
+                entity.put("GLCST_NO",GLCST_NO.getEditTextTagInfo());
+                entity.put("SKL_NO",SKL_NO.getEditTextTagInfo());
                 entity.put("KH_FS",KH_FS.getEditTextInfo());
                 entity.put("ORG_NO",mUser.getOrgNo());
                 entity.put("JCUSR_ID",mUser.getUserId());
@@ -225,7 +228,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
         {
             if("A".equals(PICTUREA.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo());
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
                 this.getSupportDelegate().start(delegate);
             }
         }
@@ -300,6 +303,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
                             GLCST_NO.setEditTextInfo(entity.getString("GLCST_NO"));
                             SKL_NO.setEditTextTagInfo(entity.getString("SKL_NO"),"BgbsklOption");
+                            GLCST_NO.setEditTextTagInfo(entity.getString("GLCST_NO"),"BgbcstsklOption");
                             GLUSR_ID.setEditTextInfo(entity.getString("GLUSR_ID"));
                             KH_FS.setEditTextInfo(entity.getString("KH_FS"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));

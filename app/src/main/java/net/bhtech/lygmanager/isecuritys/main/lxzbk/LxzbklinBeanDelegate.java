@@ -37,6 +37,7 @@ import net.bhtech.lygmanager.utils.log.LatteLogger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -93,6 +94,10 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
         final Context mContext=this.getContext();
         mUser= AccountManager.getSignInfo();
         JCLIN_DSC.setReadOnly();
+
+        Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
+                .getFieldOption("SDZBJCKLIN@@JCLIN_NANUM");
+        JCLIN_NANUM.setPopulWindow(mContext,"SDZBJCKLIN@@JCLIN_NANUM");
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +107,7 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
                 entity.setJCLIN_SFNUM(JCLIN_SFNUM.getEditTextInfo());
                 entity.setJCLIN_FXNUM(JCLIN_FXNUM.getEditTextInfo());
                 entity.setJCLIN_ZDNUM(JCLIN_ZDNUM.getEditTextInfo());
-                entity.setJCLIN_NANUM(JCLIN_NANUM.getEditTextInfo());
+                entity.setJCLIN_NANUM(JCLIN_NANUM.getEditTextTagInfo());
                 Observable<String> obj=
                         RxRestClient.builder()
                                 .url("saveOrUpdateLXZBKLINMST")
@@ -156,7 +161,7 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
                             JCLIN_SFNUM.setEditTextInfo(entity.getJCLIN_SFNUM());
                             JCLIN_FXNUM.setEditTextInfo(entity.getJCLIN_FXNUM());
                             JCLIN_ZDNUM.setEditTextInfo(entity.getJCLIN_ZDNUM());
-                            JCLIN_NANUM.setEditTextInfo(entity.getJCLIN_NANUM());
+                            JCLIN_NANUM.setEditTextTagInfo(entity.getJCLIN_NANUM(),"SDZBJCKLIN@@JCLIN_NANUM");
                         }
                     }
                 }

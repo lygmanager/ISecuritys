@@ -11,7 +11,7 @@
 },{
   "imageUrl":"{fa-building}","itemText":"新建曝光板","itemId":"6","itemType":"3"
 },{
-  "imageUrl":"{fa-ruler-combined}","itemText":"违章管理","itemId":"7","itemType":"3"
+  "imageUrl":"{fa-cogs}","itemText":"违章管理","itemId":"7","itemType":"3"
 },{
-  "imageUrl":"{fa-ruler-combined}","itemText":"新建违章","itemId":"8","itemType":"3"
+  "imageUrl":"{fa-cogs}","itemText":"新建违章","itemId":"8","itemType":"3"
 }]

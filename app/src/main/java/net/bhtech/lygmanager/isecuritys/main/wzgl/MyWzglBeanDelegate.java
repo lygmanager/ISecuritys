@@ -49,7 +49,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by zhangxinbiao on 2017/11/26.
  */
 
-public class WzglBeanDelegate extends BottomItemDelegate {
+public class MyWzglBeanDelegate extends BottomItemDelegate {
 
     private String pkValue="";
 
@@ -87,7 +87,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
     @BindView(R.id.iView)
     ImageView iView=null;
     protected Context mContext=null;
-    private WzglBeanDelegate thisdelegate=this;
+    private MyWzglBeanDelegate thisdelegate=this;
 
     private UtusrEntity mUser=null;
     private String[]mCustomItems=new String[]{"本地相册","相机拍照"};
@@ -254,10 +254,10 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         return new DefaultHorizontalAnimator();
     }
 
-    public static WzglBeanDelegate create(String pictures) {
+    public static MyWzglBeanDelegate create(String pictures) {
         final Bundle args = new Bundle();
         args.putString("BGB_NO", pictures);
-        final WzglBeanDelegate delegate = new WzglBeanDelegate();
+        final MyWzglBeanDelegate delegate = new MyWzglBeanDelegate();
         delegate.setArguments(args);
         return delegate;
     }

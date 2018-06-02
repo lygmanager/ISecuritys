@@ -152,6 +152,31 @@ public class RefreshHandler implements
         });
     }
 
+    public void getWzglList( Context _mActivity,String mType) {
+        String params="";
+        if("MY".equals(mType)){
+            params=" and JLUSR_ID='"+mUser.getUserId()+"' ";
+        }else if("YOUR".equals(mType)){
+            params=" and ZR_USR='"+mUser.getUserId()+"' ";
+        }
+        Observable<String> obj= RxRestClient.builder()
+                .url("getWzglList")
+                .params("orgno", mUser.getOrgNo())
+                .params("params",params)
+                .params("page", "1")
+                .params("limit", "10")
+                .loader(_mActivity)
+                .build()
+                .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
     public void getLxzbkList( Context _mActivity) {
         Observable<String> obj=
                 RxRestClient.builder()

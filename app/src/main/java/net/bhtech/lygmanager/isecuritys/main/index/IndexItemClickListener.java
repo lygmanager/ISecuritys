@@ -17,6 +17,7 @@ import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkDelegate;
 import net.bhtech.lygmanager.isecuritys.main.mount.MountDelegate;
 import net.bhtech.lygmanager.isecuritys.main.task.TaskDelegate;
 import net.bhtech.lygmanager.isecuritys.main.wzgl.WzglBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.wzgl.WzglDelegate;
 import net.bhtech.lygmanager.ui.recycler.MultipleFields;
 import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 
@@ -60,7 +61,7 @@ public class IndexItemClickListener extends SimpleClickListener {
                 DELEGATE.getSupportDelegate().start(new BgbBeanDelegate());
                 break;
             case "7":
-                DELEGATE.getSupportDelegate().start(new WzglBeanDelegate());
+                DELEGATE.getSupportDelegate().start(new WzglDelegate());
                 break;
             case "8":
                 DELEGATE.getSupportDelegate().start(new WzglBeanDelegate());

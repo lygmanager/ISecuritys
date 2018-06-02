@@ -18,6 +18,7 @@ public class FullimageDelegate extends BottomItemDelegate {
 
     @BindView(R.id.iView)
     ZoomImageView iView=null;
+    private String tableName="";
     private String picture="";
 
     @Override
@@ -26,6 +27,7 @@ public class FullimageDelegate extends BottomItemDelegate {
         final Bundle args = getArguments();
         if (args != null) {
             picture=args.getString("pictures");
+            tableName=args.getString("tableName");
         }
     }
 
@@ -36,13 +38,14 @@ public class FullimageDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        LiemsMethods.init(getContext()).glideImage(this,iView,"RMBGBMST",
+        LiemsMethods.init(getContext()).glideImage(this,iView,tableName,
                 picture+".JPEG");
     }
 
-    public static FullimageDelegate create(String pictures) {
+    public static FullimageDelegate create(String pictures,String tableName) {
         final Bundle args = new Bundle();
         args.putString("pictures", pictures);
+        args.putString("tableName", tableName);
         final FullimageDelegate delegate = new FullimageDelegate();
         delegate.setArguments(args);
         return delegate;

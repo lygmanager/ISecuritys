@@ -290,7 +290,9 @@ public class RightAndLeftEditText extends LinearLayout {
 
     public void setReadOnly()
     {
-
+        editText.setCursorVisible(false);
+        editText.setFocusable(false);
+        editText.setFocusableInTouchMode(false);
     }
 
     public void setEditTextInfo(String text){
@@ -402,9 +404,7 @@ public class RightAndLeftEditText extends LinearLayout {
     }
 
     public void setPopulWindow(final Context mContext,final String orgNo,final String userId,final String tblfields){
-        editText.setCursorVisible(false);
-        editText.setFocusable(false);
-        editText.setFocusableInTouchMode(false);
+        setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -415,9 +415,7 @@ public class RightAndLeftEditText extends LinearLayout {
     }
 
     public void setPopulWindow(final Context mContext,final String tblfieldArray){
-        editText.setCursorVisible(false);
-        editText.setFocusable(false);
-        editText.setFocusableInTouchMode(false);
+        setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -427,10 +425,8 @@ public class RightAndLeftEditText extends LinearLayout {
     }
 
     public void setDatePick(final BaseDelegate baseDelegate, final String initDateTime, final String dateType){
-        editText.setCursorVisible(false);
         editText.setText(initDateTime);
-        editText.setFocusable(false);
-        editText.setFocusableInTouchMode(false);
+        setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
