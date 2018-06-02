@@ -8,9 +8,15 @@ import com.chad.library.adapter.base.listener.SimpleClickListener;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckDelegate;
+import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBaseDelegate;
+import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.bgb.BgbDelegate;
 import net.bhtech.lygmanager.isecuritys.main.equip.EquipDelegate;
+import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkDelegate;
 import net.bhtech.lygmanager.isecuritys.main.mount.MountDelegate;
 import net.bhtech.lygmanager.isecuritys.main.task.TaskDelegate;
+import net.bhtech.lygmanager.isecuritys.main.wzgl.WzglBeanDelegate;
 import net.bhtech.lygmanager.ui.recycler.MultipleFields;
 import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 
@@ -42,16 +48,22 @@ public class IndexItemClickListener extends SimpleClickListener {
                 DELEGATE.getSupportDelegate().start(new AqgckBeanDelegate());
                 break;
             case "3":
-                DELEGATE.getSupportDelegate().start(new TaskDelegate());
+                DELEGATE.getSupportDelegate().start(new LxzbkDelegate());
                 break;
             case "4":
-                DELEGATE.getSupportDelegate().start(new TaskDelegate());
+                DELEGATE.getSupportDelegate().start(new LxzbkBeanDelegate());
                 break;
             case "5":
-                DELEGATE.getSupportDelegate().start(new TaskDelegate());
+                DELEGATE.getSupportDelegate().start(new BgbBaseDelegate());
                 break;
             case "6":
-                DELEGATE.getSupportDelegate().start(new TaskDelegate());
+                DELEGATE.getSupportDelegate().start(new BgbBeanDelegate());
+                break;
+            case "7":
+                DELEGATE.getSupportDelegate().start(new WzglBeanDelegate());
+                break;
+            case "8":
+                DELEGATE.getSupportDelegate().start(new WzglBeanDelegate());
                 break;
             default:break;
         }

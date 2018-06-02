@@ -1,17 +1,30 @@
 package net.bhtech.lygmanager.net;
 
+import android.app.Fragment;
 import android.content.Context;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 
 import net.bhtech.lygmanager.app.AccountManager;
+import net.bhtech.lygmanager.app.ConfigKeys;
+import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.database.UtusrEntity;
+import net.bhtech.lygmanager.delegates.BaseDelegate;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
-import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
+import net.bhtech.lygmanager.ui.tag.TouchImageView;
+import net.bhtech.lygmanager.ui.tag.ZoomImageView;
+import net.bhtech.lygmanager.utils.log.LatteLogger;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,5 +98,127 @@ public class LiemsMethods {
             }
         });
         return resultMap;
+    }
+
+    public void getLxzbklxOption(final String mTblfields)
+    {
+
+        String[][] result=null;
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url("getLxzbklxList")
+                        .params("orgno", mUser.getOrgNo())
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(mContext) {
+            @Override
+            public void onNext(String result) {
+                if(result!=null&&!"".equals(result)) {
+                    JSONArray jsonArray=JSONArray.parseArray(result);
+                    String[] list=null;
+                    String[] vlist=null;
+                    if(jsonArray.size()>0) {
+                        list=new String[jsonArray.size()];
+                        vlist=new String[jsonArray.size()];
+                        for (int j = 0; j < jsonArray.size(); j++) {
+                            String value = jsonArray.getJSONObject(j).getString("value");
+                            String label = jsonArray.getJSONObject(j).getString("label");
+                            vlist[j] = value;
+                            list[j] = label;
+
+                        }
+                        LattePreference.addCustomAppProfile("LXZBKLX", JSONObject.toJSONString(list));
+                        LattePreference.addCustomAppProfile("LXZBKLX_VAL", JSONObject.toJSONString(vlist));
+                    }
+                }
+            }
+        });
+    }
+
+    public void getLiemsOption(final String method,final String mTblfields)
+    {
+
+        String[][] result=null;
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url(method)
+                        .params("orgno", mUser.getOrgNo())
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(mContext) {
+            @Override
+            public void onNext(String result) {
+                if(result!=null&&!"".equals(result)) {
+                    JSONArray jsonArray=JSONArray.parseArray(result);
+                    String[] list=null;
+                    String[] vlist=null;
+                    if(jsonArray.size()>0) {
+                        list=new String[jsonArray.size()];
+                        vlist=new String[jsonArray.size()];
+                        for (int j = 0; j < jsonArray.size(); j++) {
+                            String value = jsonArray.getJSONObject(j).getString("value");
+                            String label = jsonArray.getJSONObject(j).getString("label");
+                            vlist[j] = value;
+                            list[j] = label;
+                        }
+                        LattePreference.addCustomAppProfile(mTblfields, JSONObject.toJSONString(list));
+                        LattePreference.addCustomAppProfile(mTblfields+"_VAL", JSONObject.toJSONString(vlist));
+                    }
+                }
+            }
+        });
+    }
+
+    public void autoUpdateVersion()
+    {
+        String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url(BASE_URL.replaceAll("webservice/","apkfile/update.json"))
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(mContext) {
+            @Override
+            public void onNext(String result) {
+                if(result!=null&&!"".equals(result)) {
+                    JSONObject jsonObject=JSONObject.parseObject(result);
+                    String serverVersion=jsonObject.getString("serverVersion");
+                }
+            }
+        });
+    }
+
+    public void upLoadFile(String filePath,String tableName,String fileName)
+    {
+        String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url(BASE_URL.replaceAll("webservice/","upLoadFile"))
+                        .file(filePath)
+                        .params("tableName",tableName)
+                        .params("fileName",fileName)
+                        .loader(mContext)
+                        .build()
+                        .upload();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(mContext) {
+            @Override
+            public void onNext(String result) {
+                if(result!=null&&!"".equals(result)&&"success".equals(result)) {
+                    Toast.makeText(mContext,"上传成功！",Toast.LENGTH_SHORT);
+                }else{
+                    Toast.makeText(mContext,result,Toast.LENGTH_SHORT);
+                }
+            }
+        });
+    }
+
+    public void glideImage(BaseDelegate delegate, ImageView iView, String tableName, String imagePath)
+    {
+        String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
+        String url=BASE_URL.replaceAll("webservice/","uploadfiles");
+        Glide.with(delegate).load(url+"/"+tableName+"/"+imagePath).into(iView);
     }
 }

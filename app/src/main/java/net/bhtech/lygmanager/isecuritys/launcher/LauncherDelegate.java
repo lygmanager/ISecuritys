@@ -11,6 +11,7 @@ import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.app.IUserChecker;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.utils.timer.BaseTimerTask;
 import net.bhtech.lygmanager.utils.timer.ITimerListener;
 
@@ -62,6 +63,7 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        //LiemsMethods.init(getContext()).autoUpdateVersion();
         initTimer();
     }
 

@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -19,10 +20,13 @@ import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
 import net.bhtech.lygmanager.isecuritys.main.equip.DefectDataConverter;
 import net.bhtech.lygmanager.isecuritys.main.index.OverrunItemClickListener;
+import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.ui.recycler.BaseDecoration;
 import net.bhtech.lygmanager.ui.refresh.RefreshHandler;
 import net.bhtech.lygmanager.ui.tag.RightAndLeftTextView;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
+
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -40,6 +44,9 @@ public class AqgckDelegate extends BottomItemDelegate {
     @BindView(R.id.button_forward)
     IconTextView button_forward=null;
 
+    @BindView(R.id.text_title)
+    TextView text_title=null;
+
 
     private RefreshHandler mRefreshHandler = null;
 
@@ -51,8 +58,12 @@ public class AqgckDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
+        text_title.setText("安全观察卡");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-plus}");
+        Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
+                .getFieldOption("AQGCKMST@@GC_ORG,AQGCKMST@@GC_CST,AQGCKMST@@GC_SX,AQGCKMST@@BGC_ORG,AQGCKMST@@GC_TYP,AQGCKMST@@IS_JZ,AQGCKMST@@FX_TYP");
+
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new AqgckDataConverter());
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override

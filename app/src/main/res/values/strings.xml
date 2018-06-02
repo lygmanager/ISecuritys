@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HSE</string>
+    <string name="title_activity_fullimage_delegate">FullimageDelegate</string>
 </resources>

@@ -4,6 +4,7 @@ package net.bhtech.lygmanager.utils.file;
  * Created by zhangxinbiao on 2017/11/16.
  */
 
+import android.app.DownloadManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -224,7 +225,6 @@ public final class FileUtil {
 
             bos.flush();
             fos.flush();
-
 
         } catch (IOException e) {
             e.printStackTrace();

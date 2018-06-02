@@ -4,14 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
@@ -23,30 +17,19 @@ import net.bhtech.lygmanager.database.AqgckEntity;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
-import net.bhtech.lygmanager.isecuritys.main.index.OverrunItemClickListener;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
-import net.bhtech.lygmanager.ui.date.DatePickDialogUtil;
-import net.bhtech.lygmanager.ui.recycler.BaseDecoration;
-import net.bhtech.lygmanager.ui.recycler.MultipleRecyclerAdapter;
-import net.bhtech.lygmanager.ui.refresh.RefreshHandler;
-import net.bhtech.lygmanager.ui.tag.EidtTextPopulWindow;
 import net.bhtech.lygmanager.ui.tag.RightAndLeftEditText;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -63,9 +46,10 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
 
     @BindView(R.id.button_commit)
     IconTextView button_commit=null;
-
     @BindView(R.id.button_forward)
     IconTextView button_forward=null;
+    @BindView(R.id.text_title)
+    TextView text_title=null;
 
     @BindView(R.id.AQ_NO)
     RightAndLeftEditText AQ_NO=null;
@@ -104,11 +88,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
     @BindView(R.id.ZQX_SHT)
     RightAndLeftEditText ZQX_SHT=null;
 
-
-    private ListPopupWindow listPopupWindow=null;
     private UtusrEntity mUser=null;
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,6 +107,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        text_title.setText("安全观察卡明细");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.VISIBLE);
@@ -234,7 +215,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
         if (pkValue != null && !"".equals(pkValue) && !"-1".equals(pkValue)) {
             Observable<String> obj =
                     RxRestClient.builder()
-                            .url("getAQGCKList")
+                            .url("getAQGCKDetail")
                             .params("aqno", pkValue)
                             .loader(this.getContext())
                             .build()
@@ -245,26 +226,25 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                     JSONObject lr2 = (JSONObject) JSONObject.parse(result);
                     LiemsResult lr = JSONObject.toJavaObject(lr2, LiemsResult.class);
                     if ("success".equals(lr.getResult()) && !"0".equals(lr.getCount())) {
-                        List<AqgckEntity> list = JSONArray.parseArray(lr.getRows().toString(), AqgckEntity.class);
-                        for (AqgckEntity entity : list) {
+                        AqgckEntity entity = JSONObject.parseObject(lr.getRows().toString(), AqgckEntity.class);
+                        if ( entity!=null) {
                             AQ_NO.setEditTextInfo(entity.getAQ_NO());
-                            GC_ORG.setEditTextInfo(entity.getGC_ORG());GC_ORG.setEditTextTagInfo(entity.getGC_ORG());
-                            GC_NAM.setEditTextInfo(entity.getGC_NAM());GC_NAM.setEditTextTagInfo(entity.getGC_NAM());
+                            GC_ORG.setEditTextTagInfo(entity.getGC_ORG(),"AQGCKMST@@GC_ORG");
+                            GC_NAM.setEditTextTagInfo(entity.getGC_NAM(),"AQGCKMST@@GC_NAM");
                             GC_CST.setEditTextInfo(entity.getGC_CST());
                             BZ_NO.setEditTextInfo(entity.getBZ_NO());
                             GC_DTM.setEditTextInfo(entity.getGC_DTM());
-                            BGC_ORG.setEditTextInfo(entity.getBGC_ORG());BGC_ORG.setEditTextTagInfo(entity.getBGC_ORG());
+                            BGC_ORG.setEditTextTagInfo(entity.getBGC_ORG(),"AQGCKMST@@BGC_ORG");
                             GC_RW.setEditTextInfo(entity.getGC_RW());
                             GC_QY.setEditTextInfo(entity.getGC_QY());
                             GC_SX.setEditTextInfo(entity.getGC_SX());
-                            GC_TYP.setEditTextInfo(entity.getGC_TYP());GC_TYP.setEditTextTagInfo(entity.getGC_TYP());
+                            GC_TYP.setEditTextTagInfo(entity.getGC_TYP(),"AQGCKMST@@GC_TYP");
                             ORG_NO.setEditTextInfo(entity.getORG_NO());
-
                             WX_SHT.setEditTextInfo(entity.getWX_SHT());
-                            IS_JZ.setEditTextTagInfo(entity.getIS_JZ());
+                            IS_JZ.setEditTextTagInfo(entity.getIS_JZ(),"AQGCKMST@@JZ_CS");
                             JZ_CS.setEditTextInfo(entity.getJZ_CS());
                             JZ_XD.setEditTextInfo(entity.getJZ_XD());
-                            FX_TYP.setEditTextTagInfo(entity.getFX_TYP());
+                            FX_TYP.setEditTextTagInfo(entity.getFX_TYP(),"AQGCKMST@@FX_TYP");
                             ZQX_SHT.setEditTextInfo(entity.getZQX_SHT());
                         }
                     }

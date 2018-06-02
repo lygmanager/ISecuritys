@@ -43,6 +43,10 @@
             <TextView style="@style/usertext" android:id="@+id/btn_sign_out" android:text="退出登陆"/>
             <ImageView style="@style/img_arrow"/>
         </LinearLayout>
+        <LinearLayout style="@style/single_layout">
+            <TextView style="@style/usertext" android:id="@+id/btn_app_update" android:text="版本更新"/>
+            <ImageView style="@style/img_arrow"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

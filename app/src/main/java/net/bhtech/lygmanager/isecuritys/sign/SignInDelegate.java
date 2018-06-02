@@ -126,7 +126,7 @@ public class SignInDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        mUsrId.setText("KKSYS");
-        mPassword.setText("1234");
+//        mUsrId.setText("KKSYS");
+//        mPassword.setText("1234");
     }
 }

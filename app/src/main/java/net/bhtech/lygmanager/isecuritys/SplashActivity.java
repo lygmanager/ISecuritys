@@ -14,8 +14,13 @@ import net.bhtech.lygmanager.isecuritys.launcher.OnLauncherFinishTag;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
 import net.bhtech.lygmanager.isecuritys.sign.ISignListener;
 import net.bhtech.lygmanager.isecuritys.sign.SignInDelegate;
+import net.bhtech.lygmanager.utils.storage.LattePreference;
+
+import butterknife.BindView;
 
 public class SplashActivity extends ProxyActivity implements ISignListener, ILauncherListener {
+
+    public static final String MESSAGE_PROGRESS = "message_progress";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +30,6 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
             actionBar.hide();
         }
         Latte.getConfigurator().withActivity(this);
-//        StatusBarCompat.translucentStatusBar(this, true);
 
     }
 
@@ -70,4 +74,5 @@ public class SplashActivity extends ProxyActivity implements ISignListener, ILau
                 break;
         }
     }
+
 }

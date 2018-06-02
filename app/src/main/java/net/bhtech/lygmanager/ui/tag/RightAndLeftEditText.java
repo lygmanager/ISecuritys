@@ -14,14 +14,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson.JSONArray;
 
 import net.bhtech.lygmanager.delegates.BaseDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckBeanDelegate;
 import net.bhtech.lygmanager.ui.date.DatePickDialogUtil;
 import net.bhtech.lygmanager.ui.date.DateTimePickDialogUtil;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
 
 
@@ -289,6 +288,11 @@ public class RightAndLeftEditText extends LinearLayout {
         return  editText.getEditableText().toString();
     }
 
+    public void setReadOnly()
+    {
+
+    }
+
     public void setEditTextInfo(String text){
         if (editText==null) {
             return;
@@ -311,6 +315,41 @@ public class RightAndLeftEditText extends LinearLayout {
             return;
         }
         editText.setTag(text);
+    }
+
+    public void setEditTextTagInfo(String text,String option){
+        if (editText==null) {
+            return;
+        }
+        String labelStr= LattePreference.getCustomAppProfile(option);
+        if(labelStr==null||"".equals(labelStr))
+        {
+            return;
+        }
+        JSONArray labels2=JSONArray.parseArray(labelStr);
+        String[] tmp=new String [labels2.size()];
+        for (int i=0;i<labels2.size();i++)
+        {
+            tmp[i]=labels2.getString(i);
+        }
+        final String[] labels=tmp;
+        String valueStr=LattePreference.getCustomAppProfile(option+"_VAL");
+        if(valueStr==null||"".equals(valueStr))
+        {
+            return;
+        }
+        final JSONArray values2=JSONArray.parseArray(valueStr);
+        String[] tmp2=new String [values2.size()];
+        for (int i=0;i<values2.size();i++)
+        {
+            if(values2.getString(i).equals(text))
+            {
+                editText.setTag(text);
+                editText.setText(labels[i]);
+                break;
+            }
+        }
+
     }
 
     public void clearText(){

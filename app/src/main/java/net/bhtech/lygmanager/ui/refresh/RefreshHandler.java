@@ -17,6 +17,7 @@ import net.bhtech.lygmanager.net.cxfweservice.CxfRestClient;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
+import net.bhtech.lygmanager.net.rx.RxRestClientBuilder;
 import net.bhtech.lygmanager.ui.recycler.DataConverter;
 import net.bhtech.lygmanager.ui.recycler.MultipleRecyclerAdapter;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
@@ -101,7 +102,6 @@ public class RefreshHandler implements
         obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
             @Override
             public void onNext(String o) {
-                System.out.print(o);
                 mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
                 RECYCLERVIEW.setAdapter(mAdapter);
             }
@@ -121,11 +121,71 @@ public class RefreshHandler implements
            obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
                @Override
                public void onNext(String o) {
-                   LatteLogger.d(o);
                    mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
                    RECYCLERVIEW.setAdapter(mAdapter);
                }
            });
+    }
+
+    public void getBgbList( Context _mActivity,String mType) {
+        String params="";
+        if("MY".equals(mType)){
+            params=" and JLUSR_ID='"+mUser.getUserId()+"' ";
+        }else if("YOUR".equals(mType)){
+            params=" and GLCST_NO='"+mUser.getCstNo()+"' ";
+        }
+        Observable<String> obj= RxRestClient.builder()
+                        .url("getBgbList")
+                        .params("orgno", mUser.getOrgNo())
+                        .params("params",params)
+                        .params("page", "1")
+                        .params("limit", "10")
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    public void getLxzbkList( Context _mActivity) {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getLxzbkList")
+                        .params("orgno", mUser.getOrgNo())
+                        .params("page", "1")
+                        .params("limit", "10")
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    public void getLxzbklinList( Context _mActivity,String jckno) {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getLxzbklinList")
+                        .params("jckno", jckno)
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
     }
 
     public void getWorksheetList(String elcId, Context _mActivity) {

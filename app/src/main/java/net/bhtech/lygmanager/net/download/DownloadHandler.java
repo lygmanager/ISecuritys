@@ -2,6 +2,7 @@ package net.bhtech.lygmanager.net.download;
 
 import android.os.AsyncTask;
 
+import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.net.RestCreator;
 import net.bhtech.lygmanager.net.callback.IError;
 import net.bhtech.lygmanager.net.callback.IFailure;

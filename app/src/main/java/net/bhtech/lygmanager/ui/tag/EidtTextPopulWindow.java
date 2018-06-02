@@ -108,8 +108,6 @@ public class EidtTextPopulWindow {
         mListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LatteLogger.d(position + "     " + id);
-
                 mEditText.setText(list[position]);
                 mEditText.setTag(vlist[position]);
                 mListPopupWindow.dismiss();

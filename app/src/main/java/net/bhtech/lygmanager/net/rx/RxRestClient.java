@@ -92,7 +92,7 @@ public final class RxRestClient {
                         RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
                 final MultipartBody.Part body =
                         MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
-                observable = service.upload(URL, body);
+                observable = service.upload(URL, body,PARAMS);
                 break;
             default:
                 break;

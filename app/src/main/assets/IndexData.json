@@ -1,21 +1,17 @@
 [{
-  "imageUrl":"{fa-cogs}","itemText":"安全观察卡","itemId":"1","itemType":"3"
+  "imageUrl":"{fa-camera-retro}","itemText":"安全观察卡","itemId":"1","itemType":"3"
 },{
-  "imageUrl":"{fa-camera-retro}","itemText":"换管记录","itemId":"2","itemType":"3"
+  "imageUrl":"{fa-camera-retro}","itemText":"新建安全观察卡","itemId":"2","itemType":"3"
 },{
-  "imageUrl":"{fa-file-archive-o}","itemText":"故障记录","itemId":"3","itemType":"3"
+  "imageUrl":"{fa-file-archive-o}","itemText":"领先指标卡","itemId":"3","itemType":"3"
 },{
-  "imageUrl":"{fa-location-arrow}","itemText":"实测记录","itemId":"4","itemType":"3"
+  "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"4","itemType":"3"
 },{
-  "imageUrl":"{fa-file-image-o}","itemText":"宏观测量记录","itemId":"5","itemType":"3"
+  "imageUrl":"{fa-building}","itemText":"曝光板","itemId":"5","itemType":"3"
 },{
-  "imageUrl":"{fa-file-text-o}","itemText":"金相记录","itemId":"6","itemType":"3"
+  "imageUrl":"{fa-building}","itemText":"新建曝光板","itemId":"6","itemType":"3"
 },{
-  "imageUrl":"{fa-file-text-o}","itemText":"缺陷记录","itemId":"7","itemType":"3"
+  "imageUrl":"{fa-ruler-combined}","itemText":"违章管理","itemId":"7","itemType":"3"
 },{
-  "imageUrl":"{fa-file-text-o}","itemText":"止晃点管理","itemId":"8","itemType":"3"
-},{
-  "imageUrl":"{fa-file-text-o}","itemText":"膨胀记录","itemId":"9","itemType":"3"
-},{
-  "imageUrl":"{fa-file-text-o}","itemText":"水质分析","itemId":"10","itemType":"3"
+  "imageUrl":"{fa-ruler-combined}","itemText":"新建违章","itemId":"8","itemType":"3"
 }]
