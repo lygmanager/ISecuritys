@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#606060"
-                    android:text="风险数量："
+                    android:text="有风险数量："
                     android:textSize="13sp"
                     android:layout_marginLeft="5dp" />
                 <TextView android:id="@+id/JCLIN_FXNUM"

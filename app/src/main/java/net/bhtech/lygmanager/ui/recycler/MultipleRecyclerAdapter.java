@@ -1,10 +1,18 @@
 package net.bhtech.lygmanager.ui.recycler;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.provider.SyncStateContract;
+import android.support.annotation.ColorRes;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.joanzapata.iconify.widget.IconTextView;
 
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
@@ -76,6 +84,22 @@ public class MultipleRecyclerAdapter extends
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
                 holder.setText(R.id.tv_multiple, text);
                 holder.setText(R.id.img_multiple, imageUrl);
+               if((int)entity.getField(MultipleFields.SPAN_SIZE)==3)
+                {
+                    IconTextView img_title=holder.getView(R.id.img_title);
+                    img_title.setText(imageUrl);
+                    holder.getView(R.id.indexLayoutTitle).setVisibility(View.VISIBLE);
+                    IconTextView iconTextView2=holder.getView(R.id.img_multiple2);
+                    iconTextView2.setText(text);
+                    iconTextView2.setTextColor(Color.GRAY);
+                    holder.getView(R.id.img_multiple).setVisibility(View.GONE);
+                    holder.getView(R.id.tv_multiple).setVisibility(View.GONE);
+                }
+                if("C".equals(entity.getField(MultipleFields.TEXT_COLOR)))
+                {
+                    IconTextView iconTextView=holder.getView(R.id.img_multiple);
+                    iconTextView.setTextColor(0xFF00C6FF);
+                }
                 break;
             case ItemType.DEFECT:
                 holder.setText(R.id.LIM_SHT, (String)entity.getField("LIM_SHT"));

@@ -16,16 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/CST_NO"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="单位"
-            app:nameSize="80dp"
-            />
+
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/BG_ADR"
             android:layout_width="fill_parent"
@@ -117,23 +108,23 @@
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/CST_NO"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="整改单位"
+            app:nameSize="80dp"
+            />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GLUSR_ID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="责任人"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/KH_FS"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="考核分数"
+            app:nameText="整改人"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
@@ -154,20 +145,83 @@
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="主键"
+            app:nameText="整改前照片"
             app:nameSize="80dp"
             android:visibility="gone"
             />
-
-        <ImageView
-            android:id="@+id/iView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/PICTUREB"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@drawable/ic_camera"
-            android:visibility="invisible"/>
+            app:nameText="整改后照片"
+            app:nameSize="80dp"
+            android:visibility="gone"
+            />
+        <LinearLayout
+            android:id="@+id/lineiViewA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:textSize="15dp"
+                    android:text="整改前："/>
+                <ImageView
+                    android:id="@+id/iView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@drawable/ic_camera"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lineiViewB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/DO_DTM"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameText="完成时间"
+                app:nameSize="80dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:textSize="15dp"
+                    android:text="整改后："/>
+                <ImageView
+                    android:id="@+id/iViewB"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@drawable/ic_camera"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     </ScrollView>
 </RelativeLayout>

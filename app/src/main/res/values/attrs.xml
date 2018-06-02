@@ -17,5 +17,7 @@
         <attr name="normalColor" format="color" />
         <!-- 编辑框没选中的颜色 -->
         <attr name="selcetColor" format="color" />
+
+        <attr name="editAble" format="boolean" />
     </declare-styleable>
 </resources>

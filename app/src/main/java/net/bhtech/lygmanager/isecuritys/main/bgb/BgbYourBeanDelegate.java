@@ -1,4 +1,4 @@
-package net.bhtech.lygmanager.isecuritys.main.wzgl;
+package net.bhtech.lygmanager.isecuritys.main.bgb;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +29,6 @@ import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
 import net.bhtech.lygmanager.ui.tag.RightAndLeftEditText;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,7 +49,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by zhangxinbiao on 2017/11/26.
  */
 
-public class MyWzglBeanDelegate extends BottomItemDelegate {
+public class BgbYourBeanDelegate extends BottomItemDelegate {
 
     private String pkValue="";
 
@@ -69,22 +68,24 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText BG_ADR=null;
     @BindView(R.id.BF_TYP)
     RightAndLeftEditText BF_TYP=null;
-    @BindView(R.id.KH_TYP)
-    RightAndLeftEditText KH_TYP=null;
     @BindView(R.id.BG_NOT)
     RightAndLeftEditText BG_NOT=null;
     @BindView(R.id.JC_DTM)
     RightAndLeftEditText JC_DTM=null;
     @BindView(R.id.DO_DTM)
     RightAndLeftEditText DO_DTM=null;
+    @BindView(R.id.JC_TYP)
+    RightAndLeftEditText JC_TYP=null;
     @BindView(R.id.KH_NUM)
     RightAndLeftEditText KH_NUM=null;
     @BindView(R.id.PLAN_DTM)
     RightAndLeftEditText PLAN_DTM=null;
-    @BindView(R.id.ZR_USR)
-    RightAndLeftEditText ZR_USR=null;
-    @BindView(R.id.KH_FS)
-    RightAndLeftEditText KH_FS=null;
+    @BindView(R.id.GLCST_NO)
+    RightAndLeftEditText GLCST_NO=null;
+    @BindView(R.id.SKL_NO)
+    RightAndLeftEditText SKL_NO=null;
+    @BindView(R.id.GLUSR_ID)
+    RightAndLeftEditText GLUSR_ID=null;
     @BindView(R.id.PICTUREA)
     RightAndLeftEditText PICTUREA=null;
     @BindView(R.id.PICTUREB)
@@ -98,11 +99,11 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
     LinearLayout lineiViewA=null;
     @BindView(R.id.lineiViewB)
     LinearLayout lineiViewB=null;
+
     protected Context mContext=null;
-    private MyWzglBeanDelegate thisdelegate=this;
+    private BgbYourBeanDelegate thisdelegate=this;
 
     private UtusrEntity mUser=null;
-    private String[]mCustomItems=new String[]{"本地相册","相机拍照"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,12 +117,12 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_wzglbean;
+        return R.layout.delegate_bgbbean;
     }
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        text_title.setText("违章明细");
+        text_title.setText("待整改曝光板明细");
         button_forward.setVisibility(View.GONE);
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.GONE);
@@ -129,18 +130,23 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
         mContext=this.getContext();
         mUser=AccountManager.getSignInfo();
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
-                .getFieldOption("RMWZGLMST@@BF_TYP,RMWZGLMST@@BG_ADR,RMWZGLMST@@KH_TYP");
+                .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstsklOption","BgbcstsklOption");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbjcnrOption","BgbjcnrOption");
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         final String today=sdf.format(new Date());
         JC_DTM.setDatePick(this,today,"DATE");
         PLAN_DTM.setDatePick(this,today,"DATE");
-        BF_TYP.setPopulWindow(mContext,"RMWZGLMST@@BF_TYP");
-        KH_TYP.setPopulWindow(mContext,"RMWZGLMST@@KH_TYP");
-        BG_ADR.setPopulWindow(mContext,"RMWZGLMST@@BG_ADR");
-        CST_NO.setPopulWindow(mContext,"BgbcstOption");
-        DO_DTM.setVisibility(View.GONE);//完成人员只能上传照片，不填报完成时间
+        DO_DTM.setDatePick(this,null,"DATE");
+        JC_TYP.setPopulWindow(mContext,"BgbjcnrOption");
+        BF_TYP.setPopulWindow(mContext,"RMBGBMST@@BF_TYP");
+        BG_ADR.setPopulWindow(mContext,"RMBGBMST@@BG_ADR");
+        CST_NO.setPopulWindow(mContext,"BgbcstOption",GLUSR_ID,"getBgbcstUserOption","BgbcstUserOption");
+        GLCST_NO.setPopulWindow(mContext,"BgbcstsklOption",SKL_NO,"getBgbsklOption","BgbsklOption");
+        SKL_NO.setPopulWindow(mContext,"BgbsklOption");
+        GLUSR_ID.setPopulWindow(mContext,"BgbcstUserOption");
 
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,13 +156,18 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
                 entity.put("BG_ADR",BG_ADR.getEditTextTagInfo());
                 entity.put("BF_TYP",BF_TYP.getEditTextTagInfo());
-                entity.put("KH_TYP",KH_TYP.getEditTextTagInfo());
                 entity.put("BG_NOT",BG_NOT.getEditTextInfo());
                 entity.put("JC_DTM",JC_DTM.getEditTextInfo());
+                if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
+                    entity.put("DO_DTM", DO_DTM.getEditTextInfo());
+                }
+                entity.put("JC_TYP",JC_TYP.getEditTextTagInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
                 entity.put("PLAN_DTM",PLAN_DTM.getEditTextInfo());
-                entity.put("KH_FS",KH_FS.getEditTextInfo());
-                entity.put("ZR_USR",ZR_USR.getEditTextInfo());
+                entity.put("GLCST_NO",GLCST_NO.getEditTextTagInfo());
+                entity.put("GLUSR_ID",GLUSR_ID.getEditTextTagInfo());
+                entity.put("SKL_NO",SKL_NO.getEditTextTagInfo());
+                entity.put("KH_FS","1");
                 entity.put("ORG_NO",mUser.getOrgNo());
                 entity.put("JCUSR_ID",mUser.getUserId());
                 entity.put("JCST_NO",mUser.getCstNo());
@@ -164,7 +175,7 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
                 entity.put("JLUSR_DTM",today);
                 Observable<String> obj=
                         RxRestClient.builder()
-                                .url("saveOrUpdateWzglMST")
+                                .url("saveOrUpdateBgbMST")
                                 .params("totaljson", JSONObject.toJSONString(entity))
                                 .loader(mContext)
                                 .build()
@@ -195,14 +206,18 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
             @Override
             public void onClick(View v) {
                 BGB_NO.clearText();
-                BG_ADR.clearText();
                 CST_NO.clearText();
+                BG_ADR.clearText();
                 BF_TYP.clearText();
-                KH_TYP.clearText();
                 BG_NOT.clearText();
-                ZR_USR.clearText();
-                KH_FS.clearText();
+                JC_DTM.clearText();
+                JC_TYP.clearText();
+                DO_DTM.clearText();
                 KH_NUM.clearText();
+                GLUSR_ID.clearText();
+                PLAN_DTM.clearText();
+                GLCST_NO.clearText();
+                SKL_NO.clearText();
                 PICTUREA.clearText();
                 PICTUREB.clearText();
                 iView.setImageBitmap(null);
@@ -211,28 +226,28 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
         });
     }
 
-    @OnLongClick(R.id.iViewB)
-    public boolean setiView(View view)
-    {
-        PictureSelector
-                .create(this)
-                .openGallery(PictureMimeType.ofImage())
-                .selectionMode(PictureConfig.SINGLE)
-                .compress(true)
-                .forResult(PictureConfig.CHOOSE_REQUEST);
-        return true;
-    }
-
     @OnClick(R.id.iView)
     public void openFullView(View view)
     {
         if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
         {
             if("A".equals(PICTUREA.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMWZGLMST");
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
                 this.getSupportDelegate().start(delegate);
             }
         }
+    }
+
+    @OnLongClick(R.id.iViewB)
+    public boolean setiViewB(View view)
+    {
+        PictureSelector
+                .create(this)
+                .openGallery(PictureMimeType.ofImage())
+                .selectionMode(PictureConfig.SINGLE)
+                .compress(true)
+                .forResult(PictureConfig.UPDATE_FLAG);
+        return true;
     }
 
     @OnClick(R.id.iViewB)
@@ -241,11 +256,12 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
         if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
         {
             if("A".equals(PICTUREB.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREB_" + BGB_NO.getEditTextInfo(),"RMWZGLMST");
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREB_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
                 this.getSupportDelegate().start(delegate);
             }
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -255,16 +271,30 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
             case PictureConfig.CHOOSE_REQUEST:
              List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
              if(selectList!=null&&selectList.size()>0) {
-                 Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iViewB);
+                 Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
                  if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
-                     LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "RMWZGLMST", "BGB_PICTUREB_"+BGB_NO.getEditTextInfo()+".JPEG");
-                     PICTUREB.setEditTextInfo("A");
+                     LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREA_"+BGB_NO.getEditTextInfo()+".JPEG");
+                     PICTUREA.setEditTextInfo("A");
                      Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                     lineiViewB.setVisibility(View.VISIBLE);
                  }else {
                      Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
                  }
              }
              break;
+              case PictureConfig.UPDATE_FLAG:
+                  List<LocalMedia> selectList2 = PictureSelector.obtainMultipleResult(data);
+                  if(selectList2!=null&&selectList2.size()>0) {
+                      Glide.with(_mActivity).load(selectList2.get(0).getCompressPath()).into(iViewB);
+                      if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
+                          LiemsMethods.init(mContext).upLoadFile(selectList2.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREB_"+BGB_NO.getEditTextInfo()+".JPEG");
+                          PICTUREB.setEditTextInfo("A");
+                          Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                      }else {
+                          Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                      }
+                  }
+                  break;
           }
         }
     }
@@ -278,21 +308,20 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
         return new DefaultHorizontalAnimator();
     }
 
-    public static MyWzglBeanDelegate create(String pictures) {
+    public static BgbYourBeanDelegate create(String pictures) {
         final Bundle args = new Bundle();
         args.putString("BGB_NO", pictures);
-        final MyWzglBeanDelegate delegate = new MyWzglBeanDelegate();
+        final BgbYourBeanDelegate delegate = new BgbYourBeanDelegate();
         delegate.setArguments(args);
         return delegate;
     }
 
     @Override
     public void onLazyInitView(Bundle bundle) {
-        LatteLogger.d(pkValue);
         if (pkValue != null && !"".equals(pkValue) && !"-1".equals(pkValue)) {
             Observable<String> obj =
                     RxRestClient.builder()
-                            .url("getWzglDetail")
+                            .url("getBgbDetail")
                             .params("bgbno", pkValue)
                             .loader(this.getContext())
                             .build()
@@ -300,31 +329,36 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
             obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
                 @Override
                 public void onNext(String result) {
-                    LatteLogger.d(result);
                     JSONObject lr2 = (JSONObject) JSONObject.parse(result);
                     LiemsResult lr = JSONObject.toJavaObject(lr2, LiemsResult.class);
                     if ("success".equals(lr.getResult()) && !"0".equals(lr.getCount())) {
                         JSONObject entity = JSONObject.parseObject(lr.getRows().toString());
                         if ( entity!=null) {
                             BGB_NO.setEditTextInfo(entity.getString("BGB_NO"));
-                            BF_TYP.setEditTextTagInfo(entity.getString("BF_TYP"),"RMWZGLMST@@BF_TYP");
-                            KH_TYP.setEditTextTagInfo(entity.getString("KH_TYP"),"RMWZGLMST@@KH_TYP");
+                            BF_TYP.setEditTextTagInfo(entity.getString("BF_TYP"),"RMBGBMST@@BF_TYP");
                             BG_NOT.setEditTextInfo(entity.getString("BG_NOT"));
                             CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbcstOption");
-                            BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMWZGLMST@@BG_ADR");
+                            BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMBGBMST@@BG_ADR");
                             JC_DTM.setEditTextInfo(entity.getString("JC_DTM"));
+                            DO_DTM.setEditTextInfo(entity.getString("DO_DTM"));
+                            JC_TYP.setEditTextTagInfo(entity.getString("JC_TYP"),"BgbjcnrOption");
                             KH_NUM.setEditTextInfo(entity.getString("KH_NUM"));
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
-                            ZR_USR.setEditTextInfo(entity.getString("ZR_USR"));
-                            KH_FS.setEditTextInfo(entity.getString("KH_FS"));
+                            GLCST_NO.setEditTextInfo(entity.getString("GLCST_NO"));
+                            SKL_NO.setEditTextTagInfo(entity.getString("SKL_NO"),"BgbsklOption");
+                            GLCST_NO.setEditTextTagInfo(entity.getString("GLCST_NO"),"BgbcstsklOption");
+                            GLUSR_ID.setEditTextInfo(entity.getString("GLUSR_ID"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
+                            PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);
                             if("A".equals(entity.getString("PICTUREA"))) {
-                                LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMWZGLMST",
+                                LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMBGBMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG");
                                 lineiViewB.setVisibility(View.VISIBLE);
-                                LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMWZGLMST",
-                                        "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG");
+                                if("A".equals(entity.getString("PICTUREB"))) {
+                                    LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMBGBMST",
+                                            "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG");
+                                }
                             }
                         }
                     }

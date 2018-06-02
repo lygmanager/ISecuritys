@@ -1,76 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:RightAndLeftEditText="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <include layout="@layout/bar_titlebar"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_titlebar"
+        android:paddingTop="5dp">
+    <LinearLayout
+        android:id="@+id/ll_equip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_DSC"
+            android:id="@+id/userId"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="检查内容"
+            app:nameText="账号"
             app:nameSize="80dp"
+            app:editAble="false"
+            
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_SFNUM"
+            android:id="@+id/usrNam"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="安全数量"
+            app:nameText="姓名"
             app:nameSize="80dp"
+            app:editAble="false"
+
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_FXNUM"
+            android:id="@+id/orgName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="有风险数量"
+            app:nameText="公司"
             app:nameSize="80dp"
+            app:editAble="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_ZDNUM"
+            android:id="@+id/cstName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="重大风险数量"
+            app:nameText="部门"
             app:nameSize="80dp"
+            app:editAble="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_NANUM"
+            android:id="@+id/position"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="不适用"
+            app:nameText="岗位"
             app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_NO"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="主键"
-            app:nameSize="80dp"
-            android:visibility="gone"
+            app:editAble="false"
             />
     </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

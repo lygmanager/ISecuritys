@@ -12,6 +12,7 @@ import net.bhtech.lygmanager.isecuritys.launcher.ILauncherListener;
 import net.bhtech.lygmanager.isecuritys.launcher.LauncherDelegate;
 import net.bhtech.lygmanager.isecuritys.launcher.OnLauncherFinishTag;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
+import net.bhtech.lygmanager.isecuritys.main.index.IndexDelegate;
 import net.bhtech.lygmanager.isecuritys.sign.ISignListener;
 import net.bhtech.lygmanager.isecuritys.sign.SignInDelegate;
 import net.bhtech.lygmanager.utils.storage.LattePreference;

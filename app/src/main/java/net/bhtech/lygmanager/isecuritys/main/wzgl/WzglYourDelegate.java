@@ -87,7 +87,7 @@ public class WzglYourDelegate extends BottomItemDelegate {
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate ecBottomDelegate = getParentDelegate().getParentDelegate();
-        mRecyclerView.addOnItemTouchListener(WzglClickListener.create(this));
+        mRecyclerView.addOnItemTouchListener(WzglClickListener.create(this,"MY"));
     }
 
     @Override

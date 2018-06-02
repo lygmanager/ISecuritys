@@ -79,5 +79,10 @@ public final class LattePreference {
     public static String getCustomAppProfile(String key) {
         return getAppPreference().getString(key, "");
     }
-
+    public static void removeCustomAppProfile(String key) {
+        getAppPreference()
+                .edit()
+                .remove(key)
+                .apply();
+    }
 }

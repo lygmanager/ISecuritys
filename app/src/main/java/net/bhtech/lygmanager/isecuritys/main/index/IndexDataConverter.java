@@ -34,10 +34,11 @@ public class IndexDataConverter extends DataConverter {
         for (IndexDataEntity data:dataArray) {
             final MultipleItemEntity entity = MultipleItemEntity.builder()
                     .setField(MultipleFields.ITEM_TYPE, data.getItemType())
-                    .setField(MultipleFields.SPAN_SIZE, 1)
+                    .setField(MultipleFields.SPAN_SIZE, data.getSpanSize())
                     .setField(MultipleFields.ID, data.getItemId())
                     .setField(MultipleFields.TEXT, data.getItemText())
                     .setField(MultipleFields.IMAGE_URL, data.getImageUrl())
+                    .setField(MultipleFields.TEXT_COLOR, data.getTextColor())
                     .build();
 
             ENTITIES.add(entity);

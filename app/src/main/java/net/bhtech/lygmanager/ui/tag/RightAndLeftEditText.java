@@ -113,7 +113,8 @@ public class RightAndLeftEditText extends LinearLayout {
                 textView.setText(text);
             }
 
-//            setEditTextEditAble(false);
+            boolean editAble = a.getBoolean(R.styleable.RightAndLeftEditText_editAble,true);
+            setEditTextEditAble(editAble);
 //            editText.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -126,6 +127,11 @@ public class RightAndLeftEditText extends LinearLayout {
 
         boolean init = editText.isFocused();
         setLineBg(init);
+    }
+
+    public void setPopChange()
+    {
+
     }
 
 
@@ -403,13 +409,12 @@ public class RightAndLeftEditText extends LinearLayout {
         getErrorText().setBackgroundColor(getResources().getColor(colorId));
     }
 
-    public void setPopulWindow(final Context mContext,final String orgNo,final String userId,final String tblfields){
+    public void setPopulWindow(final Context mContext,final String tblfieldArray,final RightAndLeftEditText rightAndLeftEditText,final String method,final String childTblfieldArray){
         setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EidtTextPopulWindow.create(mContext,editText)
-                        .params(orgNo,userId,tblfields).showListPopulWindow();
+                EidtTextPopulWindow.create(mContext,editText).initListPopulWindow(tblfieldArray,rightAndLeftEditText,method,childTblfieldArray);
             }
         });
     }
@@ -425,7 +430,8 @@ public class RightAndLeftEditText extends LinearLayout {
     }
 
     public void setDatePick(final BaseDelegate baseDelegate, final String initDateTime, final String dateType){
-        editText.setText(initDateTime);
+        if (initDateTime!=null&&!"".equals(initDateTime))
+            editText.setText(initDateTime);
         setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override

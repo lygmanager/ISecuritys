@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +77,8 @@ public class BgbBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText BG_NOT=null;
     @BindView(R.id.JC_DTM)
     RightAndLeftEditText JC_DTM=null;
+    @BindView(R.id.DO_DTM)
+    RightAndLeftEditText DO_DTM=null;
     @BindView(R.id.JC_TYP)
     RightAndLeftEditText JC_TYP=null;
     @BindView(R.id.KH_NUM)
@@ -88,12 +91,20 @@ public class BgbBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText SKL_NO=null;
     @BindView(R.id.GLUSR_ID)
     RightAndLeftEditText GLUSR_ID=null;
-    @BindView(R.id.KH_FS)
-    RightAndLeftEditText KH_FS=null;
     @BindView(R.id.PICTUREA)
     RightAndLeftEditText PICTUREA=null;
+    @BindView(R.id.PICTUREB)
+    RightAndLeftEditText PICTUREB=null;
     @BindView(R.id.iView)
     ImageView iView=null;
+    @BindView(R.id.iViewB)
+    ImageView iViewB=null;
+
+    @BindView(R.id.lineiViewA)
+    LinearLayout lineiViewA=null;
+    @BindView(R.id.lineiViewB)
+    LinearLayout lineiViewB=null;
+
     protected Context mContext=null;
     private BgbBeanDelegate thisdelegate=this;
 
@@ -127,7 +138,6 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
                 .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbsklOption","BgbsklOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstsklOption","BgbcstsklOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbjcnrOption","BgbjcnrOption");
 
@@ -135,14 +145,14 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         final String today=sdf.format(new Date());
         JC_DTM.setDatePick(this,today,"DATE");
         PLAN_DTM.setDatePick(this,today,"DATE");
+        DO_DTM.setDatePick(this,null,"DATE");
         JC_TYP.setPopulWindow(mContext,"BgbjcnrOption");
         BF_TYP.setPopulWindow(mContext,"RMBGBMST@@BF_TYP");
         BG_ADR.setPopulWindow(mContext,"RMBGBMST@@BG_ADR");
-        CST_NO.setPopulWindow(mContext,"BgbcstOption");
+        CST_NO.setPopulWindow(mContext,"BgbcstOption",GLUSR_ID,"getBgbcstUserOption","BgbcstUserOption");
+        GLCST_NO.setPopulWindow(mContext,"BgbcstsklOption",SKL_NO,"getBgbsklOption","BgbsklOption");
         SKL_NO.setPopulWindow(mContext,"BgbsklOption");
-        GLCST_NO.setPopulWindow(mContext,"BgbcstsklOption");
-
-//
+        GLUSR_ID.setPopulWindow(mContext,"BgbcstUserOption");
 
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,12 +164,16 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 entity.put("BF_TYP",BF_TYP.getEditTextTagInfo());
                 entity.put("BG_NOT",BG_NOT.getEditTextInfo());
                 entity.put("JC_DTM",JC_DTM.getEditTextInfo());
+                if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
+                    entity.put("DO_DTM", DO_DTM.getEditTextInfo());
+                }
                 entity.put("JC_TYP",JC_TYP.getEditTextTagInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
                 entity.put("PLAN_DTM",PLAN_DTM.getEditTextInfo());
                 entity.put("GLCST_NO",GLCST_NO.getEditTextTagInfo());
+                entity.put("GLUSR_ID",GLUSR_ID.getEditTextTagInfo());
                 entity.put("SKL_NO",SKL_NO.getEditTextTagInfo());
-                entity.put("KH_FS",KH_FS.getEditTextInfo());
+                entity.put("KH_FS","1");
                 entity.put("ORG_NO",mUser.getOrgNo());
                 entity.put("JCUSR_ID",mUser.getUserId());
                 entity.put("JCST_NO",mUser.getCstNo());
@@ -182,7 +196,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                                 if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
                                 {
                                     BGB_NO.getEditText().setText(rst.getPkValue());
-                                    iView.setVisibility(View.VISIBLE);
+                                    lineiViewA.setVisibility(View.VISIBLE);
                                     Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
 
                                 }
@@ -198,14 +212,22 @@ public class BgbBeanDelegate extends BottomItemDelegate {
             @Override
             public void onClick(View v) {
                 BGB_NO.clearText();
+                CST_NO.clearText();
+                BG_ADR.clearText();
+                BF_TYP.clearText();
                 BG_NOT.clearText();
                 JC_DTM.clearText();
                 JC_TYP.clearText();
+                DO_DTM.clearText();
                 KH_NUM.clearText();
+                GLUSR_ID.clearText();
                 PLAN_DTM.clearText();
                 GLCST_NO.clearText();
                 SKL_NO.clearText();
                 PICTUREA.clearText();
+                PICTUREB.clearText();
+                iView.setImageBitmap(null);
+                iViewB.setImageBitmap(null);
             }
         });
     }
@@ -213,12 +235,14 @@ public class BgbBeanDelegate extends BottomItemDelegate {
     @OnLongClick(R.id.iView)
     public boolean setiView(View view)
     {
-        PictureSelector
-                .create(this)
-                .openGallery(PictureMimeType.ofImage())
-                .selectionMode(PictureConfig.SINGLE)
-                .compress(true)
-                .forResult(PictureConfig.CHOOSE_REQUEST);
+        if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
+            PictureSelector
+                    .create(this)
+                    .openGallery(PictureMimeType.ofImage())
+                    .selectionMode(PictureConfig.SINGLE)
+                    .compress(true)
+                    .forResult(PictureConfig.CHOOSE_REQUEST);
+        }
         return true;
     }
 
@@ -229,6 +253,30 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         {
             if("A".equals(PICTUREA.getEditTextInfo())) {
                 FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
+                this.getSupportDelegate().start(delegate);
+            }
+        }
+    }
+
+    @OnLongClick(R.id.iViewB)
+    public boolean setiViewB(View view)
+    {
+        PictureSelector
+                .create(this)
+                .openGallery(PictureMimeType.ofImage())
+                .selectionMode(PictureConfig.SINGLE)
+                .compress(true)
+                .forResult(PictureConfig.UPDATE_FLAG);
+        return true;
+    }
+
+    @OnClick(R.id.iViewB)
+    public void openFullViewB(View view)
+    {
+        if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
+        {
+            if("A".equals(PICTUREB.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREB_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
                 this.getSupportDelegate().start(delegate);
             }
         }
@@ -248,11 +296,25 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                      LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREA_"+BGB_NO.getEditTextInfo()+".JPEG");
                      PICTUREA.setEditTextInfo("A");
                      Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                     lineiViewB.setVisibility(View.VISIBLE);
                  }else {
                      Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
                  }
              }
              break;
+              case PictureConfig.UPDATE_FLAG:
+                  List<LocalMedia> selectList2 = PictureSelector.obtainMultipleResult(data);
+                  if(selectList2!=null&&selectList2.size()>0) {
+                      Glide.with(_mActivity).load(selectList2.get(0).getCompressPath()).into(iViewB);
+                      if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
+                          LiemsMethods.init(mContext).upLoadFile(selectList2.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREB_"+BGB_NO.getEditTextInfo()+".JPEG");
+                          PICTUREB.setEditTextInfo("A");
+                          Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                      }else {
+                          Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                      }
+                  }
+                  break;
           }
         }
     }
@@ -298,6 +360,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                             CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbcstOption");
                             BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMBGBMST@@BG_ADR");
                             JC_DTM.setEditTextInfo(entity.getString("JC_DTM"));
+                            DO_DTM.setEditTextInfo(entity.getString("DO_DTM"));
                             JC_TYP.setEditTextTagInfo(entity.getString("JC_TYP"),"BgbjcnrOption");
                             KH_NUM.setEditTextInfo(entity.getString("KH_NUM"));
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
@@ -305,12 +368,17 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                             SKL_NO.setEditTextTagInfo(entity.getString("SKL_NO"),"BgbsklOption");
                             GLCST_NO.setEditTextTagInfo(entity.getString("GLCST_NO"),"BgbcstsklOption");
                             GLUSR_ID.setEditTextInfo(entity.getString("GLUSR_ID"));
-                            KH_FS.setEditTextInfo(entity.getString("KH_FS"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
-                            iView.setVisibility(View.VISIBLE);
+                            PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
+                            lineiViewA.setVisibility(View.VISIBLE);
                             if("A".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMBGBMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG");
+                                lineiViewB.setVisibility(View.VISIBLE);
+                                if("A".equals(entity.getString("PICTUREB"))) {
+                                    LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMBGBMST",
+                                            "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG");
+                                }
                             }
                         }
                     }

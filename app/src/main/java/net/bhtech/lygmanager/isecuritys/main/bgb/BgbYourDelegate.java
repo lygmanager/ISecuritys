@@ -64,7 +64,7 @@ public class BgbYourDelegate extends BottomItemDelegate {
             @Override
             public void onClick(View v) {
                 BgbBeanDelegate delegate = BgbBeanDelegate.create("-1");
-                getSupportDelegate().start(delegate);
+                getParentDelegate().getSupportDelegate().start(delegate);
             }
         });
 
@@ -85,7 +85,7 @@ public class BgbYourDelegate extends BottomItemDelegate {
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate ecBottomDelegate = getParentDelegate().getParentDelegate();
-        mRecyclerView.addOnItemTouchListener(BgbClickListener.create(this));
+        mRecyclerView.addOnItemTouchListener(BgbClickListener.create(this,"YOUR"));
     }
 
     @Override

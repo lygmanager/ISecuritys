@@ -152,6 +152,33 @@ public class UpdateManager
         return versionCode;
     }
 
+    public String getVersionName(Context context,AppVersionEntity version)
+    {
+        entity=version;
+        String versionName = "";
+        try
+        {
+            int versionCode = getVersionCode(mContext);
+            if (null != entity)
+            {
+                int serviceCode = Integer.valueOf(entity.getServerVersion());
+                versionName = context.getPackageManager().getPackageInfo(SplashActivity.class.getPackage().getName(), 0).versionName;
+                if (serviceCode > versionCode)
+                {
+                    versionName="(V"+versionName+"   new)";
+                }else{
+                    versionName="(V"+versionName+")";
+                }
+            }
+            // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
+
+        } catch (NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return versionName;
+    }
+
     /**
      * 显示软件更新对话框
      */

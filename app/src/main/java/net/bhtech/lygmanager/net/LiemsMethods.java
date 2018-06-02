@@ -138,12 +138,17 @@ public class LiemsMethods {
 
     public void getLiemsOption(final String method,final String mTblfields)
     {
+        getLiemsOption(method,mTblfields,"");
+    }
 
+    public void getLiemsOption(final String method,final String mTblfields,String params)
+    {
         String[][] result=null;
         Observable<String> obj =
                 RxRestClient.builder()
                         .url(method)
                         .params("orgno", mUser.getOrgNo())
+                        .params("params", params)
                         .loader(mContext)
                         .build()
                         .post();
@@ -163,9 +168,9 @@ public class LiemsMethods {
                             vlist[j] = value;
                             list[j] = label;
                         }
-                        LattePreference.addCustomAppProfile(mTblfields, JSONObject.toJSONString(list));
-                        LattePreference.addCustomAppProfile(mTblfields+"_VAL", JSONObject.toJSONString(vlist));
                     }
+                    LattePreference.addCustomAppProfile(mTblfields, JSONObject.toJSONString(list));
+                    LattePreference.addCustomAppProfile(mTblfields+"_VAL", JSONObject.toJSONString(vlist));
                 }
             }
         });

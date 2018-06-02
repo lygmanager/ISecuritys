@@ -64,7 +64,7 @@ public class BgbMyDelegate extends BottomItemDelegate {
             @Override
             public void onClick(View v) {
                 BgbBeanDelegate delegate = BgbBeanDelegate.create("-1");
-                getSupportDelegate().start(delegate);
+                getParentDelegate().getSupportDelegate().start(delegate);
             }
         });
 

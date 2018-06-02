@@ -132,7 +132,7 @@ public class RefreshHandler implements
         if("MY".equals(mType)){
             params=" and JLUSR_ID='"+mUser.getUserId()+"' ";
         }else if("YOUR".equals(mType)){
-            params=" and GLCST_NO='"+mUser.getCstNo()+"' ";
+            params=" and GLUSR_ID='"+mUser.getUserId()+"' ";
         }
         Observable<String> obj= RxRestClient.builder()
                         .url("getBgbList")

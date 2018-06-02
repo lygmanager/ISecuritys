@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:id="@+id/indexLayout"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical">
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/img_multiple"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_weight="4"
         android:layout_alignParentTop="true"
@@ -20,11 +21,47 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_multiple"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="20dp"
         android:layout_weight="1"
         android:background="@android:color/white"
         android:gravity="center"
         android:textColor="@color/text_clo"
         android:textSize="14sp"/>
+    <LinearLayout
+        android:id="@+id/indexLayoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/img_title"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:paddingTop="10dp"
+        android:paddingLeft="@dimen/dp_10"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="left"
+        android:textSize="18sp"
+        android:text="{fa-camera-retro}"
+        android:textColor="@android:color/holo_blue_light"
+        />
+    <com.joanzapata.iconify.widget.IconTextView
+        android:id="@+id/img_multiple2"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:paddingTop="6dp"
+        android:paddingLeft="@dimen/dp_10"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="left"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_blue_light"
+        />
+    </LinearLayout>
 </android.support.v7.widget.LinearLayoutCompat>

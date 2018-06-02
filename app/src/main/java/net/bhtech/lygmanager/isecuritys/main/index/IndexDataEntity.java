@@ -9,7 +9,8 @@ public class IndexDataEntity {
     private String itemText;
     private String itemId;
     private int itemType;
-    private int ITEM_TYPE;
+    private int spanSize;
+    private String textColor;
 
     public String getImageUrl() {
         return imageUrl;
@@ -43,11 +44,19 @@ public class IndexDataEntity {
         this.itemType = itemType;
     }
 
-    public int getITEM_TYPE() {
-        return ITEM_TYPE;
+    public int getSpanSize() {
+        return spanSize;
     }
 
-    public void setITEM_TYPE(int ITEM_TYPE) {
-        this.ITEM_TYPE = ITEM_TYPE;
+    public void setSpanSize(int spanSize) {
+        this.spanSize = spanSize;
+    }
+
+    public String getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(String textColor) {
+        this.textColor = textColor;
     }
 }

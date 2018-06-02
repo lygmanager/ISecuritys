@@ -16,13 +16,22 @@ import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 public class WzglClickListener extends SimpleClickListener {
 
     private final LatteDelegate DELEGATE;
+    private String MType="";
 
     private WzglClickListener(LatteDelegate delegate) {
         this.DELEGATE = delegate;
     }
+    private WzglClickListener(LatteDelegate delegate,String mType) {
+        this.DELEGATE = delegate;
+        this.MType=mType;
+    }
 
     public static SimpleClickListener create(LatteDelegate delegate) {
         return new WzglClickListener(delegate);
+    }
+
+    public static SimpleClickListener create(LatteDelegate delegate,String mType) {
+        return new WzglClickListener(delegate,mType);
     }
 
     @Override
@@ -30,8 +39,13 @@ public class WzglClickListener extends SimpleClickListener {
         final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
         final String id = entity.getField("BGB_NO");
         if(id!=null&&!"".equals(id)) {
-            WzglBeanDelegate delegate = WzglBeanDelegate.create(id);
-            DELEGATE.getParentDelegate().getSupportDelegate().start(delegate);
+            if("".equals(MType)) {
+                WzglBeanDelegate delegate = WzglBeanDelegate.create(id);
+                DELEGATE.getParentDelegate().getSupportDelegate().start(delegate);
+            }else{
+                MyWzglBeanDelegate delegate = MyWzglBeanDelegate.create(id);
+                DELEGATE.getParentDelegate().getSupportDelegate().start(delegate);
+            }
         }
 
     }

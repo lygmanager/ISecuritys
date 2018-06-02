@@ -27,7 +27,7 @@ public class BgbBaseDelegate extends BaseBottomDelegate {
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomTabBean("{fa-list-alt}", "我的发现"), new BgbMyDelegate());
-        items.put(new BottomTabBean("{fa-list}", "我的不符合项"), new BgbYourDelegate());
+        items.put(new BottomTabBean("{fa-list}", "我的整改项"), new BgbYourDelegate());
         return builder.addItems(items).build();
     }
 
