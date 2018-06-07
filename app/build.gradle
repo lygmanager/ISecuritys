@@ -103,6 +103,7 @@ dependencies {
     compile 'com.baoyz.swipemenulistview:library:1.3.0'
     //图形展示
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
 }
 greendao {
     schemaVersion 1

@@ -81,7 +81,6 @@ public class LxzbkDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
         mRecyclerView.addOnItemTouchListener(LxzbkClickListener.create(this));
     }
 

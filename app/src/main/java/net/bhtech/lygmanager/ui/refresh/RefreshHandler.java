@@ -213,14 +213,17 @@ public class RefreshHandler implements
         });
     }
 
-    public void getWorksheetList(String elcId, Context _mActivity) {
-        Observable<String> obj= CxfRestClient.builder()
-                .url("getTtklistByElcId")
-                .params("arg0", "3")
-                .params("arg1", elcId)
+    public void getWorksheetList( Context _mActivity) {
+        Observable<String> obj= RxRestClient.builder()
+                .url("getRmttkList")
+                .params("orgno", mUser.getOrgNo())
+                .params("usrid", mUser.getUserId())
+                .params("page", 1)
+                .params("limit", 20)
+                .loader(_mActivity)
                 .build()
                 .post();
-        obj.subscribe(new LatteObserver<String>(_mActivity) {
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
             @Override
             public void onNext(String o) {
                 mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));

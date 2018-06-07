@@ -12,6 +12,7 @@ import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBaseDelegate;
 import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.bgb.BgbDelegate;
 import net.bhtech.lygmanager.isecuritys.main.equip.EquipDelegate;
+import net.bhtech.lygmanager.isecuritys.main.equip.WorksheetDelegate;
 import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkDelegate;
 import net.bhtech.lygmanager.isecuritys.main.mount.MountDelegate;
@@ -65,6 +66,9 @@ public class IndexItemClickListener extends SimpleClickListener {
                 break;
             case "8":
                 DELEGATE.getSupportDelegate().start(new WzglBeanDelegate());
+                break;
+            case "9":
+                DELEGATE.getSupportDelegate().start(new WorksheetDelegate());
                 break;
             default:break;
         }

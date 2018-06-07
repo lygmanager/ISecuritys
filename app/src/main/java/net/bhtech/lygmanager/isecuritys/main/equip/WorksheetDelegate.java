@@ -1,22 +1,28 @@
 package net.bhtech.lygmanager.isecuritys.main.equip;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
+import com.joanzapata.iconify.widget.IconTextView;
 
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkClickListener;
 import net.bhtech.lygmanager.ui.recycler.BaseDecoration;
 import net.bhtech.lygmanager.ui.refresh.RefreshHandler;
-import net.bhtech.lygmanager.ui.tag.RightAndLeftTextView;
+import net.bhtech.lygmanager.ui.tag.CompoundButtonGroup;
+
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by zhangxinbiao on 2017/11/18.
@@ -24,10 +30,20 @@ import butterknife.BindView;
 
 public class WorksheetDelegate extends BottomItemDelegate {
 
-    @BindView(R.id.srl_defect)
+    @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
-    @BindView(R.id.rv_defect)
+    @BindView(R.id.rv_view)
     RecyclerView mRecyclerView = null;
+//
+//    @BindView(R.id.checkgroup)
+//    CompoundButtonGroup checkgroup=null;
+
+    @BindView(R.id.button_forward)
+    IconTextView button_forward=null;
+
+    @BindView(R.id.text_title)
+    TextView text_title=null;
+
 
 
     private RefreshHandler mRefreshHandler = null;
@@ -39,7 +55,14 @@ public class WorksheetDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        button_forward.setVisibility(View.VISIBLE);
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new WorksheetDataConverter());
+
+//        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+//        map.put("house", "马");
+//        map.put("orange", "橘子");
+//        checkgroup.setEntries(map);
+//        checkgroup.reDraw();
 
     }
 
@@ -57,6 +80,7 @@ public class WorksheetDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
+        mRecyclerView.addOnItemTouchListener(LxzbkClickListener.create(this));
     }
 
     @Override
@@ -64,18 +88,24 @@ public class WorksheetDelegate extends BottomItemDelegate {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerView();
-//        mRefreshHandler.getDefectList(defect_elcid.getText().toString(),getContext());
     }
 
     @Override
     public void onSupportVisible() {
-        Fragment fragment=getParentFragment();
-        RightAndLeftTextView rltv=fragment.getView().findViewById(R.id.ELC_ID);
-        String value=rltv.getRightText();
-        if(value!=null&&!"".equals(value)) {
-            if(this.isSupportVisible()) {
-                mRefreshHandler.getWorksheetList(value, getContext());
+        mRefreshHandler.getWorksheetList(getContext());
+    }
+
+    @OnClick(R.id.button_forward)
+    public void tipClick(View view) {
+        WeakHashMap<String,Object> params=new WeakHashMap<>();
+        params.put("orgno", "3");
+        CompoundButtonGroup.CompoundButtonAlertDialog(getContext(), "getLxzbklxList", params, new CompoundButtonGroup.ConformListener() {
+            @Override
+            public void onConformClicked(String values,String texts) {
+                text_title.setText(texts);
+
             }
-        }
+        });
+
     }
 }

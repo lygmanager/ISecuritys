@@ -74,7 +74,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         final int size = ITEMS.size();
         for (int i = 0; i < size; i++) {
-            LayoutInflater.from(getContext()).inflate(R.layout.bottom_item_icon_text_layout, mBottomBar);
+            LayoutInflater.from(getContext()).inflate(R.layout.platform_basebottom, mBottomBar);
             final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(i);
             //设置每个item的点击事件
             item.setTag(i);

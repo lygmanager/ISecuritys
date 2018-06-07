@@ -1,6 +1,5 @@
 package net.bhtech.lygmanager.ui.date;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.DatePicker;
@@ -83,7 +82,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
      */
     public AlertDialog dateTimePicKDialog(final EditText inputDate) {
         LinearLayout dateTimeLayout = (LinearLayout) activity
-                .getLayoutInflater().inflate(R.layout.common_datetime, null);
+                .getLayoutInflater().inflate(R.layout.platform_datetimepicker, null);
         datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
         timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
         init(datePicker, timePicker);
@@ -93,7 +92,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
         ad = new AlertDialog.Builder(activity.getContext())
                 .setTitle(initDateTime)
                 .setView(dateTimeLayout)
-                .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         inputDate.setText(dateTime);
                     }

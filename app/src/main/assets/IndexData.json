@@ -18,4 +18,6 @@
   "imageUrl":"{fa-building}","itemText":"曝光板","itemId":"5","itemType":"3","spanSize":"1","textColor":"B"
 },{
   "imageUrl":"{fa-cogs}","itemText":"违章管理","itemId":"7","itemType":"3","spanSize":"1","textColor":"B"
+},{
+  "imageUrl":"{fa-cogs}","itemText":"工作票","itemId":"9","itemType":"3","spanSize":"1","textColor":"B"
 }]

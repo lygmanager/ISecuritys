@@ -66,8 +66,6 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText CRW_NO=null;
     @BindView(R.id.JCK_ADR)
     RightAndLeftEditText JCK_ADR=null;
-    @BindView(R.id.JCK_DSC)
-    RightAndLeftEditText JCK_DSC=null;
     @BindView(R.id.JCKUSR_ID)
     RightAndLeftEditText JCKUSR_ID=null;
     @BindView(R.id.ORG_NO)
@@ -122,7 +120,6 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                 entity.setJCKCST_NO(JCKCST_NO.getEditTextInfo());
                 entity.setCRW_NO(CRW_NO.getEditTextInfo());
                 entity.setJCK_ADR(JCK_ADR.getEditTextInfo());
-                entity.setJCK_DSC(JCK_DSC.getEditTextInfo());
                 entity.setJCKUSR_ID(JCKUSR_ID.getEditTextTagInfo());
                 entity.setORG_NO(ORG_NO.getEditTextInfo());
                 Observable<String> obj=
@@ -159,7 +156,6 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                 JCK_NO.clearText();
                 JCK_DTM.clearText();
                 JCK_ADR.clearText();
-                JCK_DSC.clearText();
                 JCK_TYP.clearText();
             }
         });
@@ -196,7 +192,6 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                             JCK_TYP.setEditTextTagInfo(entity.getJCK_TYP(),"LXZBKLX");
                             JCK_DTM.setEditTextInfo(entity.getJCK_DTM());
                             JCK_ADR.setEditTextInfo(entity.getJCK_ADR());
-                            JCK_DSC.setEditTextInfo(entity.getJCK_DSC());
                             ORG_NO.setEditTextInfo(entity.getORG_NO());
                             JCKUSR_ID.setEditTextInfo(entity.getJCKUSR_ID());
                             JCKCST_NO.setEditTextInfo(entity.getJCKCST_NO());

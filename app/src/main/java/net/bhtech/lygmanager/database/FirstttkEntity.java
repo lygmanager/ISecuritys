@@ -16,7 +16,7 @@ public class FirstttkEntity {
     private String ELC_NO;
     private String ELC_NAM;
     private String TTKPER_ID;
-    private String TTKPER_DSC;
+    private String TTKPER_DSC_ID;
     private String PLABEG_DTM;
     private String PLAEND_DTM;
     private String PERMBEG_DTM;
@@ -95,12 +95,6 @@ public class FirstttkEntity {
     public void setTTKPER_ID(String ttkper_id) {
         this.TTKPER_ID = ttkper_id;
     }
-    public String getTTKPER_DSC() {
-        return this.TTKPER_DSC;
-    }
-    public void setTTKPER_DSC(String ttkper_dsc) {
-        this.TTKPER_DSC = ttkper_dsc;
-    }
     public String getPLABEG_DTM() {
         return this.PLABEG_DTM;
     }
@@ -124,5 +118,13 @@ public class FirstttkEntity {
     }
     public void setPERMBEG_DTM(String permbeg_dtm) {
         this.PERMBEG_DTM = permbeg_dtm;
+    }
+
+    public String getTTKPER_DSC_ID() {
+        return TTKPER_DSC_ID;
+    }
+
+    public void setTTKPER_DSC_ID(String TTKPER_DSC_ID) {
+        this.TTKPER_DSC_ID = TTKPER_DSC_ID;
     }
 }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/bar_titlebar"/>
+    <include layout="@layout/platform_titlebar"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,16 +66,6 @@
                 android:paddingRight="10dp"
                 app:nameSize="80dp"
                 app:nameText="检查地点" />
-
-            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                android:id="@+id/JCK_DSC"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                app:nameSize="80dp"
-                app:nameText="问题总数" />
     </LinearLayout>
 
     <LinearLayout

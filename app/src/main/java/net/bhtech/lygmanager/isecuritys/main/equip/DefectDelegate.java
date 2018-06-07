@@ -23,9 +23,9 @@ import butterknife.BindView;
  */
 
 public class DefectDelegate extends BottomItemDelegate {
-    @BindView(R.id.srl_defect)
+    @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
-    @BindView(R.id.rv_defect)
+    @BindView(R.id.rv_view)
     RecyclerView mRecyclerView = null;
 
 

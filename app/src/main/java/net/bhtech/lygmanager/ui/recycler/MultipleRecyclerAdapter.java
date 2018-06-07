@@ -1,21 +1,14 @@
 package net.bhtech.lygmanager.ui.recycler;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.provider.SyncStateContract;
-import android.support.annotation.ColorRes;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +47,7 @@ public class MultipleRecyclerAdapter extends
 
     private void init() {
         //设置不同的item布局
-        addItemType(ItemType.TEXT_IMAGE, R.layout.item_multiple_image_text);
+        addItemType(ItemType.TEXT_IMAGE, R.layout.item_mainscreen);
         addItemType(ItemType.DEFECT, R.layout.item_defectvlist);
         addItemType(ItemType.WORKSHEET, R.layout.item_worksheet);
         addItemType(ItemType.AQGCK, R.layout.item_aqgckvlist);
@@ -111,7 +104,8 @@ public class MultipleRecyclerAdapter extends
             case ItemType.WORKSHEET:
                 holder.setText(R.id.TTK_ID, (String)entity.getField("TTK_ID"));
                 holder.setText(R.id.TTK_ADR, (String)entity.getField("TTK_ADR"));
-                holder.setText(R.id.TTKPER_ID, (String)entity.getField("TTKPER_ID"));
+                holder.setText(R.id.PLABEG_DTM, (String)entity.getField("PLABEG_DTM"));
+                holder.setText(R.id.PLAEND_DTM, (String)entity.getField("PLAEND_DTM"));
                 holder.setText(R.id.TTK_NO, (String)entity.getField("TTK_NO"));
                 break;
             case ItemType.AQGCK:
