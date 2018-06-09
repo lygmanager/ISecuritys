@@ -55,14 +55,8 @@ public class WorksheetDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        button_forward.setVisibility(View.VISIBLE);
+        //button_forward.setVisibility(View.VISIBLE);
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new WorksheetDataConverter());
-
-//        LinkedHashMap<String, String> map = new LinkedHashMap<>();
-//        map.put("house", "马");
-//        map.put("orange", "橘子");
-//        checkgroup.setEntries(map);
-//        checkgroup.reDraw();
 
     }
 
@@ -80,7 +74,7 @@ public class WorksheetDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        mRecyclerView.addOnItemTouchListener(LxzbkClickListener.create(this));
+        mRecyclerView.addOnItemTouchListener(WorsheetClickListener.create(this));
     }
 
     @Override

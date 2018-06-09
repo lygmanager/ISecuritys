@@ -237,7 +237,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                             BGC_ORG.setEditTextTagInfo(entity.getBGC_ORG(),"AQGCKMST@@BGC_ORG");
                             GC_RW.setEditTextInfo(entity.getGC_RW());
                             GC_QY.setEditTextInfo(entity.getGC_QY());
-                            GC_SX.setEditTextInfo(entity.getGC_SX());
+                            GC_SX.setEditTextTagInfo(entity.getGC_SX(),"AQGCKMST@@GC_SX");
                             GC_TYP.setEditTextTagInfo(entity.getGC_TYP(),"AQGCKMST@@GC_TYP");
                             ORG_NO.setEditTextInfo(entity.getORG_NO());
                             WX_SHT.setEditTextInfo(entity.getWX_SHT());

@@ -23,7 +23,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 app:nameSize="80dp"
-                app:nameText="检查卡类型" />
+                app:nameText="检查卡类型"/>
 
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/JCK_DTM"
@@ -33,29 +33,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 app:nameSize="80dp"
-                app:nameText="检查日期" />
-
-            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                android:id="@+id/JCKCST_NO"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone"
-                app:nameSize="80dp"
-                app:nameText="部门" />
-
-            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                android:id="@+id/CRW_NO"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone"
-                app:nameSize="80dp"
-                app:nameText="班组" />
+                app:nameText="检查日期"/>
 
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/JCK_ADR"
@@ -65,7 +43,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 app:nameSize="80dp"
-                app:nameText="检查地点" />
+                app:nameText="检查地点"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,28 +67,6 @@
                     android:divider="#ffff0000"
                     android:dividerHeight="10dp" />
             </android.support.v4.widget.SwipeRefreshLayout>
-
-            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                android:id="@+id/JCKUSR_ID"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone"
-                app:nameSize="80dp"
-                app:nameText="检查员" />
-
-            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                android:id="@+id/ORG_NO"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone"
-                app:nameSize="80dp"
-                app:nameText="公司" />
 
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/JCK_NO"

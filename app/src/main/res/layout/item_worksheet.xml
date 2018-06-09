@@ -1,63 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:gravity="top"
     android:layout_height="wrap_content">
 
-        <TextView android:id="@+id/TTK_ADR"
-            android:layout_width="wrap_content"
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+            android:id="@+id/TTK_ADR"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="15sp" android:layout_margin="5dp"/>
+            app:wrapcontent="true" />
         <LinearLayout
             android:id="@+id/line1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/TTK_ADR">
-
-        <TextView android:text="工作票编号："
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/mainColor"
-            android:textSize="13sp"/>
-        <TextView android:id="@+id/TTK_ID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#606060"
-            android:textSize="13sp" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/TTK_ID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:left_text="工作票号"
+                    app:wrapcontent="true" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/dp_4"
             android:layout_below="@+id/line1">
 
-                <TextView android:text="开始时间："
-                    android:layout_width="wrap_content"
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/PLABEG_DTM"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/mainColor"
-                    android:textSize="13sp" />
-                <TextView android:id="@+id/PLABEG_DTM"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="开始时间"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/PLAEND_DTM"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
-                    android:textColor="#606060"
-                    android:textSize="13sp" />
-
-                <TextView android:text="结束时间："
-                    android:paddingLeft="@dimen/dp_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/mainColor"
-                    android:textSize="13sp" />
-                <TextView android:id="@+id/PLAEND_DTM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#606060"
-                    android:textSize="13sp" android:layout_marginLeft="5dp" />
+                    app:left_text="结束时间"
+                    />
         </LinearLayout>
         <TextView android:id="@+id/TTK_NO"
             android:layout_width="wrap_content"

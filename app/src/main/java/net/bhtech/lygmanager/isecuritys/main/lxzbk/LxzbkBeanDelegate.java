@@ -34,6 +34,7 @@ import net.bhtech.lygmanager.utils.log.LatteLogger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
@@ -60,16 +61,8 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText JCK_TYP=null;
     @BindView(R.id.JCK_DTM)
     RightAndLeftEditText JCK_DTM=null;
-    @BindView(R.id.JCKCST_NO)
-    RightAndLeftEditText JCKCST_NO=null;
-    @BindView(R.id.CRW_NO)
-    RightAndLeftEditText CRW_NO=null;
     @BindView(R.id.JCK_ADR)
     RightAndLeftEditText JCK_ADR=null;
-    @BindView(R.id.JCKUSR_ID)
-    RightAndLeftEditText JCKUSR_ID=null;
-    @BindView(R.id.ORG_NO)
-    RightAndLeftEditText ORG_NO=null;
     @BindView(R.id.JCK_NO)
     RightAndLeftEditText JCK_NO=null;
 
@@ -113,19 +106,22 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LxzbkEntity entity=new LxzbkEntity();
-                entity.setJCK_NO(JCK_NO.getEditTextInfo());
-                entity.setJCK_DTM(JCK_DTM.getEditTextInfo());
-                entity.setJCK_TYP(JCK_TYP.getEditTextTagInfo());
-                entity.setJCKCST_NO(JCKCST_NO.getEditTextInfo());
-                entity.setCRW_NO(CRW_NO.getEditTextInfo());
-                entity.setJCK_ADR(JCK_ADR.getEditTextInfo());
-                entity.setJCKUSR_ID(JCKUSR_ID.getEditTextTagInfo());
-                entity.setORG_NO(ORG_NO.getEditTextInfo());
+                if(JCK_TYP.getEditTextTagInfo()==null||"".equals(JCK_TYP.getEditTextTagInfo()))
+                {
+
+                    Toast.makeText(mContext, "请选择领先卡类型", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                WeakHashMap<String,Object> params=new WeakHashMap<>();
+                params.put("orgno",mUser.getOrgNo());
+                params.put("userid",mUser.getUserId());
+                params.put("lx",JCK_TYP.getEditTextTagInfo());
+                params.put("ttkNo","");
+                params.put("adr",JCK_ADR.getEditTextInfo());
                 Observable<String> obj=
                         RxRestClient.builder()
                                 .url("saveOrUpdateLXZBKMST")
-                                .params("totaljson", JSONObject.toJSONString(entity))
+                                .params(params)
                                 .loader(mContext)
                                 .build()
                                 .post();
@@ -192,23 +188,11 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                             JCK_TYP.setEditTextTagInfo(entity.getJCK_TYP(),"LXZBKLX");
                             JCK_DTM.setEditTextInfo(entity.getJCK_DTM());
                             JCK_ADR.setEditTextInfo(entity.getJCK_ADR());
-                            ORG_NO.setEditTextInfo(entity.getORG_NO());
-                            JCKUSR_ID.setEditTextInfo(entity.getJCKUSR_ID());
-                            JCKCST_NO.setEditTextInfo(entity.getJCKCST_NO());
-                            CRW_NO.setEditTextInfo(entity.getCRW_NO());
                             mRefreshHandler.getLxzbklinList(getContext(),entity.getJCK_NO());
                         }
                     }
                 }
             });
-        }else {
-            if(mUser!=null) {
-                JCKUSR_ID.setEditTextInfo(mUser.getUsrNam());
-                JCKUSR_ID.setEditTextTagInfo(mUser.getUserId());
-                ORG_NO.setEditTextInfo(mUser.getOrgNo());
-                JCKCST_NO.setEditTextInfo(mUser.getPlaNo());
-                CRW_NO.setEditTextInfo(mUser.getCrwNo());
-            }
         }
     }
 

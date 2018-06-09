@@ -1,37 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:paddingTop="-50dp"
     android:paddingLeft="@dimen/dp_10"
     android:paddingRight="@dimen/dp_10"
     android:gravity="top"
     android:layout_height="wrap_content">
 
-        <TextView android:id="@+id/BG_NOT"
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+            android:id="@+id/BG_NOT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textSize="15sp" android:layout_margin="5dp"/>
+            app:wrapcontent="true" />
         <LinearLayout
+            android:id="@+id/bgblin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/BG_NOT"
             android:orientation="horizontal">
-        <TextView android:id="@+id/BG_ADR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#606060"
-            android:textSize="13sp" />
-        <TextView android:id="@+id/JC_DTM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#606060"
-            android:textSize="13sp" android:layout_marginLeft="5dp" />
-        <TextView android:id="@+id/CST_NO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#606060"
-            android:textSize="13sp" android:layout_marginLeft="5dp" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/BG_ADR"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="检查地点"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/JC_DTM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="检查时间"
+                    app:wrapcontent="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/bgblin"
+            android:orientation="horizontal">
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/CST_NO"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="整改部门"
+                    app:wrapcontent="true" />
         </LinearLayout>
         <TextView android:id="@+id/BGB_NO"
             android:layout_width="wrap_content"

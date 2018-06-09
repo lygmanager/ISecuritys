@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -387,7 +385,7 @@ public class CompoundButtonGroup extends ScrollView {
         builder.setTitle("请选择：");
         //点击对话框以外的区域是否让对话框消失
         builder.setCancelable(true);
-        View dialogView = View.inflate(mContext, R.layout.item_checkbox, null);
+        View dialogView = View.inflate(mContext, R.layout.tag_checkbox, null);
         builder.setView(dialogView);
         final CompoundButtonGroup compoundButtonGroup = (CompoundButtonGroup) dialogView.findViewById(R.id.checkgroup);
         final LinkedHashMap<String, String> map = new LinkedHashMap<>();

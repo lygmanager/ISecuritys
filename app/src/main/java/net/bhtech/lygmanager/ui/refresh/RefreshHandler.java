@@ -24,6 +24,7 @@ import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 
 import java.util.List;
+import java.util.WeakHashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -113,6 +114,7 @@ public class RefreshHandler implements
                    RxRestClient.builder()
                     .url("getAQGCKList")
                     .params("orgno", mUser.getOrgNo())
+                    .params("userid", mUser.getUserId())
                     .params("page", "1")
                     .params("limit", "10")
                     .loader(_mActivity)
@@ -177,11 +179,19 @@ public class RefreshHandler implements
         });
     }
 
-    public void getLxzbkList( Context _mActivity) {
+    public void getLxzbkList( Context _mActivity ,String ttkNo) {
+        WeakHashMap<String,Object> params=new WeakHashMap<>();
+        if(ttkNo!=null&&!"".equals(ttkNo))
+        {
+            params.put("ttkNo",ttkNo);
+        }else{
+            params.put("userid",mUser.getUserId());
+        }
         Observable<String> obj=
                 RxRestClient.builder()
                         .url("getLxzbkList")
                         .params("orgno", mUser.getOrgNo())
+                        .params(params)
                         .params("page", "1")
                         .params("limit", "10")
                         .loader(_mActivity)

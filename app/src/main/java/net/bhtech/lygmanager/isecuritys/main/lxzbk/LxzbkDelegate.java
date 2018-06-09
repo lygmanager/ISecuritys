@@ -21,6 +21,7 @@ import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckDataConverter;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.ui.recycler.BaseDecoration;
 import net.bhtech.lygmanager.ui.refresh.RefreshHandler;
+import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import butterknife.BindView;
 
@@ -44,6 +45,8 @@ public class LxzbkDelegate extends BottomItemDelegate {
 
     private RefreshHandler mRefreshHandler = null;
 
+    private String ttkNo = null;
+
     @Override
     public Object setLayout() {
         return R.layout.delegate_lxzbk;
@@ -60,7 +63,7 @@ public class LxzbkDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LxzbklinBeanDelegate delegate = LxzbklinBeanDelegate.create("-1");
+                LxzbkBeanDelegate delegate = LxzbkBeanDelegate.create("-1");
                 getSupportDelegate().start(delegate);
             }
         });
@@ -93,6 +96,23 @@ public class LxzbkDelegate extends BottomItemDelegate {
 
     @Override
     public void onSupportVisible() {
-        mRefreshHandler.getLxzbkList( getContext());
+        mRefreshHandler.getLxzbkList( getContext(),ttkNo);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Bundle args = getArguments();
+        if (args != null) {
+            ttkNo=args.getString("TTK_NO");
+        }
+    }
+
+    public static LxzbkDelegate create(String pkval) {
+        final Bundle args = new Bundle();
+        args.putString("TTK_NO", pkval);
+        final LxzbkDelegate delegate = new LxzbkDelegate();
+        delegate.setArguments(args);
+        return delegate;
     }
 }

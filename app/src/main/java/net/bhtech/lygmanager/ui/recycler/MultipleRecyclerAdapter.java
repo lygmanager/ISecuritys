@@ -102,25 +102,25 @@ public class MultipleRecyclerAdapter extends
                 holder.setText(R.id.LIM_NO, (String)entity.getField("LIM_NO"));
                 break;
             case ItemType.WORKSHEET:
-                holder.setText(R.id.TTK_ID, (String)entity.getField("TTK_ID"));
-                holder.setText(R.id.TTK_ADR, (String)entity.getField("TTK_ADR"));
-                holder.setText(R.id.PLABEG_DTM, (String)entity.getField("PLABEG_DTM"));
-                holder.setText(R.id.PLAEND_DTM, (String)entity.getField("PLAEND_DTM"));
+                holder.setRightText(R.id.TTK_ID, (String)entity.getField("TTK_ID"));
+                holder.setRightText(R.id.TTK_ADR, (String)entity.getField("TTK_ADR"));
+                holder.setRightText(R.id.PLABEG_DTM, (String)entity.getField("PLABEG_DTM"));
+                holder.setRightText(R.id.PLAEND_DTM, (String)entity.getField("PLAEND_DTM"));
                 holder.setText(R.id.TTK_NO, (String)entity.getField("TTK_NO"));
                 break;
             case ItemType.AQGCK:
-                holder.setText(R.id.GC_ORG, (String)entity.getField("GC_ORG"));
-                holder.setText(R.id.GC_NAM, (String)entity.getField("GC_NAM"));
-                holder.setText(R.id.GC_DTM, (String)entity.getField("GC_DTM"));
-                holder.setText(R.id.GC_RW, (String)entity.getField("GC_RW"));
+                holder.setRightText(R.id.BGC_ORG, (String)entity.getField("BGC_ORG"));
+                holder.setRightText(R.id.GC_TYP, (String)entity.getField("GC_TYP"));
+                holder.setRightText(R.id.GC_SX, (String)entity.getField("GC_SX"));
+                holder.setRightText(R.id.GC_DTM, (String)entity.getField("GC_DTM"));
+                holder.setRightText(R.id.GC_RW, (String)entity.getField("GC_RW"));
                 holder.setText(R.id.AQ_NO, (String)entity.getField("AQ_NO"));
                 break;
             case ItemType.LXZBK:
-                holder.setText(R.id.JCK_TYP, (String)entity.getField("JCK_TYP"));
-                holder.setText(R.id.JCK_DTM, (String)entity.getField("JCK_DTM"));
-                holder.setText(R.id.JCK_ADR, (String)entity.getField("JCK_ADR"));
-                holder.setText(R.id.JCK_DSC, (String)entity.getField("JCK_DSC"));
-                holder.setText(R.id.JCKUSR_ID, (String)entity.getField("JCKUSR_ID"));
+                holder.setRightText(R.id.JCK_TYP, (String)entity.getField("JCK_TYP"));
+                holder.setRightText(R.id.JCK_DTM, (String)entity.getField("JCK_DTM"));
+                holder.setRightText(R.id.JCK_ADR, (String)entity.getField("JCK_ADR"));
+                holder.setRightText(R.id.JCKUSR_ID, (String)entity.getField("JCKUSR_ID"));
                 holder.setText(R.id.JCK_NO, (String)entity.getField("JCK_NO"));
                 break;
             case ItemType.LXZBKLIN:
@@ -132,12 +132,11 @@ public class MultipleRecyclerAdapter extends
                 holder.setText(R.id.JCLIN_NANUM, (String)entity.getField("JCLIN_NANUM"));
                 break;
             case ItemType.BGB:
-                holder.setText(R.id.BG_NOT, (String)entity.getField("BG_NOT"));
-                holder.setText(R.id.BG_ADR, (String)entity.getField("BG_ADR"));
-                holder.setText(R.id.JC_DTM, (String)entity.getField("JC_DTM"));
-                holder.setText(R.id.CST_NO, (String)entity.getField("CST_NO"));
+                holder.setRightText(R.id.BG_NOT, (String)entity.getField("BG_NOT"));
+                holder.setRightText(R.id.BG_ADR, (String)entity.getField("BG_ADR"));
+                holder.setRightText(R.id.JC_DTM, (String)entity.getField("JC_DTM"));
+                holder.setRightText(R.id.CST_NO, (String)entity.getField("CST_NO"));
                 holder.setText(R.id.BGB_NO, (String)entity.getField("BGB_NO"));
-                holder.setText(R.id.BG_ADR, (String)entity.getField("BG_ADR"));
                 break;
             default:
                 break;

@@ -116,7 +116,7 @@
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="观察内容类型"
+            app:nameText="观察类型"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText

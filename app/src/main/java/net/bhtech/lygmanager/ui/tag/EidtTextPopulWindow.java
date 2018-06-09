@@ -119,7 +119,6 @@ public class EidtTextPopulWindow {
 
     public void initListPopulWindow(final String tblfieldArray) {
         String labelStr= LattePreference.getCustomAppProfile(tblfieldArray);
-        LatteLogger.d(labelStr);
         if(labelStr==null||"".equals(labelStr)||"null".equals(labelStr))
         {
             return;

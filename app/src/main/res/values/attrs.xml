@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="RightAndLeftTextView">
-        <attr name="left_text" format="string"/>
+        <attr name="left_text" format="reference|string"/>
         <attr name="left_color" format="color"/>
         <attr name="left_size" format="dimension"/>
-        <attr name="right_text" format="string"/>
+        <attr name="right_text" format="reference|string"/>
         <attr name="right_color" format="color"/>
         <attr name="right_size" format="dimension"/>
+        <attr name="wrapcontent" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="RightAndLeftEditText">
         <!-- 标题的大小 -->
