@@ -116,7 +116,7 @@ public class RefreshHandler implements
                     .params("orgno", mUser.getOrgNo())
                     .params("userid", mUser.getUserId())
                     .params("page", "1")
-                    .params("limit", "10")
+                    .params("limit", "20")
                     .loader(_mActivity)
                     .build()
                     .post();
@@ -193,7 +193,7 @@ public class RefreshHandler implements
                         .params("orgno", mUser.getOrgNo())
                         .params(params)
                         .params("page", "1")
-                        .params("limit", "10")
+                        .params("limit", "20")
                         .loader(_mActivity)
                         .build()
                         .post();

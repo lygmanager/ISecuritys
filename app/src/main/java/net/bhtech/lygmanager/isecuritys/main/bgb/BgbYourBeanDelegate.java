@@ -82,6 +82,10 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText PLAN_DTM=null;
     @BindView(R.id.GLCST_NO)
     RightAndLeftEditText GLCST_NO=null;
+    @BindView(R.id.JCUSR_ID)
+    RightAndLeftEditText JCUSR_ID=null;
+    @BindView(R.id.ZGSKL_NO)
+    RightAndLeftEditText ZGSKL_NO=null;
     @BindView(R.id.SKL_NO)
     RightAndLeftEditText SKL_NO=null;
     @BindView(R.id.GLUSR_ID)
@@ -131,8 +135,8 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
         mUser=AccountManager.getSignInfo();
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
                 .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbzgcstOption","BgbzgcstOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstsklOption","BgbcstsklOption");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbjcnrOption","BgbjcnrOption");
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -143,10 +147,11 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
         JC_TYP.setPopulWindow(mContext,"BgbjcnrOption");
         BF_TYP.setPopulWindow(mContext,"RMBGBMST@@BF_TYP");
         BG_ADR.setPopulWindow(mContext,"RMBGBMST@@BG_ADR");
-        CST_NO.setPopulWindow(mContext,"BgbcstOption",GLUSR_ID,"getBgbcstUserOption","BgbcstUserOption");
-        GLCST_NO.setPopulWindow(mContext,"BgbcstsklOption",SKL_NO,"getBgbsklOption","BgbsklOption");
-        SKL_NO.setPopulWindow(mContext,"BgbsklOption");
-        GLUSR_ID.setPopulWindow(mContext,"BgbcstUserOption");
+        CST_NO.setPopulWindow(mContext,"BgbzgcstOption",ZGSKL_NO,"getBgbzgcstsklOption","BgbzgcstsklOption");
+        ZGSKL_NO.setPopulWindow(mContext,"BgbzgcstsklOption",GLUSR_ID,"getBgbzgcstUserOption","BgbzgcstUserOption");
+        GLCST_NO.setPopulWindow(mContext,"BgbcstOption",SKL_NO,"getBgbcstsklOption","BgbcstsklOption");
+        SKL_NO.setPopulWindow(mContext,"BgbcstsklOption");
+        GLUSR_ID.setPopulWindow(mContext,"BgbzgcstUserOption");
 
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +165,7 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
                 entity.put("JC_DTM",JC_DTM.getEditTextInfo());
                 if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
                     entity.put("DO_DTM", DO_DTM.getEditTextInfo());
+                    entity.put("YSUSR_ID", mUser.getUserId());
                 }
                 entity.put("JC_TYP",JC_TYP.getEditTextTagInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
@@ -337,17 +343,22 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
                             BGB_NO.setEditTextInfo(entity.getString("BGB_NO"));
                             BF_TYP.setEditTextTagInfo(entity.getString("BF_TYP"),"RMBGBMST@@BF_TYP");
                             BG_NOT.setEditTextInfo(entity.getString("BG_NOT"));
-                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbcstOption");
+                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbzgcstOption");
                             BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMBGBMST@@BG_ADR");
                             JC_DTM.setEditTextInfo(entity.getString("JC_DTM"));
                             DO_DTM.setEditTextInfo(entity.getString("DO_DTM"));
                             JC_TYP.setEditTextTagInfo(entity.getString("JC_TYP"),"BgbjcnrOption");
                             KH_NUM.setEditTextInfo(entity.getString("KH_NUM"));
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
-                            GLCST_NO.setEditTextInfo(entity.getString("GLCST_NO"));
-                            SKL_NO.setEditTextTagInfo(entity.getString("SKL_NO"),"BgbsklOption");
-                            GLCST_NO.setEditTextTagInfo(entity.getString("GLCST_NO"),"BgbcstsklOption");
-                            GLUSR_ID.setEditTextInfo(entity.getString("GLUSR_ID"));
+                            GLCST_NO.setEditTextTagInfo(entity.getString("GLCST_NO"),"BgbcstOption");
+                            SKL_NO.setEditTextTagInfo(entity.getString("SKL_NO"));
+                            SKL_NO.setEditTextInfo(entity.getString("SKL_NAM"));
+                            ZGSKL_NO.setEditTextTagInfo(entity.getString("ZGSKL_NO"));
+                            ZGSKL_NO.setEditTextInfo(entity.getString("ZGSKL_NAM"));
+                            GLUSR_ID.setEditTextTagInfo(entity.getString("GLUSR_ID"));
+                            GLUSR_ID.setEditTextInfo(entity.getString("GLUSR_NAM"));
+                            JCUSR_ID.setEditTextTagInfo(entity.getString("JCUSR_ID"));
+                            JCUSR_ID.setEditTextInfo(entity.getString("JCUSR_NAM"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);

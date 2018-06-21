@@ -57,7 +57,7 @@ public class BgbMyDelegate extends BottomItemDelegate {
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
                 .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
         LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbsklOption","BgbsklOption");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbzgcstOption","BgbzgcstOption");
 
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new BgbDataConverter());
         button_forward.setOnClickListener(new View.OnClickListener() {

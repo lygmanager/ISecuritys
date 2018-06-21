@@ -1,17 +1,27 @@
 [{
-  "imageUrl":"{fa-camera-retro}","itemText":"安全观察卡","itemId":"1","itemType":"3"
+  "imageUrl":"{fa-edit}","itemText":"安全观察卡","itemId":"0","itemType":"3","spanSize":"3","textColor":"A"
 },{
-  "imageUrl":"{fa-camera-retro}","itemText":"新建安全观察卡","itemId":"2","itemType":"3"
+  "imageUrl":"{fa-camera-retro}","itemText":"业务清单","itemId":"1","itemType":"3","spanSize":"1","textColor":"B"
 },{
-  "imageUrl":"{fa-file-archive-o}","itemText":"领先指标卡","itemId":"3","itemType":"3"
+  "imageUrl":"{fa-camera-retro}","itemText":"新建安全观察卡","itemId":"2","itemType":"3","spanSize":"1","textColor":"C"
 },{
-  "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"4","itemType":"3"
+  "imageUrl":"{fa-edit}","itemText":"领先指标卡","itemId":"0","itemType":"3","spanSize":"3","textColor":"A"
 },{
-  "imageUrl":"{fa-building}","itemText":"曝光板","itemId":"5","itemType":"3"
+  "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"4","itemType":"3","spanSize":"1","textColor":"C"
 },{
-  "imageUrl":"{fa-building}","itemText":"新建曝光板","itemId":"6","itemType":"3"
+  "imageUrl":"{fa-file-archive-o}","itemText":"工作票","itemId":"9","itemType":"3","spanSize":"1","textColor":"C"
 },{
-  "imageUrl":"{fa-cogs}","itemText":"违章管理","itemId":"7","itemType":"3"
+  "imageUrl":"{fa-file-archive-o}","itemText":"领先指标卡","itemId":"3","itemType":"3","spanSize":"1","textColor":"B"
 },{
-  "imageUrl":"{fa-cogs}","itemText":"新建违章","itemId":"8","itemType":"3"
+  "imageUrl":"{fa-edit}","itemText":"曝光板","itemId":"0","itemType":"3","spanSize":"3","textColor":"A"
+},{
+  "imageUrl":"{fa-building}","itemText":"新建曝光板","itemId":"6","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{fa-building}","itemText":"曝光板","itemId":"5","itemType":"3","spanSize":"1","textColor":"B"
+},{
+  "imageUrl":"{fa-list-ul}","itemText":"违章管理","itemId":"0","itemType":"3","spanSize":"3","textColor":"A"
+},{
+  "imageUrl":"{fa-cogs}","itemText":"新建违章","itemId":"8","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{fa-cogs}","itemText":"违章管理","itemId":"7","itemType":"3","spanSize":"1","textColor":"B"
 }]

@@ -163,10 +163,11 @@ public class EidtTextPopulWindow {
     public void initListPopulWindow(final String tblfieldArray,final RightAndLeftEditText rightAndLeftEditText,final String method,final String childTablefieldArray) {
 
         String labelStr= LattePreference.getCustomAppProfile(tblfieldArray);
-        if(labelStr==null||"".equals(labelStr))
+        if(labelStr==null||"".equals(labelStr)||"[]".equals(labelStr)||"null".equals(labelStr))
         {
             return;
         }
+        LatteLogger.d(labelStr);
         JSONArray labels2=JSONArray.parseArray(labelStr);
         String[] tmp=new String [labels2.size()];
         for (int i=0;i<labels2.size();i++)

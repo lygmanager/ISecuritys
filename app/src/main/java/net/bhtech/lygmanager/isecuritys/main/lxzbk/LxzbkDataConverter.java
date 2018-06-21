@@ -23,24 +23,25 @@ public class LxzbkDataConverter extends DataConverter {
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         ENTITIES.clear();
-        String jsonArray=getJsonData();LatteLogger.d(jsonArray);
+        String jsonArray=getJsonData();
         if(jsonArray!=null&&!"".equals(jsonArray)) {
             JSONObject lr2= (JSONObject) JSONObject.parse(jsonArray);
             LiemsResult lr=JSONObject.toJavaObject(lr2,LiemsResult.class);
-            List<LxzbkEntity>  ls=JSONArray.parseArray(lr.getRows().toString(),LxzbkEntity.class);
-            for (LxzbkEntity data : ls) {
+            JSONArray  ls=JSONArray.parseArray(lr.getRows().toString());
+            for (int i=0 ;i< ls.size();i++) {
+                JSONObject data=ls.getJSONObject(i);
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
                         .setField(MultipleFields.ITEM_TYPE, ItemType.LXZBK)
                         .setField(MultipleFields.SPAN_SIZE, 1)
-                        .setField("JCK_TYP", getTextTagInfo(data.getJCK_TYP(),"LXZBKLX"))
-                        .setField("JCK_DTM", data.getJCK_DTM())
-                        .setField("JCKCST_NO", data.getJCKCST_NO())
-                        .setField("CRW_NO", data.getCRW_NO())
-                        .setField("JCK_ADR", data.getJCK_ADR())
-                        .setField("JCK_DSC", data.getJCK_DSC())
-                        .setField("JCKUSR_ID", data.getJCKUSR_ID())
-                        .setField("ORG_NO", data.getORG_NO())
-                        .setField("JCK_NO", data.getJCK_NO())
+                        .setField("JCK_TYP", getTextTagInfo(data.getString("JCK_TYP"),"LXZBKLX"))
+                        .setField("JCK_DTM", data.getString("JCK_DTM"))
+                        .setField("JCKCST_NO", data.getString("JCKCST_NO"))
+                        .setField("CRW_NO", data.getString("CRW_NO"))
+                        .setField("JCK_ADR", data.getString("JCK_ADR"))
+                        .setField("JCK_DSC", data.getString("JCK_DSC"))
+                        .setField("JCKUSR_ID", data.getString("JCKUSR_NAM"))
+                        .setField("ORG_NO", data.getString("ORG_NO"))
+                        .setField("JCK_NO", data.getString("JCK_NO"))
                         .build();
                 ENTITIES.add(entity);
             }

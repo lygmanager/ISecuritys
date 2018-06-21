@@ -1,35 +1,49 @@
 package net.bhtech.lygmanager.isecuritys.main.aqgck;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconTextView;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.database.AqgckEntity;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.main.FullimageDelegate;
+import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBeanDelegate;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
+import net.bhtech.lygmanager.ui.tag.CompoundButtonGroup;
 import net.bhtech.lygmanager.ui.tag.RightAndLeftEditText;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -73,6 +87,10 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText GC_SX=null;
     @BindView(R.id.GC_TYP)
     RightAndLeftEditText GC_TYP=null;
+
+    @BindView(R.id.GC_TYP1)
+    CompoundButtonGroup GC_TYP1=null;
+
     @BindView(R.id.ORG_NO)
     RightAndLeftEditText ORG_NO=null;
     @BindView(R.id.WX_SHT)
@@ -87,6 +105,17 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText FX_TYP=null;
     @BindView(R.id.ZQX_SHT)
     RightAndLeftEditText ZQX_SHT=null;
+
+    @BindView(R.id.PICTUREA)
+    RightAndLeftEditText PICTUREA=null;
+    @BindView(R.id.iView)
+    ImageView iView=null;
+    @BindView(R.id.lineiViewA)
+    LinearLayout lineiViewA=null;
+    private AqgckBeanDelegate thisdelegate=this;
+
+
+    protected Context mContext=null;
 
     private UtusrEntity mUser=null;
 
@@ -112,7 +141,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.VISIBLE);
         button_commit.setText("{fa-plus}");
-        final Context mContext=this.getContext();
+        mContext=this.getContext();
         mUser=AccountManager.getSignInfo();
         Map<String,String[]> fieldOptions=LiemsMethods.init(mContext)
                 .getFieldOption("AQGCKMST@@GC_ORG,AQGCKMST@@GC_CST,AQGCKMST@@GC_SX,AQGCKMST@@BGC_ORG,AQGCKMST@@GC_TYP,AQGCKMST@@IS_JZ,AQGCKMST@@FX_TYP");
@@ -121,10 +150,13 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
         GC_ORG.setPopulWindow(mContext,"AQGCKMST@@GC_ORG");
         GC_SX.setPopulWindow(mContext,"AQGCKMST@@GC_SX");
         BGC_ORG.setPopulWindow(mContext,"AQGCKMST@@BGC_ORG");
-        GC_TYP.setPopulWindow(mContext,"AQGCKMST@@GC_TYP");
+//        GC_TYP.setPopulWindow(mContext,"AQGCKMST@@GC_TYP");
         IS_JZ.setPopulWindow(mContext,"AQGCKMST@@IS_JZ");
         FX_TYP.setPopulWindow(mContext,"AQGCKMST@@FX_TYP");
-
+        GC_TYP.setReadOnly();
+        GC_TYP1.setNumCols(3);
+        GC_TYP1.setEntries("AQGCKMST@@GC_TYP");
+        GC_TYP1.reDraw();
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,7 +171,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                 entity.setGC_RW(GC_RW.getEditTextInfo());
                 entity.setGC_QY(GC_QY.getEditTextInfo());
                 entity.setGC_SX(GC_SX.getEditTextTagInfo());
-                entity.setGC_TYP(GC_TYP.getEditTextTagInfo());
+                entity.setGC_TYP(GC_TYP1.getCheckedValueStr());
                 entity.setORG_NO(ORG_NO.getEditTextInfo());
 
                 entity.setWX_SHT(WX_SHT.getEditTextInfo());
@@ -167,6 +199,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                                 if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
                                 {
                                     AQ_NO.getEditText().setText(rst.getPkValue());
+                                    lineiViewA.setVisibility(View.VISIBLE);
                                     Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
 
                                 }
@@ -190,10 +223,59 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                 GC_QY.clearText();
                 GC_SX.clearText();
                 GC_TYP.clearText();
+                PICTUREA.clearText();
+                iView.setImageBitmap(null);
             }
         });
     }
 
+    @OnLongClick(R.id.iView)
+    public boolean setiView(View view)
+    {
+        if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo())) {
+            PictureSelector
+                    .create(this)
+                    .openGallery(PictureMimeType.ofImage())
+                    .selectionMode(PictureConfig.SINGLE)
+                    .compress(true)
+                    .forResult(PictureConfig.CHOOSE_REQUEST);
+        }
+        return true;
+    }
+
+    @OnClick(R.id.iView)
+    public void openFullView(View view)
+    {
+        if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo()))
+        {
+            if("A".equals(PICTUREA.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("AQ_PICTUREA_" + AQ_NO.getEditTextInfo(),"AQGCKMST");
+                this.getSupportDelegate().start(delegate);
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    if(selectList!=null&&selectList.size()>0) {
+                        Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
+                        if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo())) {
+                            LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "AQGCKMST", "AQ_PICTUREA_"+AQ_NO.getEditTextInfo()+".JPEG");
+                            PICTUREA.setEditTextInfo("A");
+                            Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    break;
+            }
+        }
+    }
 
 
     @Override
@@ -239,13 +321,20 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                             GC_QY.setEditTextInfo(entity.getGC_QY());
                             GC_SX.setEditTextTagInfo(entity.getGC_SX(),"AQGCKMST@@GC_SX");
                             GC_TYP.setEditTextTagInfo(entity.getGC_TYP(),"AQGCKMST@@GC_TYP");
+                            GC_TYP1.setCheckedValueStr(entity.getGC_TYP());
                             ORG_NO.setEditTextInfo(entity.getORG_NO());
                             WX_SHT.setEditTextInfo(entity.getWX_SHT());
-                            IS_JZ.setEditTextTagInfo(entity.getIS_JZ(),"AQGCKMST@@JZ_CS");
+                            IS_JZ.setEditTextTagInfo(entity.getIS_JZ(),"AQGCKMST@@IS_JZ");
                             JZ_CS.setEditTextInfo(entity.getJZ_CS());
                             JZ_XD.setEditTextInfo(entity.getJZ_XD());
                             FX_TYP.setEditTextTagInfo(entity.getFX_TYP(),"AQGCKMST@@FX_TYP");
                             ZQX_SHT.setEditTextInfo(entity.getZQX_SHT());
+                            PICTUREA.setEditTextInfo(entity.getPICTUREA());
+                            lineiViewA.setVisibility(View.VISIBLE);
+                            if("A".equals(entity.getPICTUREA())) {
+                                LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "AQGCKMST",
+                                        "AQ_PICTUREA_" + entity.getAQ_NO() + ".JPEG");
+                            }
                         }
                     }
                 }

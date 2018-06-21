@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/platform_titlebar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_titlebar"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lineContainer"
+        android:orientation="horizontal">
+
+        <ListView
+            android:id="@+id/rv_cst"
+            android:layout_width="0dp"
+            android:layout_weight="0.49"
+            android:layout_height="match_parent"
+            />
+        <ListView
+            android:id="@+id/rv_user"
+            android:layout_width="0dp"
+            android:layout_weight="0.49"
+            android:background="@color/line_color"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="vertical"
+        android:layout_below="@+id/lineContainer"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:id="@+id/twoButtonLayout"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/positiveButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/negativeButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/singleButtonLayout"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingBottom="10dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/singleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

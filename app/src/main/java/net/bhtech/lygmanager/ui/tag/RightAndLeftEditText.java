@@ -21,6 +21,8 @@ import net.bhtech.lygmanager.delegates.BaseDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.ui.date.DatePickDialogUtil;
 import net.bhtech.lygmanager.ui.date.DateTimePickDialogUtil;
+import net.bhtech.lygmanager.ui.tree.CstUserDialog;
+import net.bhtech.lygmanager.utils.log.LatteLogger;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
 
 
@@ -430,9 +432,9 @@ public class RightAndLeftEditText extends LinearLayout {
     }
 
     public void setDatePick(final BaseDelegate baseDelegate, final String initDateTime, final String dateType){
+        setReadOnly();
         if (initDateTime!=null&&!"".equals(initDateTime))
             editText.setText(initDateTime);
-        setReadOnly();
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -443,6 +445,25 @@ public class RightAndLeftEditText extends LinearLayout {
                     DatePickDialogUtil datePickDialogUtil = new DatePickDialogUtil(baseDelegate, initDateTime);
                     datePickDialogUtil.dateTimePicKDialog(editText);
                 }
+            }
+        });
+    }
+
+    public void setCstUserDialog(final Context mContext){
+        setReadOnly();
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CstUserDialog.Builder builder=new CstUserDialog.Builder(mContext);
+                builder.createSingleButtonDialog(new CstUserDialog.ConformListener() {
+                    @Override
+                    public void onConformClicked(String id, String name) {
+                        editText.setText(name);
+                        editText.setTag(id);
+
+
+                    }
+                }).show();
             }
         });
     }

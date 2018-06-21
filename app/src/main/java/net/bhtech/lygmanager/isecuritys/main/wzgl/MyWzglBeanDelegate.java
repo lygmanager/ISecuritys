@@ -75,6 +75,10 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText BG_NOT=null;
     @BindView(R.id.JC_DTM)
     RightAndLeftEditText JC_DTM=null;
+    @BindView(R.id.JCST_NO)
+    RightAndLeftEditText JCST_NO=null;
+    @BindView(R.id.JCUSR_ID)
+    RightAndLeftEditText JCUSR_ID=null;
     @BindView(R.id.DO_DTM)
     RightAndLeftEditText DO_DTM=null;
     @BindView(R.id.KH_NUM)
@@ -310,12 +314,20 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
                             BF_TYP.setEditTextTagInfo(entity.getString("BF_TYP"),"RMWZGLMST@@BF_TYP");
                             KH_TYP.setEditTextTagInfo(entity.getString("KH_TYP"),"RMWZGLMST@@KH_TYP");
                             BG_NOT.setEditTextInfo(entity.getString("BG_NOT"));
-                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbcstOption");
+                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbzgcstOption");
                             BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMWZGLMST@@BG_ADR");
+
+
+                            JCST_NO.setEditTextTagInfo(entity.getString("JCST_NO"));
+                            JCST_NO.setEditTextInfo(entity.getString("JCST_NAM"));
+                            JCUSR_ID.setEditTextTagInfo(entity.getString("JCUSR_ID"));
+                            JCUSR_ID.setEditTextInfo(entity.getString("JCUSR_NAM"));
+
                             JC_DTM.setEditTextInfo(entity.getString("JC_DTM"));
                             KH_NUM.setEditTextInfo(entity.getString("KH_NUM"));
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
-                            ZR_USR.setEditTextInfo(entity.getString("ZR_USR"));
+                            ZR_USR.setEditTextTagInfo(entity.getString("ZR_USR"));
+                            ZR_USR.setEditTextInfo(entity.getString("GLUSR_NAM"));
                             KH_FS.setEditTextInfo(entity.getString("KH_FS"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             lineiViewA.setVisibility(View.VISIBLE);

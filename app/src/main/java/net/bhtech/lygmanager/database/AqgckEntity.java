@@ -27,6 +27,7 @@ public class AqgckEntity {
     public String BZ_NO;//班组
     public String USR_ID;//当前用户
     public String USR_DTM;//当前时间
+    private String PICTUREA;
 
     public int getPkVal() {
         return pkVal;
@@ -194,5 +195,13 @@ public class AqgckEntity {
 
     public void setUSR_DTM(String USR_DTM) {
         this.USR_DTM = USR_DTM;
+    }
+
+    public String getPICTUREA() {
+        return PICTUREA;
+    }
+
+    public void setPICTUREA(String PICTUREA) {
+        this.PICTUREA = PICTUREA;
     }
 }

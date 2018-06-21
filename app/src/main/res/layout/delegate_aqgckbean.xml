@@ -10,6 +10,10 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_titlebar"
         android:paddingTop="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <LinearLayout
         android:id="@+id/ll_equip"
         android:layout_width="match_parent"
@@ -119,6 +123,14 @@
             app:nameText="观察类型"
             app:nameSize="80dp"
             />
+        <net.bhtech.lygmanager.ui.tag.CompoundButtonGroup
+            android:id="@+id/GC_TYP1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:compoundType="check_box"
+            app:entries="@array/planets"
+            app:numCols="2"
+            app:labelOrder="after"/>
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/WX_SHT"
             android:layout_width="fill_parent"
@@ -201,6 +213,44 @@
             app:nameSize="80dp"
             android:visibility="gone"
             />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/PICTUREA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="整改前照片"
+            app:nameSize="80dp"
+            android:visibility="gone"
+            />
     </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lineiViewA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_margin="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:textSize="15dp"
+                    android:text="拍照上传："/>
+                <ImageView
+                    android:id="@+id/iView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@drawable/ic_camera"/>
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

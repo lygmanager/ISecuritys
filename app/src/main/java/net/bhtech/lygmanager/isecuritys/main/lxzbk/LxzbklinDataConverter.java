@@ -27,17 +27,18 @@ public class LxzbklinDataConverter extends DataConverter {
         if(jsonArray!=null&&!"".equals(jsonArray)) {
             JSONObject lr2= (JSONObject) JSONObject.parse(jsonArray);
             LiemsResult lr=JSONObject.toJavaObject(lr2,LiemsResult.class);
-            List<LxzbklinEntity>  ls=JSONArray.parseArray(lr.getRows().toString(),LxzbklinEntity.class);
-            for (LxzbklinEntity data : ls) {
+            JSONArray ls=JSONArray.parseArray(lr.getRows().toString());
+            for (int i=0;i< ls.size();i++) {
+                JSONObject data=ls.getJSONObject(i);
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
                         .setField(MultipleFields.ITEM_TYPE, ItemType.LXZBKLIN)
                         .setField(MultipleFields.SPAN_SIZE, 1)
-                        .setField("JCLIN_NO", data.getJCLIN_NO())
-                        .setField("JCLIN_DSC", data.getJCLIN_DSC())
-                        .setField("JCLIN_SFNUM", data.getJCLIN_SFNUM())
-                        .setField("JCLIN_FXNUM", data.getJCLIN_FXNUM())
-                        .setField("JCLIN_ZDNUM", data.getJCLIN_ZDNUM())
-                        .setField("JCLIN_NANUM", getTextTagInfo(data.getJCLIN_NANUM(),"SDZBJCKLIN@@JCLIN_NANUM"))
+                        .setField("JCLIN_NO", data.getString("JCLIN_NO"))
+                        .setField("JCLIN_DSC", data.getString("JCLIN_DSC"))
+                        .setField("JCLIN_SFNUM", data.getString("JCLIN_SFNUM"))
+                        .setField("JCLIN_FXNUM", data.getString("JCLIN_FXNUM"))
+                        .setField("JCLIN_ZDNUM", data.getString("JCLIN_ZDNUM"))
+                        .setField("VALID_STA", getTextTagInfo(data.getString("VALID_STA"),"SDZBJCKLIN@@VALID_STA"))
                         .build();
                 ENTITIES.add(entity);
             }

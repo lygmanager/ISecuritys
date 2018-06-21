@@ -41,11 +41,11 @@
             android:layout_below="@+id/aqgcklin1"
             android:orientation="horizontal">
                 <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
-                    android:id="@+id/GC_TYP"
+                    android:id="@+id/GC_QY"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    app:left_text="观察类型"
+                    app:left_text="观察区域"
                     app:wrapcontent="true" />
                 <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
                     android:id="@+id/GC_SX"

@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
+import net.bhtech.lygmanager.utils.storage.LattePreference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -162,6 +163,22 @@ public class CompoundButtonGroup extends ScrollView {
         return checked;
     }
 
+    public void setCheckedValueStr(String vals) {
+        String checked = "";
+        if(vals!=null&&!"".equals(vals)) {
+            String[] valArray=vals.split("\\|");
+            for (int j=0;j<valArray.length;j++) {
+                for (int i = 0; i < buttons.size(); i++) {
+                    FullWidthCompoundButton button = buttons.get(i);
+                    if (button.getValue().equals(valArray[j])) {
+                        button.setChecked(true);
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
     public List<String> getCheckedText() {
         ArrayList<String> checked = new ArrayList<>();
         for (int i=0; i<buttons.size(); i++) {
@@ -229,6 +246,23 @@ public class CompoundButtonGroup extends ScrollView {
         for (String entry : entries) {
             map.put(entry, entry);
         }
+        this.entries = map;
+    }
+
+    public void setEntries (String tableFields) {
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        String labelStr=LattePreference.getCustomAppProfile(tableFields);
+        String valStr=LattePreference.getCustomAppProfile(tableFields+"_VAL");
+        if(labelStr!=null&&!"".equals(labelStr))
+        {
+            JSONArray labels2=JSONArray.parseArray(labelStr);
+            JSONArray vals2=JSONArray.parseArray(valStr);
+            for (int i=0;i<labels2.size();i++)
+            {
+                map.put(vals2.getString(i),labels2.getString(i));
+            }
+        }
+
         this.entries = map;
     }
 

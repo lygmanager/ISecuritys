@@ -3,9 +3,9 @@
 },{
   "imageUrl":"{fa-camera-retro}","itemText":"新建安全观察卡","itemId":"2","itemType":"3","spanSize":"1","textColor":"C"
 },{
-  "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"4","itemType":"3","spanSize":"1","textColor":"C"
-},{
   "imageUrl":"{fa-file-archive-o}","itemText":"工作票","itemId":"9","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"3","itemType":"3","spanSize":"1","textColor":"C"
 },{
   "imageUrl":"{fa-building}","itemText":"新建曝光板","itemId":"6","itemType":"3","spanSize":"1","textColor":"C"
 },{

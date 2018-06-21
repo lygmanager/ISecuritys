@@ -9,9 +9,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by 傅令杰
@@ -77,6 +79,12 @@ public class MultipleRecyclerAdapter extends
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
                 holder.setText(R.id.tv_multiple, text);
                 holder.setText(R.id.img_multiple, imageUrl);
+                IconTextView tv_multiple=holder.getView(R.id.img_multiple);
+                Random random = new Random();
+                int r = random.nextInt(256);
+                int g = random.nextInt(256);
+                int b = random.nextInt(256);
+//                tv_multiple.setTextColor(Color.rgb(r,g,b));
                if((int)entity.getField(MultipleFields.SPAN_SIZE)==3)
                 {
                     IconTextView img_title=holder.getView(R.id.img_title);
@@ -88,11 +96,7 @@ public class MultipleRecyclerAdapter extends
                     holder.getView(R.id.img_multiple).setVisibility(View.GONE);
                     holder.getView(R.id.tv_multiple).setVisibility(View.GONE);
                 }
-                if("C".equals(entity.getField(MultipleFields.TEXT_COLOR)))
-                {
-                    IconTextView iconTextView=holder.getView(R.id.img_multiple);
-                    iconTextView.setTextColor(0xFF00C6FF);
-                }
+
                 break;
             case ItemType.DEFECT:
                 holder.setText(R.id.LIM_SHT, (String)entity.getField("LIM_SHT"));
@@ -114,6 +118,7 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.GC_SX, (String)entity.getField("GC_SX"));
                 holder.setRightText(R.id.GC_DTM, (String)entity.getField("GC_DTM"));
                 holder.setRightText(R.id.GC_RW, (String)entity.getField("GC_RW"));
+                holder.setRightText(R.id.GC_QY, (String)entity.getField("GC_QY"));
                 holder.setText(R.id.AQ_NO, (String)entity.getField("AQ_NO"));
                 break;
             case ItemType.LXZBK:
@@ -129,13 +134,14 @@ public class MultipleRecyclerAdapter extends
                 holder.setText(R.id.JCLIN_SFNUM, (String)entity.getField("JCLIN_SFNUM"));
                 holder.setText(R.id.JCLIN_FXNUM, (String)entity.getField("JCLIN_FXNUM"));
                 holder.setText(R.id.JCLIN_ZDNUM, (String)entity.getField("JCLIN_ZDNUM"));
-                holder.setText(R.id.JCLIN_NANUM, (String)entity.getField("JCLIN_NANUM"));
+                holder.setText(R.id.VALID_STA, (String)entity.getField("VALID_STA"));
                 break;
             case ItemType.BGB:
                 holder.setRightText(R.id.BG_NOT, (String)entity.getField("BG_NOT"));
                 holder.setRightText(R.id.BG_ADR, (String)entity.getField("BG_ADR"));
                 holder.setRightText(R.id.JC_DTM, (String)entity.getField("JC_DTM"));
                 holder.setRightText(R.id.CST_NO, (String)entity.getField("CST_NO"));
+                holder.setRightText(R.id.GLUSR_ID, (String)entity.getField("GLUSR_ID"));
                 holder.setText(R.id.BGB_NO, (String)entity.getField("BGB_NO"));
                 break;
             default:

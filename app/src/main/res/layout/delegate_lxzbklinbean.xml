@@ -52,7 +52,7 @@
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JCLIN_NANUM"
+            android:id="@+id/VALID_STA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

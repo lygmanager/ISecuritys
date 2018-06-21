@@ -81,14 +81,20 @@ public class WorsheetClickListener extends SimpleClickListener {
 
     public void createLxzbk(String ttkNo,String adr,String lx)
     {
+        WeakHashMap<String,Object> params=new WeakHashMap<>();
+
+        params.put("JCK_NO","");
+        params.put("ORG_NO",mUser.getOrgNo());
+        params.put("JCKUSR_ID",mUser.getUserId());
+        params.put("JCKCST_NO",mUser.getPlaNo());
+        params.put("CRW_NO",mUser.getCrwNo());
+        params.put("JCK_TYP",lx);
+        params.put("TTK_NO",ttkNo);
+        params.put("JCK_ADR",adr);
         Observable<String> obj =
                 RxRestClient.builder()
                         .url("saveOrUpdateLXZBKMST")
-                        .params("orgno", mUser.getOrgNo())
-                        .params("userid", mUser.getUserId())
-                        .params("ttkNo", ttkNo)
-                        .params("adr", adr)
-                        .params("lx", lx)
+                        .params("totaljson", JSONObject.toJSONString(params))
                         .loader(mContext)
                         .build()
                         .post();

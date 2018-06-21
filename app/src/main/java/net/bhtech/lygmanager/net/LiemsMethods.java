@@ -171,6 +171,9 @@ public class LiemsMethods {
                     }
                     LattePreference.addCustomAppProfile(mTblfields, JSONObject.toJSONString(list));
                     LattePreference.addCustomAppProfile(mTblfields+"_VAL", JSONObject.toJSONString(vlist));
+                }else{
+                    LattePreference.removeCustomAppProfile(mTblfields);
+                    LattePreference.removeCustomAppProfile(mTblfields+"_VAL");
                 }
             }
         });

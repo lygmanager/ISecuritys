@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.SimpleCursorTreeAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,15 +114,20 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                     return;
                 }
                 WeakHashMap<String,Object> params=new WeakHashMap<>();
-                params.put("orgno",mUser.getOrgNo());
-                params.put("userid",mUser.getUserId());
-                params.put("lx",JCK_TYP.getEditTextTagInfo());
-                params.put("ttkNo","");
-                params.put("adr",JCK_ADR.getEditTextInfo());
+
+                params.put("JCK_NO",JCK_NO.getEditTextInfo());
+                params.put("ORG_NO",mUser.getOrgNo());
+                params.put("JCKUSR_ID",mUser.getUserId());
+                params.put("JCKCST_NO",mUser.getPlaNo());
+                params.put("CRW_NO",mUser.getCrwNo());
+                params.put("JCK_TYP",JCK_TYP.getEditTextTagInfo());
+                params.put("JCK_DTM",JCK_DTM.getEditTextInfo());
+                params.put("TTK_NO","");
+                params.put("JCK_ADR",JCK_ADR.getEditTextInfo());
                 Observable<String> obj=
                         RxRestClient.builder()
                                 .url("saveOrUpdateLXZBKMST")
-                                .params(params)
+                                .params("totaljson", JSONObject.toJSONString(params))
                                 .loader(mContext)
                                 .build()
                                 .post();
@@ -183,7 +189,6 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                     if ("success".equals(lr.getResult()) && !"0".equals(lr.getCount())) {
                         LxzbkEntity entity = JSONObject.parseObject(lr.getRows().toString(), LxzbkEntity.class);
                         if ( entity!=null) {
-                            LatteLogger.d(entity.getJCK_TYP());
                             JCK_NO.setEditTextInfo(entity.getJCK_NO());
                             JCK_TYP.setEditTextTagInfo(entity.getJCK_TYP(),"LXZBKLX");
                             JCK_DTM.setEditTextInfo(entity.getJCK_DTM());

@@ -46,6 +46,13 @@
                     android:layout_weight="0.5"
                     app:left_text="整改部门"
                     app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/GLUSR_ID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="整改人"
+                    app:wrapcontent="true" />
         </LinearLayout>
         <TextView android:id="@+id/BGB_NO"
             android:layout_width="wrap_content"

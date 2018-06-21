@@ -97,6 +97,28 @@
                 app:nameSize="80dp"
                 />
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JCST_NO"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameText="检查部门"
+                app:editAble="false"
+                app:nameSize="80dp"
+                />
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JCUSR_ID"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameText="检查人"
+                app:editAble="false"
+                app:nameSize="80dp"
+                />
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/ZR_USR"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -104,6 +126,16 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 app:nameText="责任人"
+                app:nameSize="80dp"
+                />
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/DO_DTM"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameText="完成时间"
                 app:nameSize="80dp"
                 />
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
@@ -115,6 +147,7 @@
                 android:paddingRight="10dp"
                 app:nameText="考核分数"
                 app:nameSize="80dp"
+                android:visibility="gone"
                 />
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/BGB_NO"
@@ -181,16 +214,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="invisible">
-                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-                    android:id="@+id/DO_DTM"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    app:nameText="完成时间"
-                    app:nameSize="80dp"
-                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

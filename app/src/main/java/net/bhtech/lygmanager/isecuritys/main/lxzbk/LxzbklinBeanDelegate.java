@@ -36,6 +36,7 @@ import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,8 +68,8 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText JCLIN_FXNUM=null;
     @BindView(R.id.JCLIN_ZDNUM)
     RightAndLeftEditText JCLIN_ZDNUM=null;
-    @BindView(R.id.JCLIN_NANUM)
-    RightAndLeftEditText JCLIN_NANUM=null;
+    @BindView(R.id.VALID_STA)
+    RightAndLeftEditText VALID_STA=null;
 
     private UtusrEntity mUser=null;
 
@@ -96,18 +97,18 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
         JCLIN_DSC.setReadOnly();
 
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
-                .getFieldOption("SDZBJCKLIN@@JCLIN_NANUM");
-        JCLIN_NANUM.setPopulWindow(mContext,"SDZBJCKLIN@@JCLIN_NANUM");
+                .getFieldOption("SDZBJCKLIN@@VALID_STA");
+        VALID_STA.setPopulWindow(mContext,"SDZBJCKLIN@@VALID_STA");
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LxzbklinEntity entity=new LxzbklinEntity();
-                entity.setJCLIN_NO(JCLIN_NO.getEditTextInfo());
-                entity.setJCLIN_DSC(JCLIN_DSC.getEditTextInfo());
-                entity.setJCLIN_SFNUM(JCLIN_SFNUM.getEditTextInfo());
-                entity.setJCLIN_FXNUM(JCLIN_FXNUM.getEditTextInfo());
-                entity.setJCLIN_ZDNUM(JCLIN_ZDNUM.getEditTextInfo());
-                entity.setJCLIN_NANUM(JCLIN_NANUM.getEditTextTagInfo());
+                Map<String,String> entity=new HashMap<>();
+                entity.put("JCLIN_NO",JCLIN_NO.getEditTextInfo());
+                entity.put("JCLIN_DSC",JCLIN_DSC.getEditTextInfo());
+                entity.put("JCLIN_SFNUM",JCLIN_SFNUM.getEditTextInfo());
+                entity.put("JCLIN_FXNUM",JCLIN_FXNUM.getEditTextInfo());
+                entity.put("JCLIN_ZDNUM",JCLIN_ZDNUM.getEditTextInfo());
+                entity.put("VALID_STA",VALID_STA.getEditTextTagInfo());
                 Observable<String> obj=
                         RxRestClient.builder()
                                 .url("saveOrUpdateLXZBKLINMST")
@@ -154,14 +155,14 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
                     JSONObject lr2 = (JSONObject) JSONObject.parse(result);
                     LiemsResult lr = JSONObject.toJavaObject(lr2, LiemsResult.class);
                     if ("success".equals(lr.getResult()) && !"0".equals(lr.getCount())) {
-                        LxzbklinEntity entity = JSONObject.parseObject(lr.getRows().toString(), LxzbklinEntity.class);
+                        JSONObject entity = JSONObject.parseObject(lr.getRows().toString());
                         if ( entity !=null) {
-                            JCLIN_NO.setEditTextInfo(entity.getJCLIN_NO());
-                            JCLIN_DSC.setEditTextInfo(entity.getJCLIN_DSC());
-                            JCLIN_SFNUM.setEditTextInfo(entity.getJCLIN_SFNUM());
-                            JCLIN_FXNUM.setEditTextInfo(entity.getJCLIN_FXNUM());
-                            JCLIN_ZDNUM.setEditTextInfo(entity.getJCLIN_ZDNUM());
-                            JCLIN_NANUM.setEditTextTagInfo(entity.getJCLIN_NANUM(),"SDZBJCKLIN@@JCLIN_NANUM");
+                            JCLIN_NO.setEditTextInfo(entity.getString("JCLIN_NO"));
+                            JCLIN_DSC.setEditTextInfo(entity.getString("JCLIN_DSC"));
+                            JCLIN_SFNUM.setEditTextInfo(entity.getString("JCLIN_SFNUM"));
+                            JCLIN_FXNUM.setEditTextInfo(entity.getString("JCLIN_FXNUM"));
+                            JCLIN_ZDNUM.setEditTextInfo(entity.getString("JCLIN_ZDNUM"));
+                            VALID_STA.setEditTextTagInfo(entity.getString("VALID_STA"),"SDZBJCKLIN@@VALID_STA");
                         }
                     }
                 }

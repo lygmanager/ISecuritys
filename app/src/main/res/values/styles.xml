@@ -25,6 +25,19 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="customDialog" parent="@android:style/Theme.Dialog">
+        <!--去掉边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--悬浮-->
+        <item name="android:windowIsFloating">true</item>
+        <!--背景透明-->
+        <item name="android:windowBackground">@color/white</item>
+        <!--不需要标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--全屏幕-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!--透明Activity-->
     <style name="Theme.AppCompat.Translucent">
         <item name="android:windowNoTitle">true</item>

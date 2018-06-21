@@ -38,8 +38,9 @@ public class BgbDataConverter extends DataConverter {
                         .setField("BG_NOT", data.getString("BG_NOT"))
                         .setField("BG_ADR", getTextTagInfo(data.getString("BG_ADR"),"RMBGBMST@@BG_ADR"))
                         .setField("BF_TYP", getTextTagInfo(data.getString("BF_TYP"),"RMBGBMST@@BF_TYP"))
-                        .setField("JCUSR_ID", data.getString("JCUSR_ID"))
-                        .setField("CST_NO", getTextTagInfo(data.getString("CST_NO"),"BgbcstOption"))
+                        .setField("JCUSR_ID", data.getString("JCUSR_NAM"))
+                        .setField("GLUSR_ID", data.getString("GLUSR_NAM"))
+                        .setField("CST_NO", getTextTagInfo(data.getString("CST_NO"),"BgbzgcstOption"))
                         .build();
                 ENTITIES.add(entity);
             }

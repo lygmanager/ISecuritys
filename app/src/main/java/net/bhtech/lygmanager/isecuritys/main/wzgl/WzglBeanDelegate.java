@@ -75,6 +75,10 @@ public class WzglBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText BG_NOT=null;
     @BindView(R.id.JC_DTM)
     RightAndLeftEditText JC_DTM=null;
+    @BindView(R.id.JCST_NO)
+    RightAndLeftEditText JCST_NO=null;
+    @BindView(R.id.JCUSR_ID)
+    RightAndLeftEditText JCUSR_ID=null;
     @BindView(R.id.DO_DTM)
     RightAndLeftEditText DO_DTM=null;
     @BindView(R.id.KH_NUM)
@@ -131,18 +135,18 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         mUser=AccountManager.getSignInfo();
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
                 .getFieldOption("RMWZGLMST@@BF_TYP,RMWZGLMST@@BG_ADR,RMWZGLMST@@KH_TYP");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
+        LiemsMethods.init(getContext()).getLiemsOption("getBgbzgcstOption","BgbzgcstOption");
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         final String today=sdf.format(new Date());
         JC_DTM.setDatePick(this,today,"DATE");
-        DO_DTM.setDatePick(this,null,"DATE");
+        DO_DTM.setDatePick(this,today,"DATE");
         PLAN_DTM.setDatePick(this,today,"DATE");
         BF_TYP.setPopulWindow(mContext,"RMWZGLMST@@BF_TYP");
         KH_TYP.setPopulWindow(mContext,"RMWZGLMST@@KH_TYP");
         BG_ADR.setPopulWindow(mContext,"RMWZGLMST@@BG_ADR");
-        CST_NO.setPopulWindow(mContext,"BgbcstOption");
-
+        CST_NO.setPopulWindow(mContext,"BgbzgcstOption");
+        ZR_USR.setCstUserDialog(mContext);
 //
 
         button_forward.setOnClickListener(new View.OnClickListener() {
@@ -160,9 +164,21 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 entity.put("PLAN_DTM",PLAN_DTM.getEditTextInfo());
                 if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
                     entity.put("DO_DTM", DO_DTM.getEditTextInfo());
+                    entity.put("YSUSR_ID", mUser.getUserId());
                 }
-                entity.put("KH_FS",KH_FS.getEditTextInfo());
-                entity.put("ZR_USR",ZR_USR.getEditTextInfo());
+                String bfTyp=BF_TYP.getEditTextTagInfo();
+                if("01".equals(bfTyp))
+                    entity.put("KH_FS","1");
+                else if("02".equals(bfTyp))
+                    entity.put("KH_FS","3");
+                else if("03".equals(bfTyp))
+                    entity.put("KH_FS","2");
+                else if("04".equals(bfTyp))
+                    entity.put("KH_FS","5");
+                else if("05".equals(bfTyp))
+                    entity.put("KH_FS","10");
+
+                entity.put("ZR_USR",ZR_USR.getEditTextTagInfo());
                 entity.put("ORG_NO",mUser.getOrgNo());
                 entity.put("JCUSR_ID",mUser.getUserId());
                 entity.put("JCST_NO",mUser.getCstNo());
@@ -318,7 +334,6 @@ public class WzglBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onLazyInitView(Bundle bundle) {
-        LatteLogger.d(pkValue);
         if (pkValue != null && !"".equals(pkValue) && !"-1".equals(pkValue)) {
             Observable<String> obj =
                     RxRestClient.builder()
@@ -340,13 +355,20 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                             BF_TYP.setEditTextTagInfo(entity.getString("BF_TYP"),"RMWZGLMST@@BF_TYP");
                             KH_TYP.setEditTextTagInfo(entity.getString("KH_TYP"),"RMWZGLMST@@KH_TYP");
                             BG_NOT.setEditTextInfo(entity.getString("BG_NOT"));
-                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbcstOption");
+                            CST_NO.setEditTextTagInfo(entity.getString("CST_NO"),"BgbzgcstOption");
                             BG_ADR.setEditTextTagInfo(entity.getString("BG_ADR"),"RMWZGLMST@@BG_ADR");
+
+                            JCST_NO.setEditTextTagInfo(entity.getString("JCST_NO"));
+                            JCST_NO.setEditTextInfo(entity.getString("JCST_NAM"));
+                            JCUSR_ID.setEditTextTagInfo(entity.getString("JCUSR_ID"));
+                            JCUSR_ID.setEditTextInfo(entity.getString("JCUSR_NAM"));
+
                             JC_DTM.setEditTextInfo(entity.getString("JC_DTM"));
                             DO_DTM.setEditTextInfo(entity.getString("DO_DTM"));
                             KH_NUM.setEditTextInfo(entity.getString("KH_NUM"));
                             PLAN_DTM.setEditTextInfo(entity.getString("PLAN_DTM"));
-                            ZR_USR.setEditTextInfo(entity.getString("ZR_USR"));
+                            ZR_USR.setEditTextTagInfo(entity.getString("ZR_USR"));
+                            ZR_USR.setEditTextInfo(entity.getString("GLUSR_NAM"));
                             KH_FS.setEditTextInfo(entity.getString("KH_FS"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
@@ -367,6 +389,10 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         }else {
             if(mUser!=null) {
 
+                JCUSR_ID.setEditTextTagInfo(mUser.getUserId());
+                JCUSR_ID.setEditTextInfo(mUser.getUsrNam());
+                JCST_NO.setEditTextTagInfo(mUser.getCstNo());
+                JCST_NO.setEditTextInfo(mUser.getCstName());
             }
         }
     }

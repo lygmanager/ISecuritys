@@ -59,7 +59,7 @@
                     android:text="不适用："
                     android:textSize="13sp"
                     android:layout_marginLeft="5dp" />
-                <TextView android:id="@+id/JCLIN_NANUM"
+                <TextView android:id="@+id/VALID_STA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/mainColor"
