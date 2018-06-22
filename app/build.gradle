@@ -6,8 +6,8 @@ android {
         applicationId "net.bhtech.lygmanager.isecuritys"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.06"
+        versionCode 7
+        versionName "1.07"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

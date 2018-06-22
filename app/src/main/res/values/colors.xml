@@ -11,6 +11,7 @@
     <color name="blue">#419DE4</color>
     <color name="colorBar">#0099FF</color>
 
+    <color name="badgeColor">#ffff0000</color>
     <color name="mainColor">#0099FF</color>
 
     <color name="white">#FFFFFF</color>

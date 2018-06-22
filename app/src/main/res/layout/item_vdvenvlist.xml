@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+    android:paddingTop="-50dp"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:gravity="top"
+    android:layout_height="wrap_content">
+
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+            android:id="@+id/VENDOR_NAM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:wrapcontent="true" />
+        <LinearLayout
+            android:id="@+id/aqgcklin1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/VENDOR_NAM"
+            android:orientation="horizontal">
+
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/USR_NAM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="项目经理"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/MANAGER_USR"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="项目经理"
+                    app:wrapcontent="true" android:visibility="gone"/>
+        </LinearLayout>
+
+        <TextView android:id="@+id/VEN_NO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" android:layout_margin="5dp" android:visibility="gone"/>
+</RelativeLayout>

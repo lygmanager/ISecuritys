@@ -1,4 +1,4 @@
-package net.bhtech.lygmanager.isecuritys.main.bgb;
+package net.bhtech.lygmanager.isecuritys.dialog.vdven;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -9,7 +9,6 @@ import net.bhtech.lygmanager.ui.recycler.DataConverter;
 import net.bhtech.lygmanager.ui.recycler.ItemType;
 import net.bhtech.lygmanager.ui.recycler.MultipleFields;
 import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  * Created by zhangxinbiao on 2018/5/22.
  */
 
-public class BgbDataConverter extends DataConverter {
+public class VdvenDataConverter  extends DataConverter {
     @Override
     public ArrayList<MultipleItemEntity> convert() {
         ENTITIES.clear();
@@ -27,19 +26,16 @@ public class BgbDataConverter extends DataConverter {
             JSONObject lr2= (JSONObject) JSONObject.parse(jsonArray);
             LiemsResult lr=JSONObject.toJavaObject(lr2,LiemsResult.class);
             JSONArray  ls=JSONArray.parseArray(lr.getRows().toString());
-            for (int i=0;i< ls.size();i++) {
-                JSONObject data=ls.getJSONObject(i);
+            for (int i=0;i<ls.size();i++) {
+                JSONObject data = ls.getJSONObject(i);
                 final MultipleItemEntity entity = MultipleItemEntity.builder()
-                        .setField(MultipleFields.ITEM_TYPE, ItemType.BGB)
+                        .setField(MultipleFields.ITEM_TYPE, ItemType.VDVEN)
                         .setField(MultipleFields.SPAN_SIZE, 1)
-                        .setField("BGB_NO", data.getString("BGB_NO"))
-                        .setField("JC_DTM", data.getString("JC_DTM"))
-                        .setField("BG_NOT", data.getString("BG_NOT"))
-                        .setField("BG_ADR", getTextTagInfo(data.getString("BG_ADR"),"RMBGBMST@@BG_ADR"))
-                        .setField("BF_TYP", getTextTagInfo(data.getString("BF_TYP"),"RMBGBMST@@BF_TYP"))
-                        .setField("JCUSR_ID", data.getString("JCUSR_NAM"))
-                        .setField("GLUSR_ID", data.getString("GLUSR_NAM"))
-                        .setField("CST_NO", getTextTagInfo(data.getString("CST_NO"),"BgbzgcstOption"))
+                        .setField("VEN_NO", data.getString("VEN_NO"))
+                        .setField("VENWF_STA", data.getString("VENWF_STA"))
+                        .setField("VENDOR_NAM", data.getString("VENDOR_NAM"))
+                        .setField("MANAGER_USR", data.getString("MANAGER_USR"))
+                        .setField("USR_NAM", data.getString("USR_NAM"))
                         .build();
                 ENTITIES.add(entity);
             }

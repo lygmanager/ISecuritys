@@ -11,6 +11,7 @@ public class IndexDataEntity {
     private int itemType;
     private int spanSize;
     private String textColor;
+    private int taskNum;
 
     public String getImageUrl() {
         return imageUrl;
@@ -58,5 +59,13 @@ public class IndexDataEntity {
 
     public void setTextColor(String textColor) {
         this.textColor = textColor;
+    }
+
+    public int getTaskNum() {
+        return taskNum;
+    }
+
+    public void setTaskNum(int taskNum) {
+        this.taskNum = taskNum;
     }
 }

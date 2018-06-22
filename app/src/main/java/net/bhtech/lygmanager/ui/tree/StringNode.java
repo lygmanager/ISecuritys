@@ -10,6 +10,8 @@ public class StringNode extends Node<String>{
     private String parentId;//父亲节点ID
     private String name;//部门名称
 
+    private String desc;//部门名称
+
     public StringNode() {
     }
 
@@ -17,6 +19,13 @@ public class StringNode extends Node<String>{
         this.id = id;
         this.parentId = parentId;
         this.name = name;
+    }
+
+    public StringNode(String id, String parentId, String name,String desc) {
+        this.id = id;
+        this.parentId = parentId;
+        this.name = name;
+        this.desc = desc;
     }
 
     /**
@@ -80,5 +89,13 @@ public class StringNode extends Node<String>{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

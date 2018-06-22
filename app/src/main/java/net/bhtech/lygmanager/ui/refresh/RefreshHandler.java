@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import net.bhtech.lygmanager.app.AccountManager;
@@ -12,6 +13,7 @@ import net.bhtech.lygmanager.app.ConfigKeys;
 import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.database.MountEntity;
 import net.bhtech.lygmanager.database.UtusrEntity;
+import net.bhtech.lygmanager.isecuritys.main.index.IndexDataEntity;
 import net.bhtech.lygmanager.net.RestClient;
 import net.bhtech.lygmanager.net.cxfweservice.CxfRestClient;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
@@ -19,6 +21,8 @@ import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
 import net.bhtech.lygmanager.net.rx.RxRestClientBuilder;
 import net.bhtech.lygmanager.ui.recycler.DataConverter;
+import net.bhtech.lygmanager.ui.recycler.MultipleFields;
+import net.bhtech.lygmanager.ui.recycler.MultipleItemEntity;
 import net.bhtech.lygmanager.ui.recycler.MultipleRecyclerAdapter;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 
@@ -76,6 +80,28 @@ public class RefreshHandler implements
 
         mAdapter = MultipleRecyclerAdapter.create(CONVERTER);
         RECYCLERVIEW.setAdapter(mAdapter);
+
+    }
+
+    public void firstPage(Context _mActivity) {
+
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url("getTasknumList")
+                        .params("orgno", mUser.getOrgNo())
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String result) {
+                if(result!=null&&!"".equals(result)) {
+                    mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(result));
+                    RECYCLERVIEW.setAdapter(mAdapter);
+                }
+            }
+        });
+
     }
 
     public void getDefectList(String elcId, Context _mActivity) {
@@ -110,23 +136,43 @@ public class RefreshHandler implements
     }
 
     public void getAqgcktList( Context _mActivity) {
-           Observable<String> obj=
-                   RxRestClient.builder()
-                    .url("getAQGCKList")
-                    .params("orgno", mUser.getOrgNo())
-                    .params("userid", mUser.getUserId())
-                    .params("page", "1")
-                    .params("limit", "20")
-                    .loader(_mActivity)
-                    .build()
-                    .post();
-           obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
-               @Override
-               public void onNext(String o) {
-                   mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
-                   RECYCLERVIEW.setAdapter(mAdapter);
-               }
-           });
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getAQGCKList")
+                        .params("orgno", mUser.getOrgNo())
+                        .params("userid", mUser.getUserId())
+                        .params("page", "1")
+                        .params("limit", "20")
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    public void getTglList( Context _mActivity) {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getTglList")
+                        .params("orgno", mUser.getOrgNo())
+                        .params("usrid", mUser.getUserId())
+                        .params("page", "1")
+                        .params("limit", "20")
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
     }
 
     public void getBgbList( Context _mActivity,String mType) {
@@ -176,6 +222,7 @@ public class RefreshHandler implements
                 mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
                 RECYCLERVIEW.setAdapter(mAdapter);
             }
+
         });
     }
 
@@ -206,6 +253,24 @@ public class RefreshHandler implements
         });
     }
 
+    public void getVdvenList( Context _mActivity ,String vendornam) {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getVdvenList")
+                        .params("orgno", mUser.getOrgNo())
+                        .params("vendornam", vendornam)
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
     public void getLxzbklinList( Context _mActivity,String jckno) {
         Observable<String> obj=
                 RxRestClient.builder()
@@ -222,7 +287,9 @@ public class RefreshHandler implements
             }
         });
     }
-
+    /*
+     *工作票清单
+     */
     public void getWorksheetList( Context _mActivity) {
         Observable<String> obj= RxRestClient.builder()
                 .url("getRmttkList")
@@ -230,6 +297,27 @@ public class RefreshHandler implements
                 .params("usrid", mUser.getUserId())
                 .params("page", 1)
                 .params("limit", 20)
+                .loader(_mActivity)
+                .build()
+                .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
+    /*
+     *超龄人员查询
+     */
+    public void getSmusrList( Context _mActivity) {
+        Observable<String> obj= RxRestClient.builder()
+                .url("getSmusrList")
+                .params("orgno", mUser.getOrgNo())
+                .params("page", 1)
+                .params("limit", 50)
                 .loader(_mActivity)
                 .build()
                 .post();

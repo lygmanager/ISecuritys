@@ -36,9 +36,9 @@ import butterknife.BindView;
 
 public class AqgckDelegate extends BottomItemDelegate {
 
-    @BindView(R.id.srl_aqgck)
+    @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
-    @BindView(R.id.rv_aqgck)
+    @BindView(R.id.rv_view)
     RecyclerView mRecyclerView = null;
 
     @BindView(R.id.button_forward)
@@ -52,7 +52,7 @@ public class AqgckDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_aqgck;
+        return R.layout.delegate_srl_rv;
     }
 
     @Override

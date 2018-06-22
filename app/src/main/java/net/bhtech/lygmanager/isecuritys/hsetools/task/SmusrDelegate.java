@@ -1,4 +1,4 @@
-package net.bhtech.lygmanager.isecuritys.main.bgb;
+package net.bhtech.lygmanager.isecuritys.hsetools.task;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +27,7 @@ import butterknife.BindView;
  * Created by zhangxinbiao on 2017/11/26.
  */
 
-public class BgbYourDelegate extends BottomItemDelegate {
+public class SmusrDelegate extends BottomItemDelegate {
 
     @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
@@ -51,22 +51,14 @@ public class BgbYourDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        text_title.setText("曝光版");
-        button_forward.setVisibility(View.VISIBLE);
-        button_forward.setText("{fa-plus}");
+        text_title.setText("员工自然信息表");
+//        button_forward.setVisibility(View.VISIBLE);
+//        button_forward.setText("{fa-plus}");
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
-                .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbsklOption","BgbsklOption");
+                .getFieldOption("SMUSRMST@@VEN_TYP,SMUSRMST@@USR_SEX,SMUSRMST@@VEN_TYP");
 
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new BgbDataConverter());
-        button_forward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BgbBeanDelegate delegate = BgbBeanDelegate.create("-1");
-                getParentDelegate().getSupportDelegate().start(delegate);
-            }
-        });
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new SmusrDataConverter());
+
 
     }
 
@@ -84,8 +76,7 @@ public class BgbYourDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        final EcBottomDelegate ecBottomDelegate = getParentDelegate().getParentDelegate();
-        mRecyclerView.addOnItemTouchListener(BgbClickListener.create(this,"YOUR"));
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
     }
 
     @Override
@@ -97,7 +88,7 @@ public class BgbYourDelegate extends BottomItemDelegate {
 
     @Override
     public void onSupportVisible() {
-        mRefreshHandler.getBgbList( getContext(),"YOUR");
+        mRefreshHandler.getSmusrList(getContext());
     }
 
 

@@ -14,5 +14,6 @@ public enum MultipleFields {
     ID,
     NAME,
     TAG,
-    TEXT_COLOR
+    TEXT_COLOR,
+    TASK_NUM
 }

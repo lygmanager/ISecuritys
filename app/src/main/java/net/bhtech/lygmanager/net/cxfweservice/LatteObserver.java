@@ -29,7 +29,7 @@ public abstract class LatteObserver<T> implements Observer<T> {
     @Override
     public void onError(Throwable e) {
         LatteLogger.d("a",e);
-        Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext,e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
         LatteLoader.stopLoading();
     }
 

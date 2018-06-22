@@ -32,9 +32,9 @@ import butterknife.BindView;
 
 public class LxzbkDelegate extends BottomItemDelegate {
 
-    @BindView(R.id.srl_lxzbk)
+    @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
-    @BindView(R.id.rv_lxzbk)
+    @BindView(R.id.rv_view)
     RecyclerView mRecyclerView = null;
 
     @BindView(R.id.button_forward)
@@ -49,7 +49,7 @@ public class LxzbkDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_lxzbk;
+        return R.layout.delegate_srl_rv;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package net.bhtech.lygmanager.ui.tag;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
@@ -19,11 +20,15 @@ import com.alibaba.fastjson.JSONArray;
 
 import net.bhtech.lygmanager.delegates.BaseDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.dialog.ConformListener;
+import net.bhtech.lygmanager.isecuritys.dialog.vdven.VdvenDialog;
 import net.bhtech.lygmanager.ui.date.DatePickDialogUtil;
 import net.bhtech.lygmanager.ui.date.DateTimePickDialogUtil;
 import net.bhtech.lygmanager.ui.tree.CstUserDialog;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
+
+import java.util.Map;
 
 
 /**
@@ -462,6 +467,25 @@ public class RightAndLeftEditText extends LinearLayout {
                         editText.setTag(id);
 
 
+                    }
+                }).show();
+            }
+        });
+    }
+
+    public void setVdvenDialog(final Context mContext,final RightAndLeftEditText user){
+        setReadOnly();
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VdvenDialog.Builder builder=new VdvenDialog.Builder(mContext);
+                builder.createSingleButtonDialog(new ConformListener() {
+                    @Override
+                    public void onConformClicked(String id, String name, Map params) {
+                        editText.setText(name);
+                        editText.setTag(id);
+                        user.setEditTextTagInfo((String)params.get("MANAGER_USR"));
+                        user.setEditTextInfo((String)params.get("USR_NAM"));
                     }
                 }).show();
             }

@@ -22,8 +22,8 @@ public class EcBottomDelegate extends BaseBottomDelegate {
     @Override
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
-        items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
-//        items.put(new BottomTabBean("{fa-sort}", "超限预警"), new OverrunDelegate());
+        items.put(new BottomTabBean("{fa-sort}", "智慧安监"), new IndexDelegate());
+        items.put(new BottomTabBean("{fa-compass}", "待办任务"), new TaskDelegate());
 //        items.put(new BottomTabBean("{fa-compass}", "基础信息"), new IndexDelegate());
 //        items.put(new BottomTabBean("{fa-shopping-cart}", "状态检测"), new IndexDelegate());
 //        items.put(new BottomTabBean("{fa-shopping-cart}", "统计报表"), new IndexDelegate());

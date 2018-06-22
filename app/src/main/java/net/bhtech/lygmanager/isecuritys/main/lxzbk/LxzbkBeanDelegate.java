@@ -183,7 +183,7 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                             .post();
             obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
                 @Override
-                public void onNext(String result) {LatteLogger.d(result);
+                public void onNext(String result) {
                     JSONObject lr2 = (JSONObject) JSONObject.parse(result);
                     LiemsResult lr = JSONObject.toJavaObject(lr2, LiemsResult.class);
                     if ("success".equals(lr.getResult()) && !"0".equals(lr.getCount())) {

@@ -1,4 +1,4 @@
-package net.bhtech.lygmanager.isecuritys.main.bgb;
+package net.bhtech.lygmanager.isecuritys.hsetools.tgl;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +15,9 @@ import com.joanzapata.iconify.widget.IconTextView;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
+import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckClickListener;
+import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckDataConverter;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.ui.recycler.BaseDecoration;
 import net.bhtech.lygmanager.ui.refresh.RefreshHandler;
@@ -27,7 +30,7 @@ import butterknife.BindView;
  * Created by zhangxinbiao on 2017/11/26.
  */
 
-public class BgbYourDelegate extends BottomItemDelegate {
+public class TglDelegate extends BottomItemDelegate {
 
     @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
@@ -51,20 +54,18 @@ public class BgbYourDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        text_title.setText("曝光版");
+        text_title.setText("停工令");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-plus}");
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
-                .getFieldOption("RMBGBMST@@BF_TYP,RMBGBMST@@BG_ADR");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbcstOption","BgbcstOption");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbsklOption","BgbsklOption");
+                .getFieldOption("HSETGLMST@@VALID_STA");
 
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new BgbDataConverter());
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new TglDataConverter());
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BgbBeanDelegate delegate = BgbBeanDelegate.create("-1");
-                getParentDelegate().getSupportDelegate().start(delegate);
+                TglBeanDelegate aqgckBeanDelegate = TglBeanDelegate.create("-1");
+                getSupportDelegate().start(aqgckBeanDelegate);
             }
         });
 
@@ -84,8 +85,8 @@ public class BgbYourDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        final EcBottomDelegate ecBottomDelegate = getParentDelegate().getParentDelegate();
-        mRecyclerView.addOnItemTouchListener(BgbClickListener.create(this,"YOUR"));
+        final EcBottomDelegate ecBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(TglClickListener.create(this));
     }
 
     @Override
@@ -97,7 +98,7 @@ public class BgbYourDelegate extends BottomItemDelegate {
 
     @Override
     public void onSupportVisible() {
-        mRefreshHandler.getBgbList( getContext(),"YOUR");
+        mRefreshHandler.getTglList(getContext());
     }
 
 

@@ -13,4 +13,7 @@ public class ItemType {
     public static final int LXZBK = 6;
     public static final int LXZBKLIN = 7;
     public static final int BGB = 8;
+    public static final int VDVEN = 9;
+    public static final int TGL = 10;
+    public static final int SMUSR = 1001;
 }

@@ -29,7 +29,7 @@ public class CstUserDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_cstuser;
+        return R.layout.dialog_cstuser;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.bhtech.lygmanager.isecuritys.main.index;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,7 +32,7 @@ public class IndexDelegate extends BottomItemDelegate{
     RecyclerView mRecyclerView = null;
 
     private RefreshHandler mRefreshHandler = null;
-
+    private Context mContext=null;
 
     @Override
     public Object setLayout() {
@@ -40,6 +41,7 @@ public class IndexDelegate extends BottomItemDelegate{
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        mContext=getContext();
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter(getContext()));
     }
 
@@ -66,6 +68,6 @@ public class IndexDelegate extends BottomItemDelegate{
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHandler.firstPage();
+        mRefreshHandler.firstPage(mContext);
     }
 }

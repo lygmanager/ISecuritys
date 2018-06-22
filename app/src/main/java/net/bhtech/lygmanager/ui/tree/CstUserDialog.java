@@ -4,16 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -24,14 +21,11 @@ import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
-import net.bhtech.lygmanager.utils.storage.LattePreference;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -95,7 +89,7 @@ public class CstUserDialog extends Dialog {
             //这里传入自定义的style，直接影响此Dialog的显示效果。style具体实现见style.xml
             dialog = new CstUserDialog(context, R.style.customDialog);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = inflater.inflate(R.layout.delegate_cstuser, null);
+            layout = inflater.inflate(R.layout.dialog_cstuser, null);
             dialog.addContentView(layout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             mListView=layout.findViewById(R.id.rv_cst);
             mRecyclerView=layout.findViewById(R.id.rv_user);

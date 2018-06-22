@@ -162,6 +162,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 entity.put("JC_DTM",JC_DTM.getEditTextInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
                 entity.put("PLAN_DTM",PLAN_DTM.getEditTextInfo());
+                entity.put("KHBZ_DSC","依据《通辽霍林河坑口发电有限责任公司反违章管理标准》相关条款。");
                 if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
                     entity.put("DO_DTM", DO_DTM.getEditTextInfo());
                     entity.put("YSUSR_ID", mUser.getUserId());

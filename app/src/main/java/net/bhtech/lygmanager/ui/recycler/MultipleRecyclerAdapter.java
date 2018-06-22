@@ -1,6 +1,7 @@
 package net.bhtech.lygmanager.ui.recycler;
 
 import android.graphics.Color;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
@@ -56,6 +57,10 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.LXZBK, R.layout.item_lxzbkvlist);
         addItemType(ItemType.LXZBKLIN, R.layout.item_lxzbklinvlist);
         addItemType(ItemType.BGB, R.layout.item_bgbvlist);
+        addItemType(ItemType.VDVEN, R.layout.item_vdvenvlist);
+        addItemType(ItemType.TGL, R.layout.item_tglvlist);
+
+        addItemType(ItemType.SMUSR, R.layout.item_smusrvlist);
         //设置宽度监听
         setSpanSizeLookup(this);
         openLoadAnimation();
@@ -85,6 +90,8 @@ public class MultipleRecyclerAdapter extends
                 int g = random.nextInt(256);
                 int b = random.nextInt(256);
 //                tv_multiple.setTextColor(Color.rgb(r,g,b));
+                AppCompatTextView tv_tasknum = holder.getView(R.id.tv_tasknum);
+                AppCompatTextView tv_tasknum2 = holder.getView(R.id.tv_tasknum2);
                if((int)entity.getField(MultipleFields.SPAN_SIZE)==3)
                 {
                     IconTextView img_title=holder.getView(R.id.img_title);
@@ -95,8 +102,16 @@ public class MultipleRecyclerAdapter extends
                     iconTextView2.setTextColor(Color.GRAY);
                     holder.getView(R.id.img_multiple).setVisibility(View.GONE);
                     holder.getView(R.id.tv_multiple).setVisibility(View.GONE);
-                }
+                    tv_tasknum.setVisibility(View.GONE);
+                    tv_tasknum2.setVisibility(View.GONE);
+                }else {
 
+                   int taskNum = entity.getField(MultipleFields.TASK_NUM);
+                   if(taskNum>0) {
+                       tv_tasknum.setVisibility(View.VISIBLE);
+                       tv_tasknum.setText(taskNum+"");
+                   }
+               }
                 break;
             case ItemType.DEFECT:
                 holder.setText(R.id.LIM_SHT, (String)entity.getField("LIM_SHT"));
@@ -143,6 +158,32 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.CST_NO, (String)entity.getField("CST_NO"));
                 holder.setRightText(R.id.GLUSR_ID, (String)entity.getField("GLUSR_ID"));
                 holder.setText(R.id.BGB_NO, (String)entity.getField("BGB_NO"));
+                break;
+            case ItemType.VDVEN:
+                holder.setRightText(R.id.VENDOR_NAM, (String)entity.getField("VENDOR_NAM"));
+                holder.setRightText(R.id.MANAGER_USR, (String)entity.getField("MANAGER_USR"));
+                holder.setRightText(R.id.USR_NAM, (String)entity.getField("USR_NAM"));
+                holder.setText(R.id.VEN_NO, (String)entity.getField("VEN_NO"));
+                break;
+            case ItemType.TGL:
+                holder.setRightText(R.id.TGL_ID, (String)entity.getField("TGL_ID"));
+                holder.setRightText(R.id.TG_SHT, (String)entity.getField("TG_SHT"));
+                holder.setRightText(R.id.TG_USR, (String)entity.getField("TG_USR_NAM"));
+                holder.setRightText(R.id.TG_CBS, (String)entity.getField("TG_CBS_NAM"));
+                holder.setRightText(R.id.TG_DTM, (String)entity.getField("TG_DTM"));
+                holder.setRightText(R.id.VALID_STA, (String)entity.getField("VALID_STA"));
+                holder.setText(R.id.TGL_NO, (String)entity.getField("TGL_NO"));
+                break;
+            case ItemType.SMUSR:
+                holder.setRightText(R.id.USR_ID, (String)entity.getField("USR_ID"));
+                holder.setRightText(R.id.USR_NAM, (String)entity.getField("USR_NAM"));
+                holder.setRightText(R.id.MOBILE_PHONE, (String)entity.getField("MOBILE_PHONE"));
+                holder.setRightText(R.id.USR_BIRTH, (String)entity.getField("USR_BIRTH"));
+                holder.setRightText(R.id.IDENTITY_NO, (String)entity.getField("IDENTITY_NO"));
+                holder.setRightText(R.id.USR_PEO, (String)entity.getField("USR_PEO"));
+                holder.setRightText(R.id.VEN_NO, (String)entity.getField("VEN_NO"));
+                holder.setRightText(R.id.POS_NO, (String)entity.getField("POS_NO"));
+                holder.setRightText(R.id.USR_SEX, (String)entity.getField("USR_SEX"));
                 break;
             default:
                 break;

@@ -48,7 +48,7 @@ public class WzglMyDelegate extends BottomItemDelegate {
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_bgb;
+        return R.layout.delegate_srl_rv;
     }
 
     @Override
