@@ -3,7 +3,7 @@
 },{
   "imageUrl":"{fa-camera-retro}","itemText":"新建安全观察卡","itemId":"2","itemType":"3","spanSize":"1","textColor":"C"
 },{
-  "imageUrl":"{fa-file-archive-o}","itemText":"工作票","itemId":"9","itemType":"3","spanSize":"1","textColor":"C"
+  "imageUrl":"{icon-sanjicaidan}","itemText":"工作票","itemId":"9","itemType":"3","spanSize":"1","textColor":"C"
 },{
   "imageUrl":"{fa-file-archive-o}","itemText":"新建领先指标卡","itemId":"3","itemType":"3","spanSize":"1","textColor":"C"
 },{
@@ -24,4 +24,6 @@
   "imageUrl":"{fa-cogs}","itemText":"违章管理","itemId":"7","itemType":"3","spanSize":"1","textColor":"B"
 },{
   "imageUrl":"{fa-warning}","itemText":"停工令","itemId":"11","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
+},{
+  "imageUrl":"{icon-zuoyezhidaoshu}","itemText":"复工令","itemId":"12","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
 }]

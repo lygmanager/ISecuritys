@@ -1,6 +1,5 @@
 package net.bhtech.lygmanager.net;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -8,23 +7,20 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 
 import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.app.ConfigKeys;
 import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.BaseDelegate;
+import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.common.GlideApp;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
-import net.bhtech.lygmanager.ui.tag.TouchImageView;
-import net.bhtech.lygmanager.ui.tag.ZoomImageView;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,13 +84,15 @@ public class LiemsMethods {
                             }
                             LattePreference.addCustomAppProfile(mFieldArray[i], JSONObject.toJSONString(list));
                             LattePreference.addCustomAppProfile(mFieldArray[i]+"_VAL", JSONObject.toJSONString(vlist));
-                            resultMap.put(mFields,list);
-                            resultMap.put(mFields+"_VAL",vlist);
                         }
                     }
-
-
                 }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LatteLogger.d(e);
+                super.onError(e);
             }
         });
         return resultMap;
@@ -223,10 +221,10 @@ public class LiemsMethods {
         });
     }
 
-    public void glideImage(BaseDelegate delegate, ImageView iView, String tableName, String imagePath)
+    public void glideImage(BaseDelegate delegate, ImageView iView, String tableName, String imagePath,String key)
     {
         String BASE_URL = Latte.getConfiguration(ConfigKeys.API_HOST);
         String url=BASE_URL.replaceAll("webservice/","uploadfiles");
-        Glide.with(delegate).load(url+"/"+tableName+"/"+imagePath).into(iView);
+        GlideApp.with(delegate).load(url+"/"+tableName+"/"+imagePath).signature(new ObjectKey(key)).into(iView);
     }
 }

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconTextView;
@@ -25,8 +24,10 @@ import net.bhtech.lygmanager.database.AqgckEntity;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.FullimageDelegate;
-import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.common.EditImageDialog;
+import net.bhtech.lygmanager.isecuritys.common.EditimageDelegate;
+import net.bhtech.lygmanager.isecuritys.common.FullimageDelegate;
+import net.bhtech.lygmanager.isecuritys.dialog.ConformListener;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
@@ -37,7 +38,6 @@ import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -191,7 +191,6 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                 obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
                         @Override
                         public void onNext(String result) {
-                        LatteLogger.d(result);
                             JSONObject jsonObject= JSONObject.parseObject(result);
                             LiemsResult rst=jsonObject.toJavaObject(LiemsResult.class);
                             if("success".equals(rst.getResult()))
@@ -237,6 +236,7 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                     .create(this)
                     .openGallery(PictureMimeType.ofImage())
                     .selectionMode(PictureConfig.SINGLE)
+//                    .enableCrop(true)
                     .compress(true)
                     .forResult(PictureConfig.CHOOSE_REQUEST);
         }
@@ -248,8 +248,8 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
     {
         if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo()))
         {
-            if("A".equals(PICTUREA.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("AQ_PICTUREA_" + AQ_NO.getEditTextInfo(),"AQGCKMST");
+            if(!"".equals(PICTUREA.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("AQ_PICTUREA_" + AQ_NO.getEditTextInfo(),"AQGCKMST",PICTUREA.getEditTextInfo());
                 this.getSupportDelegate().start(delegate);
             }
         }
@@ -263,14 +263,22 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     if(selectList!=null&&selectList.size()>0) {
-                        Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
-                        if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo())) {
-                            LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "AQGCKMST", "AQ_PICTUREA_"+AQ_NO.getEditTextInfo()+".JPEG");
-                            PICTUREA.setEditTextInfo("A");
-                            Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
-                        }
+                        final String pasth=selectList.get(0).getCompressPath();
+                        EditImageDialog.Builder dialog = new EditImageDialog.Builder(mContext);
+                        dialog.createSingleButtonDialog(new ConformListener() {
+                            @Override
+                            public void onConformClicked(String id, String name, Map map) {
+                                Glide.with(_mActivity).load(pasth).into(iView);
+                                if(AQ_NO.getEditTextInfo()!=null&&!"".equals(AQ_NO.getEditTextInfo())) {
+                                    LiemsMethods.init(mContext).upLoadFile(pasth, "AQGCKMST", "AQ_PICTUREA_"+AQ_NO.getEditTextInfo()+".JPEG");
+                                    PICTUREA.setEditTextInfo("A"+System.currentTimeMillis());
+                                    Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(mContext,"请先保存安全观察卡内容再添加照片！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },pasth).show();
+
                     }
                     break;
             }
@@ -331,9 +339,9 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
                             ZQX_SHT.setEditTextInfo(entity.getZQX_SHT());
                             PICTUREA.setEditTextInfo(entity.getPICTUREA());
                             lineiViewA.setVisibility(View.VISIBLE);
-                            if("A".equals(entity.getPICTUREA())) {
+                            if(!"".equals(entity.getPICTUREA())) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "AQGCKMST",
-                                        "AQ_PICTUREA_" + entity.getAQ_NO() + ".JPEG");
+                                        "AQ_PICTUREA_" + entity.getAQ_NO() + ".JPEG",entity.getPICTUREA());
                             }
                         }
                     }

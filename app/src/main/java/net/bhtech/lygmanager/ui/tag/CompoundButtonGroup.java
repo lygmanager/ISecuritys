@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
+import net.bhtech.lygmanager.utils.dimen.DimenUtil;
 import net.bhtech.lygmanager.utils.storage.LattePreference;
 
 import java.util.ArrayList;
@@ -94,9 +95,10 @@ public class CompoundButtonGroup extends ScrollView {
 
         containerLayout = new LinearLayout(context);
         containerLayout.setOrientation(LinearLayout.VERTICAL);
-        containerLayout.setLayoutParams(new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        containerLayout.setLayoutParams(layoutParams);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CompoundButtonGroup, 0, 0);
         try {

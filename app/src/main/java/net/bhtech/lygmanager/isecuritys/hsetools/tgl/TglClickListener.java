@@ -27,6 +27,9 @@ public class TglClickListener extends SimpleClickListener {
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//        BaseQuickAdapter baseQuickAdapter=(BaseQuickAdapter) mRecyclerView.getOriginAdapter();
+
+
         final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
         final String id = entity.getField("TGL_NO");
         if(id!=null&&!"".equals(id)) {

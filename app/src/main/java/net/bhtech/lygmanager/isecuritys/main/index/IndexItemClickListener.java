@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.listener.SimpleClickListener;
 import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.dialog.vdven.VdvenDialog;
+import net.bhtech.lygmanager.isecuritys.hsetools.fgl.FglDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.task.SmusrDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglDelegate;
@@ -84,8 +85,8 @@ public class IndexItemClickListener extends SimpleClickListener {
             case "11":
                 DELEGATE.getSupportDelegate().start(new TglDelegate());
                 break;
-            case "1001":
-                DELEGATE.getSupportDelegate().start(new SmusrDelegate());
+            case "12":
+                DELEGATE.getSupportDelegate().start(new FglDelegate());
                 break;
             default:break;
         }

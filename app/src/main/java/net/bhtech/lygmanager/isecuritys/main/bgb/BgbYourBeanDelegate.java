@@ -23,7 +23,9 @@ import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.FullimageDelegate;
+import net.bhtech.lygmanager.isecuritys.common.EditImageDialog;
+import net.bhtech.lygmanager.isecuritys.common.FullimageDelegate;
+import net.bhtech.lygmanager.isecuritys.dialog.ConformListener;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
@@ -237,8 +239,8 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
     {
         if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
         {
-            if("A".equals(PICTUREA.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
+            if(!"".equals(PICTUREA.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREA_" + BGB_NO.getEditTextInfo(),"RMBGBMST",PICTUREA.getEditTextInfo());
                 this.getSupportDelegate().start(delegate);
             }
         }
@@ -261,8 +263,8 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
     {
         if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo()))
         {
-            if("A".equals(PICTUREB.getEditTextInfo())) {
-                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREB_" + BGB_NO.getEditTextInfo(),"RMBGBMST");
+            if(!"".equals(PICTUREB.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("BGB_PICTUREB_" + BGB_NO.getEditTextInfo(),"RMBGBMST",PICTUREB.getEditTextInfo());
                 this.getSupportDelegate().start(delegate);
             }
         }
@@ -274,31 +276,45 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
           switch (requestCode) {
-            case PictureConfig.CHOOSE_REQUEST:
-             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-             if(selectList!=null&&selectList.size()>0) {
-                 Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
-                 if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
-                     LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREA_"+BGB_NO.getEditTextInfo()+".JPEG");
-                     PICTUREA.setEditTextInfo("A");
-                     Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
-                     lineiViewB.setVisibility(View.VISIBLE);
-                 }else {
-                     Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
-                 }
-             }
-             break;
+              case PictureConfig.CHOOSE_REQUEST:
+                  List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                  if(selectList!=null&&selectList.size()>0) {
+                      final String pasth=selectList.get(0).getCompressPath();
+                      EditImageDialog.Builder dialog = new EditImageDialog.Builder(mContext);
+                      dialog.createSingleButtonDialog(new ConformListener() {
+                          @Override
+                          public void onConformClicked(String id, String name, Map map) {
+                              Glide.with(_mActivity).load(pasth).into(iView);
+                              if (BGB_NO.getEditTextInfo() != null && !"".equals(BGB_NO.getEditTextInfo())) {
+                                  LiemsMethods.init(mContext).upLoadFile(pasth, "RMBGBMST", "BGB_PICTUREA_" + BGB_NO.getEditTextInfo() + ".JPEG");
+                                  PICTUREA.setEditTextInfo("A"+System.currentTimeMillis());
+                                  Toast.makeText(mContext, "图片上传成功！", Toast.LENGTH_SHORT).show();
+                                  lineiViewB.setVisibility(View.VISIBLE);
+                              } else {
+                                  Toast.makeText(mContext, "请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                              }
+                          }
+                      },pasth).show();
+                  };
+                  break;
               case PictureConfig.UPDATE_FLAG:
                   List<LocalMedia> selectList2 = PictureSelector.obtainMultipleResult(data);
                   if(selectList2!=null&&selectList2.size()>0) {
-                      Glide.with(_mActivity).load(selectList2.get(0).getCompressPath()).into(iViewB);
-                      if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
-                          LiemsMethods.init(mContext).upLoadFile(selectList2.get(0).getCompressPath(), "RMBGBMST", "BGB_PICTUREB_"+BGB_NO.getEditTextInfo()+".JPEG");
-                          PICTUREB.setEditTextInfo("A");
-                          Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
-                      }else {
-                          Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
-                      }
+                      final String pasth=selectList2.get(0).getCompressPath();
+                      EditImageDialog.Builder dialog = new EditImageDialog.Builder(mContext);
+                      dialog.createSingleButtonDialog(new ConformListener() {
+                          @Override
+                          public void onConformClicked(String id, String name, Map map) {
+                              Glide.with(_mActivity).load(pasth).into(iViewB);
+                              if(BGB_NO.getEditTextInfo()!=null&&!"".equals(BGB_NO.getEditTextInfo())) {
+                                  LiemsMethods.init(mContext).upLoadFile(pasth, "RMBGBMST", "BGB_PICTUREB_"+BGB_NO.getEditTextInfo()+".JPEG");
+                                  PICTUREB.setEditTextInfo("A"+System.currentTimeMillis());
+                                  Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                              }else {
+                                  Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                              }
+                          }
+                      },pasth).show();
                   }
                   break;
           }
@@ -362,13 +378,13 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);
-                            if("A".equals(entity.getString("PICTUREA"))) {
+                            if(!"".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMBGBMST",
-                                        "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG");
+                                        "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREA"));
                                 lineiViewB.setVisibility(View.VISIBLE);
-                                if("A".equals(entity.getString("PICTUREB"))) {
+                                if(!"".equals(entity.getString("PICTUREB"))) {
                                     LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMBGBMST",
-                                            "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG");
+                                            "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREB"));
                                 }
                             }
                         }

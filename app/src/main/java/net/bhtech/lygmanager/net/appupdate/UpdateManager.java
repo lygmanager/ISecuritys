@@ -119,7 +119,6 @@ public class UpdateManager
     {
         // 获取当前软件版本
         int versionCode = getVersionCode(mContext);
-        LatteLogger.d("versionCode==="+versionCode+"---------"+entity.getServerVersion());
         if (null != entity)
         {
             int serviceCode = Integer.valueOf(entity.getServerVersion());

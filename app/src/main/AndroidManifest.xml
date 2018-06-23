@@ -56,10 +56,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name=".main.FullimageDelegate"
-            android:label="@string/title_activity_fullimage_delegate"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

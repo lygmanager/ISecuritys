@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -20,23 +17,17 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import net.bhtech.lygmanager.app.AccountManager;
-import net.bhtech.lygmanager.database.AqgckEntity;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
-import net.bhtech.lygmanager.isecuritys.main.FullimageDelegate;
-import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
-import net.bhtech.lygmanager.ui.tag.CompoundButtonGroup;
 import net.bhtech.lygmanager.ui.tag.RightAndLeftEditText;
-import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.WeakHashMap;
 
 import butterknife.BindView;
@@ -119,7 +110,7 @@ public class TglBeanDelegate extends BottomItemDelegate {
         button_commit.setText("{fa-plus}");
         mContext=this.getContext();
         mUser=AccountManager.getSignInfo();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         TG_DTM.setDatePick(this,sdf.format(new Date()),"DATE");
         TG_CBS.setVdvenDialog(mContext,TG_USR);
         TG_USR.setCstUserDialog(mContext);
@@ -182,8 +173,9 @@ public class TglBeanDelegate extends BottomItemDelegate {
                 TG_QY.clearText();
                 TG_WT.clearText();
                 TG_CS.clearText();
-                TG_BZ.clearText();
-                TG_DTM.clearText();
+                TG_BZ.setEditTextInfo(mUser.getUsrNam());
+                TG_BZ.setEditTextTagInfo(mUser.getUserId());
+                TG_DTM.setEditTextInfo(sdf.format(new Date()));
                 PZUSR_ID.clearText();
                 PZ_DTM.clearText();
             }

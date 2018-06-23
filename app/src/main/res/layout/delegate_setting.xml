@@ -31,7 +31,7 @@
             <ImageView style="@style/img_arrow"/>
         </LinearLayout>
         <View style="@style/bg_line"/>
-        <LinearLayout style="@style/single_layout" android:id="@+id/layout_app_update">
+        <LinearLayout style="@style/mid_layout" android:id="@+id/layout_app_update">
             <TextView style="@style/usertext" android:id="@+id/btn_app_update"  android:text="版本更新"/>
             <ImageView style="@style/img_arrow"/>
         </LinearLayout>

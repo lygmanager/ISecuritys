@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:RightAndLeftEditText="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -21,127 +20,78 @@
         android:orientation="vertical">
 
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_ORG"
+            android:id="@+id/TGL_ID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="观察者公司"
+            app:nameText="停工令"
+            app:editAble="false"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_CST"
+            android:id="@+id/VALID_STA"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="观察者部门"
-            app:nameSize="80dp"
-            android:visibility="gone"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/BZ_NO"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="班组"
-            app:nameSize="80dp"
-            android:visibility="gone"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_NAM"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="观察者姓名"
-            app:nameSize="80dp"
-            android:visibility="gone"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_DTM"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="观察时间"
+            app:nameText="状态"
+            app:editAble="false"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/BGC_ORG"
+            android:id="@+id/TG_CBS"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="被观察对象"
+            app:nameText="承包商"
+            app:nameSize="80dp"
+            app:editAble="false"
+            />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/CBSPRJ_MAN"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="项目经理"
+            app:nameSize="80dp"
+            app:editAble="false"
+            />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/TG_QY"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="停工区域"
+            app:nameSize="80dp"
+            app:editAble="false"
+            />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/PRJ_NO"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="项目"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_RW"
+            android:id="@+id/JZ_SHT"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="观察任务"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_QY"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="观察区域"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_SX"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="观察属性"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/GC_TYP"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="观察类型"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.CompoundButtonGroup
-            android:id="@+id/GC_TYP1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            app:compoundType="check_box"
-            app:entries="@array/planets"
-            app:numCols="2"
-            app:labelOrder="after"/>
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/WX_SHT"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="危险描述"
+            app:nameText="纠正措施"
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
@@ -155,75 +105,24 @@
             app:nameSize="80dp"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JZ_CS"
+            android:id="@+id/CBSHSE_DTM"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:nameText="纠正措施"
+            app:nameText="纠正时间"
             app:nameSize="80dp"
+            app:editAble="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/JZ_XD"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="纠正行动"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/FX_TYP"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="风险类型"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/ZQX_SHT"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="正确项描述"
-            app:nameSize="80dp"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/ORG_NO"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="公司"
-            app:nameSize="80dp"
-            android:visibility="gone"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/AQ_NO"
+            android:id="@+id/FGL_NO"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             app:nameText="主键"
-            app:nameSize="80dp"
-            android:visibility="gone"
-            />
-        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
-            android:id="@+id/PICTUREA"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            app:nameText="整改前照片"
             app:nameSize="80dp"
             android:visibility="gone"
             />
@@ -249,7 +148,6 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:orientation="vertical"
-                    android:drawingCacheQuality="low"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:background="@drawable/ic_camera"/>

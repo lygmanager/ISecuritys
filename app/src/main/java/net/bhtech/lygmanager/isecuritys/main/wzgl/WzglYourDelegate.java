@@ -57,9 +57,9 @@ public class WzglYourDelegate extends BottomItemDelegate {
         text_title.setText("违章管理");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-plus}");
-        Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
-                .getFieldOption("RMWZGLMST@@BF_TYP,RMWZGLMST@@BG_ADR");
-        LiemsMethods.init(getContext()).getLiemsOption("getBgbzgcstOption","BgbzgcstOption");
+//        Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
+//                .getFieldOption("RMWZGLMST@@BF_TYP,RMWZGLMST@@BG_ADR");
+//        LiemsMethods.init(getContext()).getLiemsOption("getBgbzgcstOption","BgbzgcstOption");
 
         mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new BgbDataConverter());
         button_forward.setOnClickListener(new View.OnClickListener() {

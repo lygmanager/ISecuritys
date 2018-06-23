@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+    android:paddingTop="-50dp"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:gravity="top"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+            android:id="@+id/TGL_ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:wrapcontent="true" />
+        <LinearLayout
+            android:id="@+id/aqgcklin1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/TGL_ID"
+            android:orientation="horizontal">
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/TG_CBS_NAM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="承包商"
+                    app:wrapcontent="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/aqgcklin2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/aqgcklin1"
+            android:orientation="horizontal">
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/CBSPRJ_MAN_NAM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="项目经理"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/VALID_STA"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="状态"
+                    app:wrapcontent="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/aqgcklin2"
+            android:orientation="horizontal">
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/PRJ_NO"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="项目"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/TG_QY"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="区域"
+                    app:wrapcontent="true" />
+        </LinearLayout>
+        <TextView android:id="@+id/FGL_NO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp" android:layout_margin="5dp" android:visibility="gone"/>
+</RelativeLayout>

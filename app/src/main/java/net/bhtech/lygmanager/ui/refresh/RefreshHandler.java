@@ -175,6 +175,31 @@ public class RefreshHandler implements
         });
     }
 
+    public void getCommonList( Context _mActivity,String mUrl,WeakHashMap<String, Object> params) {
+        String wherelimit="";
+        if(params!=null&&!params.isEmpty())
+        {
+            wherelimit=JSONObject.toJSONString(params);
+        }
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url(mUrl)
+                        .params("wherelimit",wherelimit)
+                        .params("orgno", mUser.getOrgNo())
+                        .params("page", "1")
+                        .params("limit", "20")
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
     public void getBgbList( Context _mActivity,String mType) {
         String params="";
         if("MY".equals(mType)){

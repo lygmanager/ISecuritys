@@ -59,6 +59,7 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.BGB, R.layout.item_bgbvlist);
         addItemType(ItemType.VDVEN, R.layout.item_vdvenvlist);
         addItemType(ItemType.TGL, R.layout.item_tglvlist);
+        addItemType(ItemType.FGL, R.layout.item_fglvlist);
 
         addItemType(ItemType.SMUSR, R.layout.item_smusrvlist);
         //设置宽度监听
@@ -173,6 +174,15 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.TG_DTM, (String)entity.getField("TG_DTM"));
                 holder.setRightText(R.id.VALID_STA, (String)entity.getField("VALID_STA"));
                 holder.setText(R.id.TGL_NO, (String)entity.getField("TGL_NO"));
+                break;
+            case ItemType.FGL:
+                holder.setRightText(R.id.TGL_ID, (String)entity.getField("TGL_ID"));
+                holder.setRightText(R.id.TG_CBS_NAM, (String)entity.getField("TG_CBS_NAM"));
+                holder.setRightText(R.id.CBSPRJ_MAN_NAM, (String)entity.getField("CBSPRJ_MAN_NAM"));
+                holder.setRightText(R.id.TG_QY, (String)entity.getField("TG_QY"));
+                holder.setRightText(R.id.PRJ_NO, (String)entity.getField("PRJ_NO"));
+                holder.setRightText(R.id.VALID_STA, (String)entity.getField("VALID_STA"));
+                holder.setText(R.id.FGL_NO, (String)entity.getField("FGL_NO"));
                 break;
             case ItemType.SMUSR:
                 holder.setRightText(R.id.USR_ID, (String)entity.getField("USR_ID"));
