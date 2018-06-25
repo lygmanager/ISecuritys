@@ -7,8 +7,6 @@
     android:paddingRight="@dimen/dp_10"
     android:gravity="top"
     android:layout_height="wrap_content">
-
-
         <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
             android:id="@+id/JCK_ADR"
             android:layout_width="match_parent"
@@ -20,7 +18,6 @@
             android:layout_height="match_parent"
             android:layout_below="@id/JCK_ADR"
             android:orientation="horizontal">
-
                 <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
                     android:id="@+id/JCK_DTM"
                     android:layout_width="0dp"
@@ -28,7 +25,6 @@
                     android:layout_weight="0.5"
                     app:left_text="检查时间"
                     app:wrapcontent="true" />
-
                 <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
                     android:id="@+id/JCK_TYP"
                     android:layout_width="0dp"

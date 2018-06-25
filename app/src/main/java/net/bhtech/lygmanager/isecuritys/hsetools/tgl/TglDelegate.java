@@ -141,7 +141,7 @@ public class TglDelegate extends BottomItemDelegate {
             public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
                 int width = getResources().getDimensionPixelSize(R.dimen.dp_72);
                 SwipeMenuItem deleteItem = new SwipeMenuItem(mContext);
-                deleteItem.setText("生成复工令")
+                deleteItem.setText("生成复工申请")
                         .setBackground(R.color.badgeColor)
                         .setWidth(width)
                         .setHeight(MATCH_PARENT);
@@ -160,6 +160,11 @@ public class TglDelegate extends BottomItemDelegate {
                 final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(adapterPosition);
                 if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION&&menuPosition==0) {
                     if("02".equals(entity.getField("VALID_STA_VAL"))) {
+                        if(!mUser.getUserId().equals(entity.getField("TG_USR")))
+                        {
+                            Toast.makeText(mContext, "项目承包人才可生成复工申请！", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         WeakHashMap<String, Object> params = new WeakHashMap<>();
                         params.put("FGL_NO", "-1");
                         params.put("TGL_NO", entity.getField("TGL_NO"));
@@ -195,7 +200,7 @@ public class TglDelegate extends BottomItemDelegate {
                             }
                         });
                     }else{
-                        Toast.makeText(mContext, "请完成停工令审批才可生成复工令", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "请完成停工令审批才可生成复工申请", Toast.LENGTH_SHORT).show();
                     }
                 } else if (direction == SwipeMenuRecyclerView.LEFT_DIRECTION) {
                     Toast.makeText(mContext, "list第" + adapterPosition + "; 左侧菜单第" + menuPosition, Toast.LENGTH_SHORT).show();

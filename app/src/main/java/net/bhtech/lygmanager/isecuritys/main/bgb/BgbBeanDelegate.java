@@ -1,6 +1,9 @@
 package net.bhtech.lygmanager.isecuritys.main.bgb;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -129,7 +132,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        text_title.setText("曝光板明细");
+        text_title.setText("我发现的曝光板");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.VISIBLE);
@@ -159,7 +162,7 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,String> entity=new HashMap<>();
+                final Map<String,String> entity=new HashMap<>();
                 entity.put("BGB_NO",BGB_NO.getEditTextInfo());
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
                 entity.put("BG_ADR",BG_ADR.getEditTextTagInfo());
@@ -169,6 +172,9 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
                     entity.put("DO_DTM", DO_DTM.getEditTextInfo());
                     entity.put("YSUSR_ID", mUser.getUserId());
+                    entity.put("DO_NOT", "02");
+                }else{
+                    entity.put("DO_NOT", "01");
                 }
                 entity.put("JC_TYP",JC_TYP.getEditTextTagInfo());
                 entity.put("KH_NUM",KH_NUM.getEditTextInfo());
@@ -184,32 +190,35 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 entity.put("JCST_NO",mUser.getCstNo());
                 entity.put("JLUSR_ID",mUser.getUserId());
                 entity.put("JLUSR_DTM",today);
-                Observable<String> obj=
-                        RxRestClient.builder()
-                                .url("saveOrUpdateBgbMST")
-                                .params("totaljson", JSONObject.toJSONString(entity))
-                                .loader(mContext)
-                                .build()
-                                .post();
-                obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+                String bfTyp=BF_TYP.getEditTextTagInfo();
+                if("04".equals(bfTyp)||"05".equals(bfTyp))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("提醒");
+                    builder.setMessage("是否将人员拉入黑名单？");
+                    builder.setPositiveButton("是", new DialogInterface.OnClickListener()
+                    {
                         @Override
-                        public void onNext(String result) {
-                            JSONObject jsonObject= JSONObject.parseObject(result);
-                            LiemsResult rst=jsonObject.toJavaObject(LiemsResult.class);
-                            if("success".equals(rst.getResult()))
-                            {
-                                if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
-                                {
-                                    BGB_NO.getEditText().setText(rst.getPkValue());
-                                    lineiViewA.setVisibility(View.VISIBLE);
-                                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                            saveOrUpdate(entity);
+                        }
+                    });
+                    builder.setNegativeButton("否", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    Dialog noticeDialog = builder.create();
+                    noticeDialog.show();
+                }else{
+                    saveOrUpdate(entity);
+                }
 
-                                }
-                            }else{
-                                Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();
-                            }
-                    }
-                });
             }
         });
 
@@ -235,6 +244,36 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                 iViewB.setImageBitmap(null);
                 JCUSR_ID.setEditTextInfo(mUser.getUsrNam());
                 JCUSR_ID.setEditTextTagInfo(mUser.getUserId());
+            }
+        });
+    }
+
+    private void saveOrUpdate(Map<String,String> entity)
+    {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("saveOrUpdateBgbMST")
+                        .params("totaljson", JSONObject.toJSONString(entity))
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String result) {
+                JSONObject jsonObject= JSONObject.parseObject(result);
+                LiemsResult rst=jsonObject.toJavaObject(LiemsResult.class);
+                if("success".equals(rst.getResult()))
+                {
+                    if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
+                    {
+                        BGB_NO.getEditText().setText(rst.getPkValue());
+                        lineiViewA.setVisibility(View.VISIBLE);
+                        Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+
+                    }
+                }else{
+                    Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

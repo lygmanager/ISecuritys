@@ -25,5 +25,5 @@
 },{
   "imageUrl":"{fa-warning}","itemText":"停工令","itemId":"11","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
 },{
-  "imageUrl":"{icon-zuoyezhidaoshu}","itemText":"复工令","itemId":"12","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
+  "imageUrl":"{icon-zuoyezhidaoshu}","itemText":"复工申请","itemId":"12","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
 }]

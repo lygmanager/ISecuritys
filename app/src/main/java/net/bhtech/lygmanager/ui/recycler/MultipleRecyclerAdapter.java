@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.ui.tag.RightAndLeftTextView;
 import net.bhtech.lygmanager.utils.log.LatteLogger;
 
 import java.util.ArrayList;
@@ -173,6 +174,11 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.TG_CBS, (String)entity.getField("TG_CBS_NAM"));
                 holder.setRightText(R.id.TG_DTM, (String)entity.getField("TG_DTM"));
                 holder.setRightText(R.id.VALID_STA, (String)entity.getField("VALID_STA"));
+                RightAndLeftTextView validSta = holder.getView(R.id.VALID_STA);
+                if("0".equals((String)entity.getField("FGL_NUM"))&&"02".equals((String)entity.getField("VALID_STA_VAL")))
+                {
+                    validSta.setRightTextColor(R.color.badgeColor);
+                }
                 holder.setText(R.id.TGL_NO, (String)entity.getField("TGL_NO"));
                 break;
             case ItemType.FGL:

@@ -22,7 +22,7 @@ public class mainApplication extends MultiDexApplication {
                 .withIcon(new FontEcModule())
                 .withLoaderDelayed(1000)
 //                .withApiHost("http://172.16.128.200:7001/Liems/webservice/")
-                .withApiHost("http://192.168.1.103:7001/Liems/webservice/")
+                .withApiHost("http://192.168.0.104:7001/Liems/webservice/")
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
                 .withJavascriptInterface("latte")
                 .configure();

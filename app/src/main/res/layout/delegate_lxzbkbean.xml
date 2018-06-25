@@ -16,6 +16,17 @@
         android:orientation="vertical">
 
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JCK_ID"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameText="检查卡编号"
+                app:nameSize="80dp"
+                app:editAble="false"
+                />
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/JCK_TYP"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -35,6 +46,15 @@
                 app:nameSize="80dp"
                 app:nameText="检查日期"/>
 
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JCK_DSC"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameSize="80dp"
+                app:nameText="内容"/>
             <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
                 android:id="@+id/JCK_ADR"
                 android:layout_width="fill_parent"

@@ -127,7 +127,7 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        text_title.setText("违章明细");
+        text_title.setText("待整改的违章");
         button_forward.setVisibility(View.GONE);
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.GONE);

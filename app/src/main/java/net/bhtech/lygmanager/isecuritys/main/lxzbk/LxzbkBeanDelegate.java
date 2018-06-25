@@ -64,6 +64,10 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText JCK_DTM=null;
     @BindView(R.id.JCK_ADR)
     RightAndLeftEditText JCK_ADR=null;
+    @BindView(R.id.JCK_DSC)
+    RightAndLeftEditText JCK_DSC=null;
+    @BindView(R.id.JCK_ID)
+    RightAndLeftEditText JCK_ID=null;
     @BindView(R.id.JCK_NO)
     RightAndLeftEditText JCK_NO=null;
 
@@ -124,6 +128,7 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                 params.put("JCK_DTM",JCK_DTM.getEditTextInfo());
                 params.put("TTK_NO","");
                 params.put("JCK_ADR",JCK_ADR.getEditTextInfo());
+                params.put("JCK_DSC",JCK_DSC.getEditTextInfo());
                 Observable<String> obj=
                         RxRestClient.builder()
                                 .url("saveOrUpdateLXZBKMST")
@@ -141,6 +146,7 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                             if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
                             {
                                 JCK_NO.setEditTextInfo(rst.getPkValue());
+                                JCK_ID.setEditTextInfo(rst.getMsg());
                                 mRefreshHandler.getLxzbklinList(getContext(),rst.getPkValue());
                                 Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
                             }
@@ -159,6 +165,8 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                 JCK_DTM.clearText();
                 JCK_ADR.clearText();
                 JCK_TYP.clearText();
+                JCK_ID.clearText();
+                JCK_DSC.clearText();
             }
         });
 
@@ -190,9 +198,11 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
                         LxzbkEntity entity = JSONObject.parseObject(lr.getRows().toString(), LxzbkEntity.class);
                         if ( entity!=null) {
                             JCK_NO.setEditTextInfo(entity.getJCK_NO());
+                            JCK_ID.setEditTextInfo(entity.getJCK_ID());
                             JCK_TYP.setEditTextTagInfo(entity.getJCK_TYP(),"LXZBKLX");
                             JCK_DTM.setEditTextInfo(entity.getJCK_DTM());
                             JCK_ADR.setEditTextInfo(entity.getJCK_ADR());
+                            JCK_DSC.setEditTextInfo(entity.getJCK_DSC());
                             mRefreshHandler.getLxzbklinList(getContext(),entity.getJCK_NO());
                         }
                     }

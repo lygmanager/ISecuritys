@@ -84,7 +84,7 @@ public class FglDelegate extends BottomItemDelegate {
         mContext=getContext();
         DELEGATE=this;
         mUser= AccountManager.getSignInfo();
-        text_title.setText("复工令");
+        text_title.setText("复工申请");
 //        button_forward.setVisibility(View.VISIBLE);
 //        button_forward.setText("{fa-plus}");
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())

@@ -20,6 +20,8 @@
         <attr name="selcetColor" format="color" />
 
         <attr name="editAble" format="boolean" />
+        <attr name="singleLine" format="boolean" />
+        <attr name="numeric" format="boolean" />
     </declare-styleable>
     <declare-styleable name="CompoundButtonGroup">
         <attr name="entries" format="reference" />

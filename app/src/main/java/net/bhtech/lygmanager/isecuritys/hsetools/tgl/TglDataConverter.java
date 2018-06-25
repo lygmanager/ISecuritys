@@ -41,6 +41,7 @@ public class TglDataConverter extends DataConverter {
                         .setField("TG_CBS", data.getString("TG_CBS"))
                         .setField("TG_QY", data.getString("TG_QY"))
                         .setField("TG_DTM", data.getString("TG_DTM"))
+                        .setField("FGL_NUM", data.getString("FGL_NUM"))
                         .setField("VALID_STA", getTextTagInfo(data.getString("VALID_STA"),"HSETGLMST@@VALID_STA"))
                         .setField("VALID_STA_VAL", data.getString("VALID_STA"))
                         .build();

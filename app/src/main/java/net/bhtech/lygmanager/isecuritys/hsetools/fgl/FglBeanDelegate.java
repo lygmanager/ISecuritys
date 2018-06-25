@@ -99,7 +99,7 @@ public class FglBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        text_title.setText("复工令明细");
+        text_title.setText("复工申请明细");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-save}");
         mContext=this.getContext();

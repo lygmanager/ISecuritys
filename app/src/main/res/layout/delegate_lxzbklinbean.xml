@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_titlebar"
         android:orientation="vertical">
-
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JCLIN_DSC"
             android:layout_width="fill_parent"
@@ -30,6 +29,7 @@
             android:paddingRight="10dp"
             app:nameText="安全数量"
             app:nameSize="80dp"
+            app:numeric="true"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JCLIN_FXNUM"
@@ -40,6 +40,7 @@
             android:paddingRight="10dp"
             app:nameText="有风险数量"
             app:nameSize="80dp"
+            app:numeric="true"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JCLIN_ZDNUM"
@@ -50,6 +51,7 @@
             android:paddingRight="10dp"
             app:nameText="重大风险数量"
             app:nameSize="80dp"
+            app:numeric="true"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/VALID_STA"

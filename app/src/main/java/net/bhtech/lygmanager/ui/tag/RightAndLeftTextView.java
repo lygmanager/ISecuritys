@@ -2,6 +2,7 @@ package net.bhtech.lygmanager.ui.tag;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -55,6 +56,9 @@ public class RightAndLeftTextView extends LinearLayout {
 
     public void setRightText(String rightText) {
         this.rightTextView.setText(rightText);
+    }
+    public void setRightTextColor(int color) {
+        this.rightTextView.setTextColor(getResources().getColor(color));
     }
 
     public String getLeftText() {

@@ -1,6 +1,9 @@
 package net.bhtech.lygmanager.isecuritys.main.wzgl;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -128,7 +131,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
-        text_title.setText("违章明细");
+        text_title.setText("我发现的违章");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.VISIBLE);
@@ -154,7 +157,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,String> entity=new HashMap<>();
+                final Map<String,String> entity=new HashMap<>();
                 entity.put("BGB_NO",BGB_NO.getEditTextInfo());
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
                 entity.put("BG_ADR",BG_ADR.getEditTextTagInfo());
@@ -168,6 +171,9 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 if(DO_DTM.getEditTextInfo()!=null&&!"".equals(DO_DTM.getEditTextInfo())) {
                     entity.put("DO_DTM", DO_DTM.getEditTextInfo());
                     entity.put("YSUSR_ID", mUser.getUserId());
+                    entity.put("DO_NOT", "02");
+                }else{
+                    entity.put("DO_NOT", "01");
                 }
                 String bfTyp=BF_TYP.getEditTextTagInfo();
                 if("01".equals(bfTyp))
@@ -180,39 +186,41 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                     entity.put("KH_FS","5");
                 else if("05".equals(bfTyp))
                     entity.put("KH_FS","10");
-
                 entity.put("ZR_USR",ZR_USR.getEditTextTagInfo());
                 entity.put("ORG_NO",mUser.getOrgNo());
                 entity.put("JCUSR_ID",mUser.getUserId());
                 entity.put("JCST_NO",mUser.getCstNo());
                 entity.put("JLUSR_ID",mUser.getUserId());
                 entity.put("JLUSR_DTM",today);
-                Observable<String> obj=
-                        RxRestClient.builder()
-                                .url("saveOrUpdateWzglMST")
-                                .params("totaljson", JSONObject.toJSONString(entity))
-                                .loader(mContext)
-                                .build()
-                                .post();
-                obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
-                        @Override
-                        public void onNext(String result) {
-                            JSONObject jsonObject= JSONObject.parseObject(result);
-                            LiemsResult rst=jsonObject.toJavaObject(LiemsResult.class);
-                            if("success".equals(rst.getResult()))
-                            {
-                                if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
-                                {
-                                    BGB_NO.getEditText().setText(rst.getPkValue());
-                                    lineiViewA.setVisibility(View.VISIBLE);
-                                    Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
 
-                                }
-                            }else{
-                                Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();
-                            }
-                    }
-                });
+                if("04".equals(bfTyp)||"05".equals(bfTyp))
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("提醒");
+                    builder.setMessage("是否将人员拉入黑名单？");
+                    builder.setPositiveButton("是", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                            saveOrUpdate(entity);
+                        }
+                    });
+                    builder.setNegativeButton("否", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    Dialog noticeDialog = builder.create();
+                    noticeDialog.show();
+                }else{
+                    saveOrUpdate(entity);
+                }
+
             }
         });
 
@@ -230,6 +238,36 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 KH_NUM.clearText();
                 PICTUREA.clearText();
                 iView.setImageBitmap(null);
+            }
+        });
+    }
+
+    private void saveOrUpdate(Map<String,String> entity)
+    {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("saveOrUpdateWzglMST")
+                        .params("totaljson", JSONObject.toJSONString(entity))
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String result) {
+                JSONObject jsonObject= JSONObject.parseObject(result);
+                LiemsResult rst=jsonObject.toJavaObject(LiemsResult.class);
+                if("success".equals(rst.getResult()))
+                {
+                    if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
+                    {
+                        BGB_NO.getEditText().setText(rst.getPkValue());
+                        lineiViewA.setVisibility(View.VISIBLE);
+                        Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+
+                    }
+                }else{
+                    Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

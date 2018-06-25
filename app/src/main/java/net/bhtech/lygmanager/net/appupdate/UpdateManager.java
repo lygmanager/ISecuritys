@@ -110,6 +110,16 @@ public class UpdateManager
         }
     }
 
+    public void checkUpdate(AppVersionEntity version,String msg)
+    {
+        entity=version;
+        if (isUpdate())
+        {
+            // 显示提示对话框
+            showNoticeDialog();
+        }
+    }
+
     /**
      * 检查软件是否有更新版本
      *

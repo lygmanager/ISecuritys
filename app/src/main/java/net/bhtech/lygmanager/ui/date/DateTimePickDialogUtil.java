@@ -99,7 +99,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        inputDate.setText("");
+//                        inputDate.setText("");
                     }
                 }).show();
 

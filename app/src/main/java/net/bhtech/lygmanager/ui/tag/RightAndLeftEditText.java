@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -122,6 +123,10 @@ public class RightAndLeftEditText extends LinearLayout {
 
             boolean editAble = a.getBoolean(R.styleable.RightAndLeftEditText_editAble,true);
             setEditTextEditAble(editAble);
+            boolean singleLine = a.getBoolean(R.styleable.RightAndLeftEditText_singleLine,false);
+            setSingleLine(singleLine);
+            boolean numeric = a.getBoolean(R.styleable.RightAndLeftEditText_numeric,false);
+            setNumeric(numeric);
 //            editText.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
@@ -219,6 +224,16 @@ public class RightAndLeftEditText extends LinearLayout {
         lineView.setLayoutParams(lp);
     }
 
+    public void setSingleLine(boolean singleLine) {
+        editText.setSingleLine(singleLine);
+    }
+
+    public void setNumeric(boolean numeric) {
+        if(numeric) {
+            editText.setSingleLine(numeric);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }
+    }
 
     public View getRootView(){
 

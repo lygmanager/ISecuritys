@@ -16,6 +16,7 @@ public class LxzbkEntity {
     public String JCKUSR_ID;//观察任务
     public String ORG_NO;//观察区域
     public String JCK_NO;//观察属性
+    private String JCK_ID;//观察属性
 
     public int getPkVal() {
         return pkVal;
@@ -95,5 +96,13 @@ public class LxzbkEntity {
 
     public void setJCK_NO(String JCK_NO) {
         this.JCK_NO = JCK_NO;
+    }
+
+    public String getJCK_ID() {
+        return JCK_ID;
+    }
+
+    public void setJCK_ID(String JCK_ID) {
+        this.JCK_ID = JCK_ID;
     }
 }
