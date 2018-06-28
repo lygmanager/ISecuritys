@@ -69,10 +69,10 @@ class FullWidthCompoundButton extends LinearLayout {
 
         setClickable(true);
         setOrientation(HORIZONTAL);
-        setPadding(20, 32, 20, 32);
+        setPadding(5, 12, 5, 12);
 
         textView = new TextView(context);
-
+        textView.setSingleLine(false);
         prepareButton();
         addOrderedViews(labelOrder);
     }

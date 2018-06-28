@@ -54,7 +54,7 @@ public class WzglYourDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        text_title.setText("违章管理");
+        text_title.setText("我的整改项");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-plus}");
 //        Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())

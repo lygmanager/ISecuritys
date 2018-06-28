@@ -43,4 +43,9 @@ public class MultipleItemEntity implements MultiItemEntity {
         FIELDS_REFERENCE.get().put(key,value);
         return this;
     }
+
+
+    public final String getFieldString(Object key){
+        return (String) FIELDS_REFERENCE.get().get(key);
+    }
 }

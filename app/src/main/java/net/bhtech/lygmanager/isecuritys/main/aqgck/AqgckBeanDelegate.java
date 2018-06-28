@@ -114,6 +114,8 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
     LinearLayout lineiViewA=null;
     private AqgckBeanDelegate thisdelegate=this;
 
+    @BindView(R.id.ll_equip)
+    LinearLayout ll_equip=null;
 
     protected Context mContext=null;
 
@@ -160,6 +162,10 @@ public class AqgckBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkIsEmpty(mContext,ll_equip))
+                {
+                    return;
+                }
                 AqgckEntity entity=new AqgckEntity();
                 entity.setAQ_NO(AQ_NO.getEditTextInfo());
                 entity.setGC_ORG(GC_ORG.getEditTextTagInfo());

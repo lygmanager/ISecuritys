@@ -83,6 +83,7 @@
             android:paddingRight="10dp"
             app:nameText="项目"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JZ_SHT"
@@ -93,6 +94,7 @@
             android:paddingRight="10dp"
             app:nameText="纠正措施"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/IS_JZ"
@@ -103,6 +105,7 @@
             android:paddingRight="10dp"
             app:nameText="是否纠正"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/CBSHSE_DTM"

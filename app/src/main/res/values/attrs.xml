@@ -18,7 +18,7 @@
         <attr name="normalColor" format="color" />
         <!-- 编辑框没选中的颜色 -->
         <attr name="selcetColor" format="color" />
-
+        <attr name="canEmpty" format="boolean" />
         <attr name="editAble" format="boolean" />
         <attr name="singleLine" format="boolean" />
         <attr name="numeric" format="boolean" />

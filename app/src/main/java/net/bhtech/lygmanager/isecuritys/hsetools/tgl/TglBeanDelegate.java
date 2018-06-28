@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,8 @@ public class TglBeanDelegate extends BottomItemDelegate {
 
     private TglBeanDelegate thisdelegate=this;
 
+    @BindView(R.id.ll_equip)
+    LinearLayout ll_equip=null;
 
     protected Context mContext=null;
 
@@ -117,6 +120,10 @@ public class TglBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkIsEmpty(mContext,ll_equip))
+                {
+                    return;
+                }
                 WeakHashMap<String,Object> params=new WeakHashMap<>();
                 params.put("TGL_NO",TGL_NO.getEditTextInfo());
                 params.put("TG_SHT",TG_SHT.getEditTextInfo());

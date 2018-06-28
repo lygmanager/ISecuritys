@@ -20,10 +20,18 @@
             android:layout_below="@+id/TTK_ADR">
                 <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
                     android:id="@+id/TTK_ID"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     app:left_text="工作票号"
                     app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/ADR_DSC"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    app:left_text="地点"
+                    />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

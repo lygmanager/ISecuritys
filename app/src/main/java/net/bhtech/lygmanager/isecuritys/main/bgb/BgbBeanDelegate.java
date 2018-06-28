@@ -109,6 +109,9 @@ public class BgbBeanDelegate extends BottomItemDelegate {
     @BindView(R.id.lineiViewB)
     LinearLayout lineiViewB=null;
 
+    @BindView(R.id.ll_equip)
+    LinearLayout ll_equip=null;
+
     protected Context mContext=null;
     private BgbBeanDelegate thisdelegate=this;
 
@@ -162,6 +165,10 @@ public class BgbBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkIsEmpty(mContext,ll_equip))
+                {
+                    return;
+                }
                 final Map<String,String> entity=new HashMap<>();
                 entity.put("BGB_NO",BGB_NO.getEditTextInfo());
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
@@ -436,10 +443,10 @@ public class BgbBeanDelegate extends BottomItemDelegate {
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);
+                            lineiViewB.setVisibility(View.VISIBLE);
                             if(!"".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMBGBMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREA"));
-                                lineiViewB.setVisibility(View.VISIBLE);
                                 if(!"".equals(entity.getString("PICTUREB"))) {
                                     LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMBGBMST",
                                             "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREB"));

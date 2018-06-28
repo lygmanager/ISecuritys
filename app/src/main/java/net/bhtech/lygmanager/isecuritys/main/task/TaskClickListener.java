@@ -13,6 +13,7 @@ import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.aqgck.AqgckDelegate;
 import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBaseDelegate;
 import net.bhtech.lygmanager.isecuritys.main.bgb.BgbBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.main.bgb.BgbDelegate;
 import net.bhtech.lygmanager.isecuritys.main.equip.WorksheetDelegate;
 import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkDelegate;
@@ -45,6 +46,15 @@ public class TaskClickListener extends SimpleClickListener {
         switch (id){
             case "1001":
                 DELEGATE.getSupportDelegate().start(new SmusrDelegate());
+                break;
+            case "1002":
+                DELEGATE.getSupportDelegate().start(new WzglDelegate());
+                break;
+            case "1003":
+                DELEGATE.getSupportDelegate().start(new BgbBaseDelegate());
+                break;
+            case "1004":
+                DELEGATE.getSupportDelegate().start(new TglDelegate());
                 break;
             default:break;
         }

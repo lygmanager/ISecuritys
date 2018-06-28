@@ -125,6 +125,7 @@ public class MultipleRecyclerAdapter extends
             case ItemType.WORKSHEET:
                 holder.setRightText(R.id.TTK_ID, (String)entity.getField("TTK_ID"));
                 holder.setRightText(R.id.TTK_ADR, (String)entity.getField("TTK_ADR"));
+                holder.setRightText(R.id.ADR_DSC, (String)entity.getField("ADR_DSC"));
                 holder.setRightText(R.id.PLABEG_DTM, (String)entity.getField("PLABEG_DTM"));
                 holder.setRightText(R.id.PLAEND_DTM, (String)entity.getField("PLAEND_DTM"));
                 holder.setText(R.id.TTK_NO, (String)entity.getField("TTK_NO"));

@@ -60,6 +60,15 @@ public class RightAndLeftEditText extends LinearLayout {
 
     /**编辑框的内容是否合法*/
     private boolean isLegal =false;
+    private boolean canEmpty =true;
+
+    public boolean isCanEmpty() {
+        return canEmpty;
+    }
+
+    public void setCanEmpty(boolean canEmpty) {
+        this.canEmpty = canEmpty;
+    }
 
     public interface IEditCall {
         /**失去焦点或者输入完毕*/
@@ -127,13 +136,8 @@ public class RightAndLeftEditText extends LinearLayout {
             setSingleLine(singleLine);
             boolean numeric = a.getBoolean(R.styleable.RightAndLeftEditText_numeric,false);
             setNumeric(numeric);
-//            editText.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    DatePickDialogUtil datePickDialogUtil=new DatePickDialogUtil(getContext().,null);
-//                    datePickDialogUtil.dateTimePicKDialog(editText);
-//                }
-//            });
+            boolean canEmpty2 = a.getBoolean(R.styleable.RightAndLeftEditText_canEmpty,true);
+            setCanEmpty(canEmpty2);
 
         }
 

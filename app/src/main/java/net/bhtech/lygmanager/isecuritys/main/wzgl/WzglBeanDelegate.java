@@ -108,6 +108,8 @@ public class WzglBeanDelegate extends BottomItemDelegate {
     @BindView(R.id.lineiViewB)
     LinearLayout lineiViewB=null;
 
+    @BindView(R.id.ll_equip)
+    LinearLayout ll_equip=null;
 
     protected Context mContext=null;
     private WzglBeanDelegate thisdelegate=this;
@@ -145,7 +147,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         final String today=sdf.format(new Date());
         JC_DTM.setDatePick(this,today,"DATE");
-        DO_DTM.setDatePick(this,today,"DATE");
+        DO_DTM.setDatePick(this,null,"DATE");
         PLAN_DTM.setDatePick(this,today,"DATE");
         BF_TYP.setPopulWindow(mContext,"RMWZGLMST@@BF_TYP");
         KH_TYP.setPopulWindow(mContext,"RMWZGLMST@@KH_TYP");
@@ -157,6 +159,10 @@ public class WzglBeanDelegate extends BottomItemDelegate {
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkIsEmpty(mContext,ll_equip))
+                {
+                    return;
+                }
                 final Map<String,String> entity=new HashMap<>();
                 entity.put("BGB_NO",BGB_NO.getEditTextInfo());
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
@@ -197,7 +203,7 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     builder.setTitle("提醒");
-                    builder.setMessage("是否将人员拉入黑名单？");
+                    builder.setMessage("是否将人员列入黑名单？");
                     builder.setPositiveButton("是", new DialogInterface.OnClickListener()
                     {
                         @Override
@@ -429,10 +435,11 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);
+                            lineiViewB.setVisibility(View.VISIBLE);
                             if(!"".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMWZGLMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREA"));
-                                lineiViewB.setVisibility(View.VISIBLE);
+
                                 if(!"".equals(entity.getString("PICTUREB"))) {
                                     LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMWZGLMST",
                                             "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREB"));

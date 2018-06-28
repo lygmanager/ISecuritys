@@ -1,6 +1,12 @@
 package net.bhtech.lygmanager.delegates.bottom;
 
+import android.content.Context;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import net.bhtech.lygmanager.delegates.LatteDelegate;
+import net.bhtech.lygmanager.ui.tag.RightAndLeftEditText;
 
 /**
  * Created by zhangxinbiao on 2017/11/9.
@@ -22,4 +28,19 @@ public abstract class BottomItemDelegate extends LatteDelegate {
 //        return true;
 //    }
 
+    public boolean checkIsEmpty(Context mContext,LinearLayout ll_equip)
+    {
+        for(int i=0;i<ll_equip.getChildCount();i++)
+        {
+            View viewchild2 = ll_equip.getChildAt(i);
+            if(viewchild2 instanceof RightAndLeftEditText) {
+                RightAndLeftEditText viewchild=(RightAndLeftEditText)viewchild2;
+                if (!viewchild.isCanEmpty() && "".equals(viewchild.getEditTextInfo())) {
+                    Toast.makeText(mContext, viewchild.getTextView().getText() + "不能为空！", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

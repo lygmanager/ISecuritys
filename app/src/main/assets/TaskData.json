@@ -1,3 +1,9 @@
 [{
-  "imageUrl":"{icon-rengongzhineng}","itemText":"年龄超限","itemId":"1001","itemType":"3","spanSize":"1","textColor":"C"
+  "imageUrl":"{icon-rengongzhineng #17C7D5}","itemText":"年龄超限","itemId":"1001","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{icon-yuexianyichangchaxun #62D44B}","itemText":"违章管理","itemId":"1002","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{icon-yuexianyichangfenxi #DE704B}","itemText":"曝光板","itemId":"1003","itemType":"3","spanSize":"1","textColor":"C"
+},{
+  "imageUrl":"{icon-jiaoseguanli #D872AB}","itemText":"停工令","itemId":"1004","itemType":"3","spanSize":"1","textColor":"C"
 }]

@@ -145,7 +145,7 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
         final String today=sdf.format(new Date());
         JC_DTM.setDatePick(this,today,"DATE");
         PLAN_DTM.setDatePick(this,today,"DATE");
-        DO_DTM.setDatePick(this,null,"DATE");
+        DO_DTM.setVisibility(View.GONE);
         JC_TYP.setPopulWindow(mContext,"BgbjcnrOption");
         BF_TYP.setPopulWindow(mContext,"RMBGBMST@@BF_TYP");
         BG_ADR.setPopulWindow(mContext,"RMBGBMST@@BG_ADR");
@@ -378,10 +378,11 @@ public class BgbYourBeanDelegate extends BottomItemDelegate {
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             PICTUREB.setEditTextInfo(entity.getString("PICTUREB"));
                             lineiViewA.setVisibility(View.VISIBLE);
+                            lineiViewB.setVisibility(View.VISIBLE);
                             if(!"".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMBGBMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREA"));
-                                lineiViewB.setVisibility(View.VISIBLE);
+
                                 if(!"".equals(entity.getString("PICTUREB"))) {
                                     LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMBGBMST",
                                             "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREB"));

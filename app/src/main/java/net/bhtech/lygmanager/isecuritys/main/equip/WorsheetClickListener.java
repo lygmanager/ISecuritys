@@ -64,6 +64,7 @@ public class WorsheetClickListener extends SimpleClickListener {
         final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
         final String id = entity.getField("TTK_NO");
         final String adr = entity.getField("TTK_ADR");
+        final String dcs = entity.getField("ADR_DSC");
         if(id!=null&&!"".equals(id)) {
             WeakHashMap<String,Object> params=new WeakHashMap<>();
             params.put("orgno", mUser.getOrgNo());
@@ -71,7 +72,7 @@ public class WorsheetClickListener extends SimpleClickListener {
                 @Override
                 public void onConformClicked(String values,String texts) {
                     if(!"".equals(values))
-                    createLxzbk(id,adr,values);
+                    createLxzbk(id,adr,values,dcs);
 
                 }
             });
@@ -79,7 +80,7 @@ public class WorsheetClickListener extends SimpleClickListener {
 
     }
 
-    public void createLxzbk(String ttkNo,String adr,String lx)
+    public void createLxzbk(String ttkNo,String adr,String lx,String dcs)
     {
         WeakHashMap<String,Object> params=new WeakHashMap<>();
 
@@ -90,7 +91,8 @@ public class WorsheetClickListener extends SimpleClickListener {
         params.put("CRW_NO",mUser.getCrwNo());
         params.put("JCK_TYP",lx);
         params.put("TTK_NO",ttkNo);
-        params.put("JCK_ADR",adr);
+        params.put("JCK_DSC",adr);
+        params.put("JCK_ADR",dcs);
         Observable<String> obj =
                 RxRestClient.builder()
                         .url("saveOrUpdateLXZBKMST")

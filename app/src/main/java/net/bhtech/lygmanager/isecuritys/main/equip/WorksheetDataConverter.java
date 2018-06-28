@@ -36,6 +36,7 @@ public class WorksheetDataConverter extends DataConverter {
                             .setField(MultipleFields.SPAN_SIZE, 1)
                             .setField("TTK_ID", data.getTTK_ID())
                             .setField("TTK_ADR", data.getTTK_ADR())
+                            .setField("ADR_DSC", data.getADR_DSC())
                             .setField("TTKPER_DSC_ID", data.getTTKPER_DSC_ID())
                             .setField("PLABEG_DTM", data.getPLABEG_DTM())
                             .setField("PLAEND_DTM", data.getPLAEND_DTM())

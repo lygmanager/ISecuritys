@@ -39,6 +39,7 @@
             android:paddingRight="10dp"
             app:nameText="停工要求"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_CBS"
@@ -49,6 +50,7 @@
             android:paddingRight="10dp"
             app:nameText="承包商"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_USR"
@@ -59,6 +61,7 @@
             android:paddingRight="10dp"
             app:nameText="承包人"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_QY"
@@ -69,6 +72,7 @@
             android:paddingRight="10dp"
             app:nameText="停工区域"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_WT"
@@ -79,6 +83,7 @@
             android:paddingRight="10dp"
             app:nameText="问题描述"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_CS"
@@ -89,6 +94,7 @@
             android:paddingRight="10dp"
             app:nameText="纠正措施"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/TG_BZ"

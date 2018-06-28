@@ -54,7 +54,7 @@ public class BgbDelegate extends BottomItemDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
 
-        text_title.setText("曝光版");
+        text_title.setText("我的整改项");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-plus}");
         Map<String,String[]> fieldOptions= LiemsMethods.init(getContext())
@@ -87,7 +87,6 @@ public class BgbDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        final EcBottomDelegate ecBottomDelegate = getParentDelegate().getParentDelegate();
         mRecyclerView.addOnItemTouchListener(BgbClickListener.create(this));
     }
 

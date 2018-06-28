@@ -26,6 +26,7 @@
             android:paddingRight="10dp"
             app:nameText="地点"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/BF_TYP"
@@ -36,6 +37,7 @@
             android:paddingRight="10dp"
             app:nameText="不符合项"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/BG_NOT"
@@ -46,6 +48,7 @@
             android:paddingRight="10dp"
             app:nameText="内容"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JC_DTM"
@@ -66,6 +69,7 @@
             android:paddingRight="10dp"
             app:nameText="检查内容"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/KH_NUM"
@@ -76,6 +80,8 @@
             android:paddingRight="10dp"
             app:nameText="考核金额"
             app:nameSize="80dp"
+            app:numeric="true"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/PLAN_DTM"
@@ -96,6 +102,7 @@
             android:paddingRight="10dp"
             app:nameText="管理部门"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/SKL_NO"
@@ -106,6 +113,7 @@
             android:paddingRight="10dp"
             app:nameText="专业"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/CST_NO"
@@ -116,6 +124,7 @@
             android:paddingRight="10dp"
             app:nameText="整改单位"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/ZGSKL_NO"
@@ -126,6 +135,7 @@
             android:paddingRight="10dp"
             app:nameText="整改专业"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GLUSR_ID"
@@ -136,6 +146,7 @@
             android:paddingRight="10dp"
             app:nameText="整改人"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/JCUSR_ID"

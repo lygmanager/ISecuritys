@@ -203,9 +203,9 @@ public class RefreshHandler implements
     public void getBgbList( Context _mActivity,String mType) {
         String params="";
         if("MY".equals(mType)){
-            params=" and JLUSR_ID='"+mUser.getUserId()+"' ";
+            params=" and JLUSR_ID='"+mUser.getUserId()+"' and DO_NOT<>'02' ";
         }else if("YOUR".equals(mType)){
-            params=" and GLUSR_ID='"+mUser.getUserId()+"' ";
+            params=" and GLUSR_ID='"+mUser.getUserId()+"' and DO_NOT='01' and PICTUREB is null ";
         }
         Observable<String> obj= RxRestClient.builder()
                         .url("getBgbList")
@@ -228,9 +228,9 @@ public class RefreshHandler implements
     public void getWzglList( Context _mActivity,String mType) {
         String params="";
         if("MY".equals(mType)){
-            params=" and JLUSR_ID='"+mUser.getUserId()+"' ";
+            params=" and JLUSR_ID='"+mUser.getUserId()+"' and DO_NOT<>'02' ";
         }else if("YOUR".equals(mType)){
-            params=" and ZR_USR='"+mUser.getUserId()+"' ";
+            params=" and ZR_USR='"+mUser.getUserId()+"' and DO_NOT='01' AND PICTUREB is null ";
         }
         Observable<String> obj= RxRestClient.builder()
                 .url("getWzglList")

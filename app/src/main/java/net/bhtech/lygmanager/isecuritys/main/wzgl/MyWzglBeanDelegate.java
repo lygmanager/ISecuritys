@@ -340,10 +340,11 @@ public class MyWzglBeanDelegate extends BottomItemDelegate {
                             KH_FS.setEditTextInfo(entity.getString("KH_FS"));
                             PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
                             lineiViewA.setVisibility(View.VISIBLE);
+                            lineiViewB.setVisibility(View.VISIBLE);
                             if(!"".equals(entity.getString("PICTUREA"))) {
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "RMWZGLMST",
                                         "BGB_PICTUREA_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREA"));
-                                lineiViewB.setVisibility(View.VISIBLE);
+
                                 LiemsMethods.init(mContext).glideImage(thisdelegate, iViewB, "RMWZGLMST",
                                         "BGB_PICTUREB_" + entity.getString("BGB_NO") + ".JPEG",entity.getString("PICTUREB"));
                             }

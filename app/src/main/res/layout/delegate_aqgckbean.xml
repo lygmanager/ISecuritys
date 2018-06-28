@@ -29,6 +29,7 @@
             android:paddingRight="10dp"
             app:nameText="观察者公司"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GC_CST"
@@ -82,6 +83,7 @@
             android:paddingRight="10dp"
             app:nameText="被观察对象"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GC_RW"
@@ -92,6 +94,7 @@
             android:paddingRight="10dp"
             app:nameText="观察任务"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GC_QY"
@@ -102,6 +105,7 @@
             android:paddingRight="10dp"
             app:nameText="观察区域"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GC_SX"
@@ -112,6 +116,7 @@
             android:paddingRight="10dp"
             app:nameText="观察属性"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/GC_TYP"
@@ -143,6 +148,7 @@
             android:paddingRight="10dp"
             app:nameText="危险描述"
             app:nameSize="80dp"
+            app:canEmpty="false"
             />
         <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
             android:id="@+id/IS_JZ"
