@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -21,6 +23,8 @@ import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.common.FullimageDelegate;
+import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
@@ -79,6 +83,13 @@ public class TglBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText PZUSR_ID=null;
     @BindView(R.id.PZ_DTM)
     RightAndLeftEditText PZ_DTM=null;
+
+    @BindView(R.id.PICTUREA)
+    RightAndLeftEditText PICTUREA=null;
+    @BindView(R.id.iView)
+    ImageView iView=null;
+    @BindView(R.id.lineiViewA)
+    LinearLayout lineiViewA=null;
 
     private TglBeanDelegate thisdelegate=this;
 
@@ -208,10 +219,10 @@ public class TglBeanDelegate extends BottomItemDelegate {
     {
         if(TGL_NO.getEditTextInfo()!=null&&!"".equals(TGL_NO.getEditTextInfo()))
         {
-//            if("A".equals(PICTUREA.getEditTextInfo())) {
-//                FullimageDelegate delegate = FullimageDelegate.create("AQ_PICTUREA_" + TGL_NO.getEditTextInfo(),"AQGCKMST");
-//                this.getSupportDelegate().start(delegate);
-//            }
+            if(!"".equals(PICTUREA.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("TGL_PICTUREA_" + TGL_NO.getEditTextInfo(),"HSETGLMST",PICTUREA.getEditTextInfo());
+                this.getSupportDelegate().start(delegate);
+            }
         }
     }
 
@@ -222,16 +233,16 @@ public class TglBeanDelegate extends BottomItemDelegate {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-//                    if(selectList!=null&&selectList.size()>0) {
-//                        Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
-//                        if(TGL_NO.getEditTextInfo()!=null&&!"".equals(TGL_NO.getEditTextInfo())) {
-//                            LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "AQGCKMST", "AQ_PICTUREA_"+TGL_NO.getEditTextInfo()+".JPEG");
-//                            PICTUREA.setEditTextInfo("A");
-//                            Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
-//                        }else {
-//                            Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
+                    if(selectList!=null&&selectList.size()>0) {
+                        Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
+                        if(TGL_NO.getEditTextInfo()!=null&&!"".equals(TGL_NO.getEditTextInfo())) {
+                            LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "HSETGLMST", "TGL_PICTUREA_"+TGL_NO.getEditTextInfo()+".JPEG");
+                            PICTUREA.setEditTextInfo("A"+System.currentTimeMillis());
+                            Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                     break;
             }
         }
@@ -286,6 +297,12 @@ public class TglBeanDelegate extends BottomItemDelegate {
                             PZUSR_ID.setEditTextTagInfo(entity.getString("PZUSR_ID"));
                             PZUSR_ID.setEditTextInfo(entity.getString("PZUSR_NAM"));
                             PZ_DTM.setEditTextInfo(entity.getString("PZ_DTM"));
+                            PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
+                            lineiViewA.setVisibility(View.VISIBLE);
+                            if(!"".equals(entity.getString("PICTUREA"))) {
+                                LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "HSETGLMST",
+                                        "TGL_PICTUREA_" + entity.getString("TGL_NO") + ".JPEG",entity.getString("PICTUREA"));
+                            }
                         }
                     }
                 }

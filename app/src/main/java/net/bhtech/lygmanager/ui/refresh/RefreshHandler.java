@@ -89,6 +89,7 @@ public class RefreshHandler implements
                 RxRestClient.builder()
                         .url("getTasknumList")
                         .params("orgno", mUser.getOrgNo())
+                        .params("usrid", mUser.getUserId())
                         .loader(_mActivity)
                         .build()
                         .post();
@@ -337,10 +338,11 @@ public class RefreshHandler implements
     /*
      *超龄人员查询
      */
-    public void getSmusrList( Context _mActivity) {
+    public void getSmusrList( Context _mActivity,String wtype) {
         Observable<String> obj= RxRestClient.builder()
                 .url("getSmusrList")
                 .params("orgno", mUser.getOrgNo())
+                .params("wtype", wtype)
                 .params("page", 1)
                 .params("limit", 50)
                 .loader(_mActivity)

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+    android:paddingTop="-50dp"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10"
+    android:background="@color/white"
+    android:gravity="top"
+    android:layout_height="wrap_content">
+
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+            android:id="@+id/USR_NAM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:wrapcontent="true" />
+        <LinearLayout
+            android:id="@+id/lxzbklin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/USR_NAM"
+            android:orientation="horizontal">
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/USR_ID"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    app:left_text="工号"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/CERTIF_TYP"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    app:left_text="证件类型"
+                    app:wrapcontent="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lxzbklin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lxzbklin"
+            android:orientation="horizontal">
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/CERTIF_YXDTM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="有效期"
+                    app:wrapcontent="true" />
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftTextView
+                    android:id="@+id/CERTIF_FSDTM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    app:left_text="复审日期"
+                    app:wrapcontent="true" />
+        </LinearLayout>
+</RelativeLayout>

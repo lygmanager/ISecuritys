@@ -1,0 +1,155 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RightAndLeftEditText="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/platform_titlebar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_titlebar"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_equip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/PLA_NO"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:editAble="false"
+                    app:nameSize="80dp"
+                    app:nameText="单位名称" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/CRW_NO"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:editAble="false"
+                    app:nameSize="80dp"
+                    app:nameText="班组" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/ZY_ID"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:editAble="false"
+                    app:nameSize="80dp"
+                    app:nameText="作业许可证" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/JD_USR_NAM"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:editAble="false"
+                    app:nameSize="80dp"
+                    app:nameText="监督人员" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/JD_ITEM"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:canEmpty="false"
+                    app:nameSize="80dp"
+                    app:nameText="监督项目" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/JD_DESC"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:canEmpty="false"
+                    app:nameSize="80dp"
+                    app:nameText="施工内容" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/JD_ADR"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:canEmpty="false"
+                    app:nameSize="80dp"
+                    app:nameText="危险源部位" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/START_DTM"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:canEmpty="false"
+                    app:nameSize="80dp"
+                    app:nameText="开始时间" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/END_DTM"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    app:canEmpty="false"
+                    app:nameSize="80dp"
+                    app:nameText="结束时间" />
+
+                <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                    android:id="@+id/JD_NO"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:visibility="gone"
+                    app:nameSize="80dp"
+                    app:nameText="主键" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/srl_jclin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_10"
+                    android:visibility="visible">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_jclin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#ffff0000"
+                        android:dividerHeight="10dp" />
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+</RelativeLayout>

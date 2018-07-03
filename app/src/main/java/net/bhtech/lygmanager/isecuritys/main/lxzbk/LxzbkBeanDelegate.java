@@ -107,6 +107,7 @@ public class LxzbkBeanDelegate extends BottomItemDelegate {
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         JCK_DTM.setDatePick(this,sdf.format(new Date()),"DATE");
         JCK_TYP.setPopulWindow(mContext,"LXZBKLX");
+        LiemsMethods.init(getContext()).getFieldOption("SDZBJCKLIN@@VALID_STA");
 
         button_forward.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,6 +9,8 @@ import net.bhtech.lygmanager.app.Latte;
 import net.bhtech.lygmanager.delegates.LatteDelegate;
 import net.bhtech.lygmanager.isecuritys.dialog.vdven.VdvenDialog;
 import net.bhtech.lygmanager.isecuritys.hsetools.fgl.FglDelegate;
+import net.bhtech.lygmanager.isecuritys.hsetools.gfxjd.GfxjdDelegate;
+import net.bhtech.lygmanager.isecuritys.hsetools.gfxzy.GfxzyDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.task.SmusrDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglDelegate;
@@ -64,13 +66,13 @@ public class IndexItemClickListener extends SimpleClickListener {
             case "4":
                 DELEGATE.getSupportDelegate().start(new LxzbkBeanDelegate());
                 break;
-            case "5":
+            case "1003":
                 DELEGATE.getSupportDelegate().start(new BgbBaseDelegate());
                 break;
             case "6":
                 DELEGATE.getSupportDelegate().start(new BgbBeanDelegate());
                 break;
-            case "7":
+            case "1002":
                 DELEGATE.getSupportDelegate().start(new WzglDelegate());
                 break;
             case "8":
@@ -87,6 +89,12 @@ public class IndexItemClickListener extends SimpleClickListener {
                 break;
             case "12":
                 DELEGATE.getSupportDelegate().start(new FglDelegate());
+                break;
+            case "13":
+                DELEGATE.getSupportDelegate().start(new GfxzyDelegate());
+                break;
+            case "14":
+                DELEGATE.getSupportDelegate().start(new GfxjdDelegate());
                 break;
             default:break;
         }

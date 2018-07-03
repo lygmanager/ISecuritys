@@ -61,6 +61,10 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.VDVEN, R.layout.item_vdvenvlist);
         addItemType(ItemType.TGL, R.layout.item_tglvlist);
         addItemType(ItemType.FGL, R.layout.item_fglvlist);
+        addItemType(ItemType.GFXZY, R.layout.item_gfxzyvlist);
+        addItemType(ItemType.GFXJD, R.layout.item_gfxjdvlist);
+        addItemType(ItemType.GFXJDLIN, R.layout.item_gfxjdlinvlist);
+        addItemType(ItemType.CERTIF, R.layout.item_certifvlist);
 
         addItemType(ItemType.SMUSR, R.layout.item_smusrvlist);
         //设置宽度监听
@@ -201,6 +205,38 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.VEN_NO, (String)entity.getField("VEN_NO"));
                 holder.setRightText(R.id.POS_NO, (String)entity.getField("POS_NO"));
                 holder.setRightText(R.id.USR_SEX, (String)entity.getField("USR_SEX"));
+                break;
+            case ItemType.GFXZY:
+                holder.setRightText(R.id.ZY_SHT, (String)entity.getField("ZY_SHT"));
+                holder.setRightText(R.id.ZY_ID, (String)entity.getField("ZY_ID"));
+                holder.setRightText(R.id.XK_JB, (String)entity.getField("XK_JB"));
+                holder.setRightText(R.id.ZT_QY, (String)entity.getField("ZT_QY"));
+                holder.setRightText(R.id.ZY_TYP_STR, (String)entity.getField("ZY_TYP_STR"));
+                holder.setRightText(R.id.STA_DTM, (String)entity.getField("STA_DTM"));
+                holder.setRightText(R.id.END_DTM, (String)entity.getField("END_DTM"));
+                holder.setText(R.id.ZY_NO, (String)entity.getField("ZY_NO"));
+                break;
+            case ItemType.GFXJD:
+                holder.setRightText(R.id.JD_ITEM, (String)entity.getField("JD_ITEM"));
+                holder.setRightText(R.id.ZY_ID, (String)entity.getField("ZY_ID"));
+                holder.setRightText(R.id.JD_USR_NAM, (String)entity.getField("JD_USR_NAM"));
+                holder.setRightText(R.id.PLA_NAM, (String)entity.getField("PLA_NAM"));
+                holder.setRightText(R.id.CRW_NAM, (String)entity.getField("CRW_NAM"));
+                holder.setRightText(R.id.START_DTM, (String)entity.getField("START_DTM"));
+                holder.setRightText(R.id.END_DTM, (String)entity.getField("END_DTM"));
+                holder.setText(R.id.JD_NO, (String)entity.getField("JD_NO"));
+                break;
+            case ItemType.GFXJDLIN:
+                holder.setRightText(R.id.JDLIN_DESC, (String)entity.getField("JDLIN_DESC"));
+                holder.setRightText(R.id.JDLIN_JL, (String)entity.getField("JDLIN_JL"));
+                holder.setText(R.id.JDLIN_NO, (String)entity.getField("JDLIN_NO"));
+                break;
+            case ItemType.CERTIF:
+                holder.setRightText(R.id.USR_ID, (String)entity.getField("USR_ID"));
+                holder.setRightText(R.id.USR_NAM, (String)entity.getField("USR_NAM"));
+                holder.setRightText(R.id.CERTIF_TYP, (String)entity.getField("CERTIF_TYP"));
+                holder.setRightText(R.id.CERTIF_YXDTM, (String)entity.getField("CERTIF_YXDTM"));
+                holder.setRightText(R.id.CERTIF_FSDTM, (String)entity.getField("CERTIF_FSDTM"));
                 break;
             default:
                 break;

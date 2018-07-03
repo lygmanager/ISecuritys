@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -21,6 +23,8 @@ import net.bhtech.lygmanager.app.AccountManager;
 import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
+import net.bhtech.lygmanager.isecuritys.common.FullimageDelegate;
+import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
 import net.bhtech.lygmanager.net.rx.RxRestClient;
@@ -75,6 +79,30 @@ public class FglBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText CBSHSE_DTM=null;
     @BindView(R.id.VALID_STA)
     RightAndLeftEditText VALID_STA=null;
+
+    @BindView(R.id.SG_MAN_NAM)
+    RightAndLeftEditText SG_MAN_NAM=null;
+    @BindView(R.id.SG_DTM)
+    RightAndLeftEditText SG_DTM=null;
+    @BindView(R.id.HSE_YJ)
+    RightAndLeftEditText HSE_YJ=null;
+    @BindView(R.id.HSE_MAN_NAM)
+    RightAndLeftEditText HSE_MAN_NAM=null;
+    @BindView(R.id.HSE_DTM)
+    RightAndLeftEditText HSE_DTM=null;
+    @BindView(R.id.PRJ_YJ)
+    RightAndLeftEditText PRJ_YJ=null;
+    @BindView(R.id.PRJ_MAN_NAM)
+    RightAndLeftEditText PRJ_MAN_NAM=null;
+    @BindView(R.id.PRJ_DTM)
+    RightAndLeftEditText PRJ_DTM=null;
+
+    @BindView(R.id.PICTUREA)
+    RightAndLeftEditText PICTUREA=null;
+    @BindView(R.id.iView)
+    ImageView iView=null;
+    @BindView(R.id.lineiViewA)
+    LinearLayout lineiViewA=null;
 
     private FglBeanDelegate thisdelegate=this;
 
@@ -159,6 +187,54 @@ public class FglBeanDelegate extends BottomItemDelegate {
         });
     }
 
+    @OnLongClick(R.id.iView)
+    public boolean setiView(View view)
+    {
+        if(FGL_NO.getEditTextInfo()!=null&&!"".equals(FGL_NO.getEditTextInfo())) {
+            PictureSelector
+                    .create(this)
+                    .openGallery(PictureMimeType.ofImage())
+                    .selectionMode(PictureConfig.SINGLE)
+                    .compress(true)
+                    .forResult(PictureConfig.CHOOSE_REQUEST);
+        }
+        return true;
+    }
+
+    @OnClick(R.id.iView)
+    public void openFullView(View view)
+    {
+        if(FGL_NO.getEditTextInfo()!=null&&!"".equals(FGL_NO.getEditTextInfo()))
+        {
+            if(!"".equals(PICTUREA.getEditTextInfo())) {
+                FullimageDelegate delegate = FullimageDelegate.create("FGL_PICTUREA_" + FGL_NO.getEditTextInfo(),"HSEFGLMST",PICTUREA.getEditTextInfo());
+                this.getSupportDelegate().start(delegate);
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    if(selectList!=null&&selectList.size()>0) {
+                        Glide.with(_mActivity).load(selectList.get(0).getCompressPath()).into(iView);
+                        if(FGL_NO.getEditTextInfo()!=null&&!"".equals(FGL_NO.getEditTextInfo())) {
+                            LiemsMethods.init(mContext).upLoadFile(selectList.get(0).getCompressPath(), "HSEFGLMST", "FGL_PICTUREA_"+FGL_NO.getEditTextInfo()+".JPEG");
+                            PICTUREA.setEditTextInfo("A"+System.currentTimeMillis());
+                            Toast.makeText(mContext,"图片上传成功！", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext,"请先保存曝光板内容再添加照片！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
     @Override
     public FragmentAnimator onCreateFragmentAnimator()
     {
@@ -203,6 +279,22 @@ public class FglBeanDelegate extends BottomItemDelegate {
                             IS_JZ.setEditTextTagInfo(entity.getString("IS_JZ"),"HSEFGLMST@@IS_JZ");
                             VALID_STA.setEditTextTagInfo(entity.getString("VALID_STA"),"HSEFGLMST@@VALID_STA");
                             CBSHSE_DTM.setEditTextInfo(entity.getString("CBSHSE_DTM"));
+                            PICTUREA.setEditTextInfo(entity.getString("PICTUREA"));
+
+                            SG_MAN_NAM.setEditTextInfo(entity.getString("SG_MAN_NAM"));
+                            SG_DTM.setEditTextInfo(entity.getString("SG_DTM"));
+                            HSE_YJ.setEditTextInfo(entity.getString("HSE_YJ"));
+                            HSE_MAN_NAM.setEditTextInfo(entity.getString("HSE_MAN_NAM"));
+                            HSE_DTM.setEditTextInfo(entity.getString("HSE_DTM"));
+                            PRJ_YJ.setEditTextInfo(entity.getString("PRJ_YJ"));
+                            PRJ_MAN_NAM.setEditTextInfo(entity.getString("PRJ_MAN_NAM"));
+                            PRJ_DTM.setEditTextInfo(entity.getString("PRJ_DTM"));
+
+                            lineiViewA.setVisibility(View.VISIBLE);
+                            if(!"".equals(entity.getString("PICTUREA"))) {
+                                LiemsMethods.init(mContext).glideImage(thisdelegate, iView, "HSEFGLMST",
+                                        "FGL_PICTUREA_" + entity.getString("FGL_NO") + ".JPEG",entity.getString("PICTUREA"));
+                            }
                         }
                     }
                 }

@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RightAndLeftEditText="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/platform_titlebar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/layout_titlebar"
+            android:orientation="vertical">
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JDLIN_DESC"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:editAble="false"
+                app:nameSize="80dp"
+                app:nameText="监督项目" />
+
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JDLIN_JL"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                app:nameSize="80dp"
+                app:nameText="结论" />
+
+
+            <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+                android:id="@+id/JDLIN_NO"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:nameSize="80dp"
+                app:nameText="主键" />
+
+        </LinearLayout>
+</RelativeLayout>

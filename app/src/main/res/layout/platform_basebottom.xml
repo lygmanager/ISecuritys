@@ -5,15 +5,43 @@
     android:layout_weight="1"
     android:paddingBottom="3dp"
     android:paddingTop="6dp">
-
-    <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/icon_bottom_item"
+    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="25sp" />
+        android:orientation="horizontal">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:id="@+id/tv_tasknum2"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textSize="16sp" />
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/icon_bottom_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:drawableTintMode="src_over"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_tasknum"
+            android:layout_width="0dp"
+            android:layout_height="23dp"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:background="@drawable/text_view_border"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_bottom_item"

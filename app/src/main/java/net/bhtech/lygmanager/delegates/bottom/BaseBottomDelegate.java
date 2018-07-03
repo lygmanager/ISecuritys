@@ -79,7 +79,8 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
             //设置每个item的点击事件
             item.setTag(i);
             item.setOnClickListener(this);
-            final IconTextView itemIcon = (IconTextView) item.getChildAt(0);
+            final LinearLayoutCompat linearLayoutCompat =(LinearLayoutCompat)item.getChildAt(0);
+            final IconTextView itemIcon = (IconTextView) linearLayoutCompat.getChildAt(1);
             final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
             final BottomTabBean bean = TAB_BEANS.get(i);
             //初始化数据
@@ -89,6 +90,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
                 itemIcon.setTextColor(mClickedColor);
                 itemTitle.setTextColor(mClickedColor);
             }
+
         }
 
         final ISupportFragment[] delegateArray = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
@@ -99,7 +101,8 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         final int count = mBottomBar.getChildCount();
         for (int i = 0; i < count; i++) {
             final RelativeLayout item = (RelativeLayout) mBottomBar.getChildAt(i);
-            final IconTextView itemIcon = (IconTextView) item.getChildAt(0);
+            final LinearLayoutCompat linearLayoutCompat =(LinearLayoutCompat)item.getChildAt(0);
+            final IconTextView itemIcon = (IconTextView) linearLayoutCompat.getChildAt(1);
             itemIcon.setTextColor(Color.GRAY);
             final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
             itemTitle.setTextColor(Color.GRAY);
@@ -111,7 +114,8 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         final int tag = (int) v.getTag();
         resetColor();
         final RelativeLayout item = (RelativeLayout) v;
-        final IconTextView itemIcon = (IconTextView) item.getChildAt(0);
+        final LinearLayoutCompat linearLayoutCompat =(LinearLayoutCompat)item.getChildAt(0);
+        final IconTextView itemIcon = (IconTextView) linearLayoutCompat.getChildAt(1);
         itemIcon.setTextColor(mClickedColor);
         final AppCompatTextView itemTitle = (AppCompatTextView) item.getChildAt(1);
         itemTitle.setTextColor(mClickedColor);

@@ -72,11 +72,12 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText VALID_STA=null;
 
     private UtusrEntity mUser=null;
+    private BottomItemDelegate thisDelegate=null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Bundle args = getArguments();LatteLogger.d(args.getString("JCLIN_NO"));
+        final Bundle args = getArguments();
         if (args != null) {
             pkValue=args.getString("JCLIN_NO");
         }
@@ -92,6 +93,7 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
         text_title.setText("检查内容");
         button_forward.setVisibility(View.VISIBLE);
         button_forward.setText("{fa-save}");
+        thisDelegate=this;
         final Context mContext=this.getContext();
         mUser= AccountManager.getSignInfo();
         JCLIN_DSC.setReadOnly();
@@ -127,6 +129,7 @@ public class LxzbklinBeanDelegate extends BottomItemDelegate {
                             {
                                 JCLIN_NO.getEditText().setText(rst.getPkValue());
                                 Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
+                                thisDelegate.getFragmentManager().popBackStack();
                             }
                         }else{
                             Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();

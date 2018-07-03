@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.isecuritys.hsetools.fgl.FglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
+import net.bhtech.lygmanager.isecuritys.main.lxzbk.LxzbkBeanDelegate;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
@@ -70,6 +72,25 @@ public class SmusrDelegate extends BottomItemDelegate {
     private Context mContext=null;
     private UtusrEntity mUser=null;
 
+    private String wType="";
+
+    public static SmusrDelegate create(String wtype)
+    {
+        final Bundle args = new Bundle();
+        args.putString("wtype", wtype);
+        final SmusrDelegate delegate = new SmusrDelegate();
+        delegate.setArguments(args);
+        return delegate;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Bundle args = getArguments();
+        if (args != null) {
+            wType=args.getString("wtype");
+        }
+    }
 
     private RefreshHandler mRefreshHandler = null;
 
@@ -80,8 +101,16 @@ public class SmusrDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        String title="";
+        if("1001".equals(wType))
+        {
+            title="超龄";
+        }else if("1006".equals(wType))
+        {
+            title="黑名单";
+        }
 
-        text_title.setText("员工自然信息表");
+        text_title.setText(title+"员工自然信息表");
 //        button_forward.setVisibility(View.VISIBLE);
 //        button_forward.setText("{fa-plus}");
         mContext=getContext();
@@ -110,60 +139,58 @@ public class SmusrDelegate extends BottomItemDelegate {
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate ecBottomDelegate = getParentDelegate();
 
-        mRecyclerView.setSwipeMenuCreator(new SwipeMenuCreator() {
-            @Override
-            public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
-                int width = getResources().getDimensionPixelSize(R.dimen.dp_72);
-                SwipeMenuItem deleteItem = new SwipeMenuItem(mContext);
-                deleteItem.setText("列入黑名单")
-                        .setBackground(R.color.badgeColor)
-                        .setWidth(width)
-                        .setHeight(MATCH_PARENT);
-                rightMenu.addMenuItem(deleteItem);
-            }
-        });
-
-        mRecyclerView.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
-            @Override
-            public void onItemClick(SwipeMenuBridge menuBridge) {
-                menuBridge.closeMenu();
-                int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
-                int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
-                int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
-                BaseQuickAdapter baseQuickAdapter=(BaseQuickAdapter) mRecyclerView.getOriginAdapter();
-                final MultipleItemEntity mentity = (MultipleItemEntity) baseQuickAdapter.getData().get(adapterPosition);
-                if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION&&menuPosition==0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("提醒");
-                    builder.setMessage("是否将人员列入黑名单？");
-                    builder.setPositiveButton("是", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            dialog.dismiss();
-                            final Map<String,String> entity=new HashMap<>();
-                            entity.put("USR_ID",mentity.getFieldString("USR_ID"));
-                            entity.put("VALID_STA","I");
-                            entity.put("SM_STA","2");
-                            entity.put("QUA_STA","00");
-                            saveOrUpdate(entity);
-                        }
-                    });
-                    builder.setNegativeButton("否", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            dialog.dismiss();
-                        }
-                    });
-                    Dialog noticeDialog = builder.create();
-                    noticeDialog.show();
+        if("1001".equals(wType)) {
+            mRecyclerView.setSwipeMenuCreator(new SwipeMenuCreator() {
+                @Override
+                public void onCreateMenu(SwipeMenu leftMenu, SwipeMenu rightMenu, int viewType) {
+                    int width = getResources().getDimensionPixelSize(R.dimen.dp_72);
+                    SwipeMenuItem deleteItem = new SwipeMenuItem(mContext);
+                    deleteItem.setText("列入黑名单")
+                            .setBackground(R.color.badgeColor)
+                            .setWidth(width)
+                            .setHeight(MATCH_PARENT);
+                    rightMenu.addMenuItem(deleteItem);
                 }
+            });
 
-            }
-        });
+            mRecyclerView.setSwipeMenuItemClickListener(new SwipeMenuItemClickListener() {
+                @Override
+                public void onItemClick(SwipeMenuBridge menuBridge) {
+                    menuBridge.closeMenu();
+                    int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
+                    int adapterPosition = menuBridge.getAdapterPosition(); // RecyclerView的Item的position。
+                    int menuPosition = menuBridge.getPosition(); // 菜单在RecyclerView的Item中的Position。
+                    BaseQuickAdapter baseQuickAdapter = (BaseQuickAdapter) mRecyclerView.getOriginAdapter();
+                    final MultipleItemEntity mentity = (MultipleItemEntity) baseQuickAdapter.getData().get(adapterPosition);
+                    if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION && menuPosition == 0) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("提醒");
+                        builder.setMessage("是否将人员列入黑名单？");
+                        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                final Map<String, String> entity = new HashMap<>();
+                                entity.put("USR_ID", mentity.getFieldString("USR_ID"));
+                                entity.put("VALID_STA", "I");
+                                entity.put("SM_STA", "2");
+                                entity.put("QUA_STA", "00");
+                                saveOrUpdate(entity);
+                            }
+                        });
+                        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        Dialog noticeDialog = builder.create();
+                        noticeDialog.show();
+                    }
+
+                }
+            });
+        }
     }
 
     private void saveOrUpdate(Map<String,String> entity)
@@ -184,7 +211,7 @@ public class SmusrDelegate extends BottomItemDelegate {
                 {
                     if(rst.getPkValue()!=null&&!"".equals(rst.getPkValue()))
                     {
-                        mRefreshHandler.getSmusrList(getContext());
+                        mRefreshHandler.getSmusrList(getContext(),wType);
                         Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
 
                     }
@@ -204,7 +231,7 @@ public class SmusrDelegate extends BottomItemDelegate {
 
     @Override
     public void onSupportVisible() {
-        mRefreshHandler.getSmusrList(getContext());
+        mRefreshHandler.getSmusrList(getContext(),wType);
     }
 
 

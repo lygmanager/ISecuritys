@@ -19,11 +19,15 @@
 },{
   "imageUrl":"{icon-xiansunfenxi #6E704B}","itemText":"领先指标卡","itemId":"3","itemType":"3","spanSize":"1","textColor":"B"
 },{
-  "imageUrl":"{icon-yuexianyichangfenxi #E1BE4F}","itemText":"曝光板","itemId":"5","itemType":"3","spanSize":"1","textColor":"B"
+  "imageUrl":"{icon-yuexianyichangfenxi #E1BE4F}","itemText":"曝光板","itemId":"1003","itemType":"3","spanSize":"1","textColor":"B"
 },{
-  "imageUrl":"{icon-yuexianyichangchaxun #93B85E}","itemText":"违章管理","itemId":"7","itemType":"3","spanSize":"1","textColor":"B"
+  "imageUrl":"{icon-yuexianyichangchaxun #93B85E}","itemText":"违章管理","itemId":"1002","itemType":"3","spanSize":"1","textColor":"B"
 },{
   "imageUrl":"{icon-jiaoseguanli #D872AB}","itemText":"停工令","itemId":"11","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
 },{
   "imageUrl":"{icon-zuoyezhidaoshu}","itemText":"复工申请","itemId":"12","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
+},{
+  "imageUrl":"{icon-bianyaqiyunhangpingjia #DE0F4B}","itemText":"高风险作业许可证","itemId":"13","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
+},{
+  "imageUrl":"{icon-wugongguanlijiyouhua #00A375}","itemText":"高风险现场监督","itemId":"14","itemType":"3","spanSize":"1","textColor":"B","taskNum":"0"
 }]

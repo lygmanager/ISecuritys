@@ -151,6 +151,17 @@
             app:nameSize="80dp"
             android:visibility="gone"
             />
+        <net.bhtech.lygmanager.ui.tag.RightAndLeftEditText
+            android:id="@+id/PICTUREA"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:nameText="主键"
+            app:nameSize="80dp"
+            android:visibility="gone"
+            />
     </LinearLayout>
         <LinearLayout
             android:id="@+id/lineiViewA"

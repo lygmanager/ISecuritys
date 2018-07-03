@@ -1,6 +1,7 @@
 package net.bhtech.lygmanager.isecuritys.sign;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,6 +43,8 @@ public class SignInDelegate extends LatteDelegate {
     @BindView(R.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
+    private Context mContext=null;
+
     private ISignListener mISignListener = null;
 
     @Override
@@ -78,6 +81,7 @@ public class SignInDelegate extends LatteDelegate {
                             .url("loginApp")
                             .params("userName", mUsrId.getText().toString())
                             .params("password", mPassword.getText().toString())
+                            .loader(mContext)
                             .build()
                             .post();
             obj1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
@@ -126,6 +130,7 @@ public class SignInDelegate extends LatteDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
+        mContext=getContext();
 //        mUsrId.setText("KKSYS");
 //        mPassword.setText("1234");
     }

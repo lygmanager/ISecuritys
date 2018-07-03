@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
 
 import net.bhtech.lygmanager.delegates.LatteDelegate;
+import net.bhtech.lygmanager.isecuritys.hsetools.task.CertifDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.task.SmusrDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglDelegate;
@@ -45,13 +46,13 @@ public class TaskClickListener extends SimpleClickListener {
         final String id = entity.getField(MultipleFields.ID);
         switch (id){
             case "1001":
-                DELEGATE.getSupportDelegate().start(new SmusrDelegate());
+                DELEGATE.getSupportDelegate().start(SmusrDelegate.create("1001"));
                 break;
-            case "1002":
-                DELEGATE.getSupportDelegate().start(new WzglDelegate());
+            case "1006":
+                DELEGATE.getSupportDelegate().start(SmusrDelegate.create("1006"));
                 break;
-            case "1003":
-                DELEGATE.getSupportDelegate().start(new BgbBaseDelegate());
+            case "1005":
+                DELEGATE.getSupportDelegate().start(new CertifDelegate());
                 break;
             case "1004":
                 DELEGATE.getSupportDelegate().start(new TglDelegate());
