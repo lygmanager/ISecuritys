@@ -276,7 +276,6 @@ public class UpdateManager
         {
             try
             {
-                LatteLogger.d(Environment.getExternalStorageState()+"    "+Environment.MEDIA_MOUNTED);
                 // 判断SD卡是否存在，并且是否具有读写权限
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
                 {
@@ -357,21 +356,22 @@ public class UpdateManager
             return;
         }
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N&&Build.VERSION.SDK_INT<Build.VERSION_CODES.O) {//判读版本是否在7.0以上
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {//判读版本是否在7.0以上
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {//兼容8.0
+                boolean hasInstallPermission = mContext.getPackageManager().canRequestPackageInstalls();
+                if (!hasInstallPermission) {
+                    startInstallPermissionSettingActivity();
+                    return;
+                }
+            }
             Uri apkUri = getUriForFile(mContext, "net.bhtech.lygmanager.isecuritys.fileprovider", apkfile);//在AndroidManifest中的android:authorities值
             Intent install = new Intent(Intent.ACTION_VIEW);
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             install.setDataAndType(apkUri, "application/vnd.android.package-archive");
             mContext.startActivity(install);
-        } //兼容8.0
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            boolean hasInstallPermission = mContext.getPackageManager().canRequestPackageInstalls();
-            if (!hasInstallPermission) {
-                startInstallPermissionSettingActivity();
-                return;
-            }
-        } else{
+        }
+          else{
             Intent install = new Intent(Intent.ACTION_VIEW);
             install.setDataAndType(Uri.fromFile(apkfile), "application/vnd.android.package-archive");
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

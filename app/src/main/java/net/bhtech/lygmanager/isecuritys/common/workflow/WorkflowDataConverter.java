@@ -21,7 +21,6 @@ public class WorkflowDataConverter extends DataConverter {
     public ArrayList<MultipleItemEntity> convert() {
         ENTITIES.clear();
         String jsonArray=getJsonData();
-        LatteLogger.d(jsonArray);
         if(jsonArray!=null&&!"".equals(jsonArray)) {
             JSONObject lr2= (JSONObject) JSONObject.parse(jsonArray);
             String historyNodes=lr2.getString("historyNodes");
