@@ -29,6 +29,7 @@ import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.isecuritys.hsetools.fgl.FglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.gfxjd.GfxjdBeanDelegate;
+import net.bhtech.lygmanager.isecuritys.hsetools.gfxjd.GfxjdDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglBeanDelegate;
 import net.bhtech.lygmanager.isecuritys.hsetools.tgl.TglDataConverter;
 import net.bhtech.lygmanager.isecuritys.main.EcBottomDelegate;
@@ -113,17 +114,17 @@ public class GfxzyDelegate extends BottomItemDelegate {
                 (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         final EcBottomDelegate ecBottomDelegate = getParentDelegate();
 //        mRecyclerView.addOnItemTouchListener(TglClickListener.create(this));
-//        mRecyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
-//            @Override
-//            public void onItemClick(View itemView, int position) {
-//                TextView ZY_NO=itemView.findViewById(R.id.ZY_NO);
-//                String id=ZY_NO.getText().toString();
-//                if(id!=null&&!"".equals(id)) {
-//                    TglBeanDelegate delegate = TglBeanDelegate.create(id);
-//                    DELEGATE.getSupportDelegate().start(delegate);
-//                }
-//            }
-//        });
+        mRecyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                TextView ZY_NO=itemView.findViewById(R.id.ZY_NO);
+                String id=ZY_NO.getText().toString();
+                if(id!=null&&!"".equals(id)) {
+                    GfxjdDelegate delegate = GfxjdDelegate.create(id);
+                    DELEGATE.getSupportDelegate().start(delegate);
+                }
+            }
+        });
 
 
         mRecyclerView.setSwipeMenuCreator(new SwipeMenuCreator() {
@@ -149,16 +150,16 @@ public class GfxzyDelegate extends BottomItemDelegate {
                 BaseQuickAdapter baseQuickAdapter=(BaseQuickAdapter) mRecyclerView.getOriginAdapter();
                 final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(adapterPosition);
                 if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION&&menuPosition==0) {
-                    if(!"0".equals(entity.getField("JD_NUM"))&&!"".equals(entity.getField("JD_NUM")))
-                    {
-                        String id=entity.getField("JD_NUM");
-                        if(id!=null&&!"".equals(id)) {
-                            Toast.makeText(mContext, "现场监督已生成，跳转到该记录！", Toast.LENGTH_SHORT).show();
-                            GfxjdBeanDelegate delegate = GfxjdBeanDelegate.create(id);
-                            DELEGATE.getSupportDelegate().start(delegate);
-                        }
-                        return;
-                    }
+//                    if(!"0".equals(entity.getField("JD_NUM"))&&!"".equals(entity.getField("JD_NUM")))
+//                    {
+//                        String id=entity.getField("JD_NUM");
+//                        if(id!=null&&!"".equals(id)) {
+//                            Toast.makeText(mContext, "现场监督已生成，跳转到该记录！", Toast.LENGTH_SHORT).show();
+//                            GfxjdBeanDelegate delegate = GfxjdBeanDelegate.create(id);
+//                            DELEGATE.getSupportDelegate().start(delegate);
+//                        }
+//                        return;
+//                    }
 //                    if("02".equals(entity.getField("VALID_STA_VAL"))) {
 //                        if(!mUser.getUserId().equals(entity.getField("TG_USR")))
 //                        {

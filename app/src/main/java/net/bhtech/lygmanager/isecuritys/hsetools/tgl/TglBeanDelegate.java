@@ -24,6 +24,7 @@ import net.bhtech.lygmanager.database.UtusrEntity;
 import net.bhtech.lygmanager.delegates.bottom.BottomItemDelegate;
 import net.bhtech.lygmanager.isecuritys.R;
 import net.bhtech.lygmanager.isecuritys.common.FullimageDelegate;
+import net.bhtech.lygmanager.isecuritys.common.workflow.WorkflowDelegate;
 import net.bhtech.lygmanager.net.LiemsMethods;
 import net.bhtech.lygmanager.net.cxfweservice.LatteObserver;
 import net.bhtech.lygmanager.net.rx.LiemsResult;
@@ -54,6 +55,8 @@ public class TglBeanDelegate extends BottomItemDelegate {
 
     @BindView(R.id.button_commit)
     IconTextView button_commit=null;
+    @BindView(R.id.button_backward)
+    IconTextView button_backward=null;
     @BindView(R.id.button_forward)
     IconTextView button_forward=null;
     @BindView(R.id.text_title)
@@ -122,6 +125,10 @@ public class TglBeanDelegate extends BottomItemDelegate {
         button_forward.setText("{fa-save}");
         button_commit.setVisibility(View.VISIBLE);
         button_commit.setText("{fa-plus}");
+
+        button_backward.setVisibility(View.VISIBLE);
+        button_backward.setText("{fa-sliders}");
+
         mContext=this.getContext();
         mUser=AccountManager.getSignInfo();
         final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -170,7 +177,7 @@ public class TglBeanDelegate extends BottomItemDelegate {
                                         TGL_ID.setEditTextInfo(rst.getMsg());
                                     }
                                     Toast.makeText(mContext, "保存成功", Toast.LENGTH_SHORT).show();
-
+                                    lineiViewA.setVisibility(View.VISIBLE);
                                 }
                             }else{
                                 Toast.makeText(mContext, rst.getMsg(), Toast.LENGTH_SHORT).show();
@@ -198,6 +205,16 @@ public class TglBeanDelegate extends BottomItemDelegate {
                 PZ_DTM.clearText();
             }
         });
+    }
+
+    @OnClick(R.id.button_backward)
+    public void WorkFlowOnclick(View view)
+    {
+        if(TGL_NO.getEditTextInfo()!=null&&!"".equals(TGL_NO.getEditTextInfo())) {
+            WorkflowDelegate delegate=WorkflowDelegate.create(TGL_NO.getEditTextInfo(),"HSETGLMST");
+            getSupportDelegate().start(delegate);
+//            LiemsMethods.init(mContext).startWorkFlow("B1SFG20011","HSETGLMST",TGL_NO.getEditTextInfo(),"KKSYS;060606");
+        }
     }
 
     @OnLongClick(R.id.iView)

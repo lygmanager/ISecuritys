@@ -227,4 +227,29 @@ public class LiemsMethods {
         String url=BASE_URL.replaceAll("webservice/","uploadfiles");
         GlideApp.with(delegate).load(url+"/"+tableName+"/"+imagePath).signature(new ObjectKey(key)).into(iView);
     }
+
+    public void startWorkFlow(final String pgmId,final String tblNam,final String pkValue,String todoUserList)
+    {
+        String[][] result=null;
+        Observable<String> obj =
+                RxRestClient.builder()
+                        .url("startWorkFlow")
+                        .params("pgmId", pgmId)
+                        .params("tblNam", tblNam)
+                        .params("userId", mUser.getUserId())
+                        .params("pkValue", pkValue)
+                        .params("todoUserList", todoUserList)
+                        .params("noticeUserList", "")
+                        .params("rapid", "0")
+                        .loader(mContext)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(mContext) {
+            @Override
+            public void onNext(String result) {
+
+                LatteLogger.d(result);
+            }
+        });
+    }
 }

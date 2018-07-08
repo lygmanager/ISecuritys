@@ -90,6 +90,10 @@ public class GfxjdBeanDelegate extends BottomItemDelegate {
     RightAndLeftEditText START_DTM=null;
     @BindView(R.id.END_DTM)
     RightAndLeftEditText END_DTM=null;
+    @BindView(R.id.JD_REPORT)
+    RightAndLeftEditText JD_REPORT=null;
+    @BindView(R.id.JD_DPTUSR)
+    RightAndLeftEditText JD_DPTUSR=null;
 
 
     @BindView(R.id.srl_jclin)
@@ -227,7 +231,7 @@ public class GfxjdBeanDelegate extends BottomItemDelegate {
                     RxRestClient.builder()
                             .url("getGfxjdList")
                             .params("orgno", mUser.getOrgNo())
-                            .params("wherelimit", " AND JD_NO="+pkValue)
+                            .params("wherelimit", " {\"JD_NO\":\""+pkValue+"\"}")
                             .loader(this.getContext())
                             .build()
                             .post();
@@ -252,7 +256,8 @@ public class GfxjdBeanDelegate extends BottomItemDelegate {
                                 JD_ADR.setEditTextInfo(entity.getString("JD_ADR"));
                                 START_DTM.setEditTextInfo(entity.getString("START_DTM"));
                                 END_DTM.setEditTextInfo(entity.getString("END_DTM"));
-
+                                JD_REPORT.setEditTextInfo(entity.getString("JD_REPORT"));
+                                JD_DPTUSR.setEditTextInfo(entity.getString("JD_DPTUSR_NAM"));
                                 WeakHashMap<String, Object> params=new WeakHashMap<>();
                                 params.put("JD_NO",JD_NO.getEditTextInfo());
                                 mRefreshHandler.getCommonList(mContext,"getGfxjdlinList",params);

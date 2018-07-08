@@ -65,6 +65,7 @@ public class MultipleRecyclerAdapter extends
         addItemType(ItemType.GFXJD, R.layout.item_gfxjdvlist);
         addItemType(ItemType.GFXJDLIN, R.layout.item_gfxjdlinvlist);
         addItemType(ItemType.CERTIF, R.layout.item_certifvlist);
+        addItemType(ItemType.WORKFLOW, R.layout.item_workflowvlist);
 
         addItemType(ItemType.SMUSR, R.layout.item_smusrvlist);
         //设置宽度监听
@@ -237,6 +238,13 @@ public class MultipleRecyclerAdapter extends
                 holder.setRightText(R.id.CERTIF_TYP, (String)entity.getField("CERTIF_TYP"));
                 holder.setRightText(R.id.CERTIF_YXDTM, (String)entity.getField("CERTIF_YXDTM"));
                 holder.setRightText(R.id.CERTIF_FSDTM, (String)entity.getField("CERTIF_FSDTM"));
+                break;
+            case ItemType.WORKFLOW:
+                holder.setRightText(R.id.OBJECT_SHT, (String)entity.getField("OBJECT_SHT"));
+                holder.setRightText(R.id.USR_NAM, (String)entity.getField("USR_NAM"));
+                holder.setRightText(R.id.DEAL_RESULT, (String)entity.getField("DEAL_RESULT"));
+                holder.setRightText(R.id.OPERDTM, (String)entity.getField("OPERDTM"));
+                holder.setRightText(R.id.MEMO_TXT, (String)entity.getField("MEMO_TXT"));
                 break;
             default:
                 break;

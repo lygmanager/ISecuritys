@@ -17,6 +17,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -355,13 +357,20 @@ public class UpdateManager
             return;
         }
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {//判读版本是否在7.0以上
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N&&Build.VERSION.SDK_INT<Build.VERSION_CODES.O) {//判读版本是否在7.0以上
             Uri apkUri = getUriForFile(mContext, "net.bhtech.lygmanager.isecuritys.fileprovider", apkfile);//在AndroidManifest中的android:authorities值
             Intent install = new Intent(Intent.ACTION_VIEW);
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             install.setDataAndType(apkUri, "application/vnd.android.package-archive");
             mContext.startActivity(install);
+        } //兼容8.0
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            boolean hasInstallPermission = mContext.getPackageManager().canRequestPackageInstalls();
+            if (!hasInstallPermission) {
+                startInstallPermissionSettingActivity();
+                return;
+            }
         } else{
             Intent install = new Intent(Intent.ACTION_VIEW);
             install.setDataAndType(Uri.fromFile(apkfile), "application/vnd.android.package-archive");
@@ -369,6 +378,16 @@ public class UpdateManager
             mContext.startActivity(install);
         }
 
+    }
+    /**
+     * 跳转到设置-允许安装未知来源-页面
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void startInstallPermissionSettingActivity() {
+        //注意这个是8.0新API
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 }
 

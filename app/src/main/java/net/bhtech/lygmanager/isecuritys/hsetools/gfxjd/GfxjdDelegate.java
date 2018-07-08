@@ -55,6 +55,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class GfxjdDelegate extends BottomItemDelegate {
 
+    private String pkValue="";
+
     @BindView(R.id.srl_layout)
     SwipeRefreshLayout mRefreshLayout = null;
     @BindView(R.id.rv_view)
@@ -74,6 +76,15 @@ public class GfxjdDelegate extends BottomItemDelegate {
     LatteDelegate DELEGATE;
 
     private UtusrEntity mUser=null;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Bundle args = getArguments();
+        if (args != null) {
+            pkValue=args.getString("ZY_NO");
+        }
+    }
 
     @Override
     public Object setLayout() {
@@ -130,10 +141,18 @@ public class GfxjdDelegate extends BottomItemDelegate {
 
     @Override
     public void onSupportVisible() {
-        mRefreshHandler.getCommonList(getContext(),"getGfxjdList",null);
+        WeakHashMap<String, Object> params=new WeakHashMap<>();
+        params.put("ZY_NO",pkValue);
+        mRefreshHandler.getCommonList(getContext(),"getGfxjdList",params);
     }
 
-
+    public static GfxjdDelegate create(String pictures) {
+        final Bundle args = new Bundle();
+        args.putString("ZY_NO", pictures);
+        final GfxjdDelegate delegate = new GfxjdDelegate();
+        delegate.setArguments(args);
+        return delegate;
+    }
 
 
 }

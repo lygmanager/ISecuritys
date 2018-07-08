@@ -156,6 +156,24 @@ public class RefreshHandler implements
         });
     }
 
+    public void getWorkFlowHistoryList( Context _mActivity,String tblNam,String pkValue) {
+        Observable<String> obj=
+                RxRestClient.builder()
+                        .url("getWorkFlowHistoryList")
+                        .params("tblNam", tblNam)
+                        .params("pkValue", pkValue)
+                        .loader(_mActivity)
+                        .build()
+                        .post();
+        obj.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new LatteObserver<String>(_mActivity) {
+            @Override
+            public void onNext(String o) {
+                mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(o));
+                RECYCLERVIEW.setAdapter(mAdapter);
+            }
+        });
+    }
+
     public void getTglList( Context _mActivity) {
         Observable<String> obj=
                 RxRestClient.builder()

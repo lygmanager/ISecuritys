@@ -164,7 +164,8 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                     return;
                 }
                 final Map<String,String> entity=new HashMap<>();
-                entity.put("BGB_NO",BGB_NO.getEditTextInfo());
+                String bgbNo=BGB_NO.getEditTextInfo();
+                entity.put("BGB_NO",bgbNo);
                 entity.put("CST_NO",CST_NO.getEditTextTagInfo());
                 entity.put("BG_ADR",BG_ADR.getEditTextTagInfo());
                 entity.put("BF_TYP",BF_TYP.getEditTextTagInfo());
@@ -199,30 +200,30 @@ public class WzglBeanDelegate extends BottomItemDelegate {
                 entity.put("JLUSR_ID",mUser.getUserId());
                 entity.put("JLUSR_DTM",today);
 
-                if("04".equals(bfTyp)||"05".equals(bfTyp))
+                if("04".equals(bfTyp)||"05".equals(bfTyp)||"02".equals(bfTyp))
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("提醒");
-                    builder.setMessage("是否将人员列入黑名单？");
-                    builder.setPositiveButton("是", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            dialog.dismiss();
-                            saveOrUpdate(entity);
-                        }
-                    });
-                    builder.setNegativeButton("否", new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            dialog.dismiss();
-                        }
-                    });
-                    Dialog noticeDialog = builder.create();
-                    noticeDialog.show();
+                    if("".equals(bgbNo)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("提醒");
+                        builder.setMessage("是否将人员列入黑名单？");
+                        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                saveOrUpdate(entity);
+                            }
+                        });
+                        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        Dialog noticeDialog = builder.create();
+                        noticeDialog.show();
+                    }else{
+                        saveOrUpdate(entity);
+                    }
                 }else{
                     saveOrUpdate(entity);
                 }

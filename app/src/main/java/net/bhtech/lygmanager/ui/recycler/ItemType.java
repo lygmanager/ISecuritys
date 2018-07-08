@@ -21,4 +21,5 @@ public class ItemType {
     public static final int GFXJDLIN = 14;
     public static final int SMUSR = 1001;
     public static final int CERTIF = 1002;
+    public static final int WORKFLOW = 9999;
 }
